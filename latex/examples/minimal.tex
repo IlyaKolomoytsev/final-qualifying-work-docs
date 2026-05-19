@@ -1,0 +1,66 @@
+\documentclass[
+  numbers=section,
+  document-code={ВКРБ-09.03.04-10.19-03-24-81}
+]{../fqw}
+
+\begin{document}
+
+\FqwEnableDocumentCodeHeader
+
+\tableofcontents
+
+\FqwUnnumberedSection{Введение}
+
+Текст введения без сокращений. Иллюстрация приведена в соответствии с рисунком~\ref{fig:test}.
+
+\section{Анализ предметной области}
+
+Основной текст должен быть выровнен по ширине и иметь абзацный отступ.
+К основным элементам относятся:
+\begin{itemize}
+\item первый элемент;
+\item второй элемент.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\rule{0pt}{20mm}\rule{40mm}{0pt}}
+  \caption{Проверочный рисунок}
+  \label{fig:test}
+\end{figure}
+
+Параметры приведены в таблице~\ref{tab:test}.
+
+\begin{table}[H]
+  \caption{Проверочная таблица}
+  \label{tab:test}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Параметр & Значение \\
+    \hline
+    A & 1 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Расчёт выполняется по формуле~\eqref{eq:test}:
+\begin{equation}
+  x = y + z.
+  \label{eq:test}
+\end{equation}
+\begin{FqwWhere}
+  $x$ -- значение параметра; \\
+  $y$ и $z$ -- составляющие.
+\end{FqwWhere}
+
+\FqwUnnumberedSection{Заключение}
+
+Заключительный текст.
+
+\appendix
+\FqwAppendix{Проверочное приложение}
+
+Текст приложения.
+
+\end{document}
