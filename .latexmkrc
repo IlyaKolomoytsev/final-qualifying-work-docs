@@ -1,5 +1,7 @@
 $pdf_mode = 5;
 
+$ENV{'TEXINPUTS'} = '../latex//:' . ($ENV{'TEXINPUTS'} || '');
+
 # The project class uses fontspec and Russian Unicode text, so the default
 # engine is XeLaTeX. Switch to lualatex here if local font caches are configured.
 $xelatex = 'xelatex -interaction=nonstopmode -halt-on-error -file-line-error %O %S';
