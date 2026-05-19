@@ -129,11 +129,11 @@
     {}
 }
 
-\onehalfspacing
+\setstretch{1.5}
+\justifying
 \setlength{\parindent}{1.25cm}
 \setlength{\parskip}{0pt}
-\justifying
-\AtBeginDocument{\justifying\color{black}}
+\AtBeginDocument{\justifying\setlength{\parindent}{1.25cm}\color{black}}
 
 \hypersetup{
     unicode=true,
