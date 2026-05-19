@@ -1,0 +1,25 @@
+# LaTeX build directories
+build/
+*/build/
+
+# Common LaTeX generated files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Generated PDFs are reproducible build artifacts.
+*.pdf
