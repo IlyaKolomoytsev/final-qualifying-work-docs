@@ -1,0 +1,1568 @@
+Аннотация
+
+\hl{Техническое задание устанавливает требования к разработке
+программного модуля для сетевого симулятора Ns-3, предназначенного для
+моделирования программно-аппаратного гидроакустического
+приёмопередатчика и гидроакустического канала связи с целью проведения
+виртуальных и полунатурных испытаний и исследований сценариев
+эксплуатации. Техническое задание включает в себя страниц~--~38,
+приложений~--~5.}
+
+\hl{Список ключевых слов: моделирование, виртуальные испытания,
+полунатурные испытания, сетевой симулятор, Ns-3, гидроакустический
+приёмопередатчик, гидроакустический канал связи.\\
+}
+
+\section{Содержание}\label{ux441ux43eux434ux435ux440ux436ux430ux43dux438ux435}
+
+\hyperref[ux432ux432ux435ux434ux435ux43dux438ux435]{Содержание 4}
+
+\hyperref[ux432ux432ux435ux434ux435ux43dux438ux435]{Введение 6}
+
+\hyperref[ux43dux430ux438ux43cux435ux43dux43eux432ux430ux43dux438ux435-ux43fux440ux43eux433ux440ux430ux43cux43cux44b]{1.1
+Наименование программы 6}
+
+\hyperref[ux43eux431ux43bux430ux441ux442ux44c-ux43fux440ux438ux43cux435ux43dux435ux43dux438ux44f]{1.2
+Область применения 6}
+
+\hyperref[ux43eux441ux43dux43eux432ux430ux43dux438ux435-ux434ux43bux44f-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438]{2.
+Основание для разработки 6}
+
+\hyperref[ux43dux430ux437ux43dux430ux447ux435ux43dux438ux435-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438]{3.
+Назначение разработки 7}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux435]{4
+Требования к программе 7}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux444ux443ux43dux43aux446ux438ux43eux43dux430ux43bux44cux43dux44bux43c-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43aux430ux43c]{4.1
+Требования к функциональным характеристикам 7}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux430ux440ux445ux438ux442ux435ux43aux442ux443ux440ux435-ux43cux43eux434ux435ux43bux438-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43e-ux430ux43fux43fux430ux440ux430ux442ux43dux43eux433ux43e-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430]{4.1.2
+Требования к архитектуре модели программно-аппаратного приёмопередатчика
+8}
+
+\hyperref[ux43eux431ux449ux438ux435-ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f]{4.1.2.1
+Общие требования 8}
+
+\hyperref[ux43dux435ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux44c-ux443ux440ux43eux432ux43dux435ux439]{4.1.2.2
+Независимость уровней 8}
+
+\hyperref[ux444ux443ux43dux43aux446ux438ux438-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f]{4.1.2.2
+Функции физического уровня 9}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux430ux440ux445ux438ux442ux435ux43aux442ux443ux440ux435-ux43cux43eux434ux435ux43bux438-ux433ux438ux434ux440ux43eux430ux43aux443ux441ux442ux438ux447ux435ux441ux43aux43eux433ux43e-ux43aux430ux43dux430ux43bux430-ux441ux432ux44fux437ux438]{4.1.3
+Требования к архитектуре модели гидроакустического канала связи 9}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux440ux435ux430ux43bux438ux437ux430ux446ux438ux438-ux43cux43eux434ux435ux43bux438-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430]{4.1.4
+Требования к реализации модели приёмопередатчика 10}
+
+\hyperref[ux43eux431ux449ux438ux435-ux43fux43eux43bux43eux436ux435ux43dux438ux44f]{4.1.4.1
+Общие положения 10}
+
+\hyperref[ux441ux43eux441ux442ux43eux44fux43dux438ux44f-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f]{4.1.4.2
+Состояния физического уровня 10}
+
+\hyperref[_rgwhsh7we1q0]{4.1.6 Требования к модели гидроакустического
+канала связи 12}
+
+\hyperref[_ytskkr1fx40n]{4.1.6.1 Расчёт характеристик распространения
+12}
+
+\hyperref[_lhvuj3g4c8ca]{4.1.6.3 Рассчёт затухания (потерь) сигнала 13}
+
+\hyperref[_uhesppck4kdg]{4.2 Требования к надежности 13}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43eux431ux435ux441ux43fux435ux447ux435ux43dux438ux44e-ux43dux430ux434ux451ux436ux43dux43eux433ux43e-ux444ux443ux43dux43aux446ux438ux43eux43dux438ux440ux43eux432ux430ux43dux438ux44f-ux43fux440ux43eux433ux440ux430ux43cux43cux44b]{4.2.1
+Требования к обеспечению}
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43eux431ux435ux441ux43fux435ux447ux435ux43dux438ux44e-ux43dux430ux434ux451ux436ux43dux43eux433ux43e-ux444ux443ux43dux43aux446ux438ux43eux43dux438ux440ux43eux432ux430ux43dux438ux44f-ux43fux440ux43eux433ux440ux430ux43cux43cux44b]{надёжного
+функционирования программы 13}
+
+\hyperref[ux432ux440ux435ux43cux44f-ux432ux43eux441ux441ux442ux430ux43dux43eux432ux43bux435ux43dux438ux44f-ux43fux43eux441ux43bux435-ux43eux442ux43aux430ux437ux430]{4.2.2
+Время восстановления после отказа 13}
+
+\hyperref[ux43eux442ux43aux430ux437ux44b-ux438ux437-ux437ux430-ux43dux435ux43aux43eux440ux440ux435ux43aux442ux43dux44bux445-ux434ux435ux439ux441ux442ux432ux438ux439-ux43fux43eux43bux44cux437ux43eux432ux430ux442ux435ux43bux44f]{4.2.3
+Отказы из-за некорректных действий пользователя 13}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux443ux441ux43bux43eux432ux438ux44fux43c-ux44dux43aux441ux43fux43bux443ux430ux442ux430ux446ux438ux438]{4.3
+Требования к условиям эксплуатации 14}
+
+\hyperref[ux43aux43bux438ux43cux430ux442ux438ux447ux435ux441ux43aux438ux435-ux443ux441ux43bux43eux432ux438ux44f-ux44dux43aux441ux43fux43bux443ux430ux442ux430ux446ux438ux438]{4.3.1
+Климатические условия эксплуатации 14}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43aux432ux430ux43bux438ux444ux438ux43aux430ux446ux438ux438-ux438-ux447ux438ux441ux43bux435ux43dux43dux43eux441ux442ux438-ux43fux435ux440ux441ux43eux43dux430ux43bux430]{4.3.2
+Требования к квалификации и численности персонала 14}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux441ux43eux441ux442ux430ux432ux443-ux438-ux43fux430ux440ux430ux43cux435ux442ux440ux430ux43c-ux442ux435ux445ux43dux438ux447ux435ux441ux43aux438ux445-ux441ux440ux435ux434ux441ux442ux432]{4.4
+Требования к составу и параметрам технических средств 14}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux43eux43dux43dux43eux439-ux438-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43eux439-ux441ux43eux432ux43cux435ux441ux442ux438ux43cux43eux441ux442ux438]{4.5
+Требования к информационной и программной совместимости 15}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux43eux43dux43dux44bux43c-ux441ux442ux440ux443ux43aux442ux443ux440ux430ux43c-ux438-ux43cux435ux442ux43eux434ux430ux43c-ux440ux435ux448ux435ux43dux438ux44f]{4.5.1
+Требования к информационным структурам и методам решения 15}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux441ux445ux43eux434ux43dux44bux43c-ux43aux43eux434ux430ux43c-ux438-ux44fux437ux44bux43aux430ux43c-ux43fux440ux43eux433ux440ux430ux43cux43cux438ux440ux43eux432ux430ux43dux438ux44f]{4.5.2
+Требования к исходным кодам и языкам программирования 15}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux44bux43c-ux441ux440ux435ux434ux441ux442ux432ux430ux43c-ux438ux441ux43fux43eux43bux44cux437ux443ux435ux43cux44bux43c-ux43fux440ux43eux433ux440ux430ux43cux43cux43eux439]{4.5.3
+Требования к программным средствам, используемым программой 15}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux437ux430ux449ux438ux442ux435-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux438]{4.5.4
+Требования к защите информации 15}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43cux430ux440ux43aux438ux440ux43eux432ux43aux435-ux438-ux443ux43fux430ux43aux43eux432ux43aux435]{4.6
+Требования к маркировке и упаковке 16}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux442ux440ux430ux43dux441ux43fux43eux440ux442ux438ux440ux43eux432ux430ux43dux438ux44e-ux438-ux445ux440ux430ux43dux435ux43dux438ux44e]{4.7
+Требования к транспортированию и хранению 16}
+
+\hyperref[ux441ux43fux435ux446ux438ux430ux43bux44cux43dux44bux435-ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f]{4.8
+Специальные требования 16}
+
+\hyperref[ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43eux439-ux434ux43eux43aux443ux43cux435ux43dux442ux430ux446ux438ux438]{5
+Требования к программной документации 16}
+
+\hyperref[ux442ux435ux445ux43dux438ux43aux43e-ux44dux43aux43eux43dux43eux43cux438ux447ux435ux441ux43aux438ux435-ux43fux43eux43aux430ux437ux430ux442ux435ux43bux438]{6
+Технико-экономические показатели 17}
+
+\hyperref[ux44dux43aux43eux43dux43eux43cux438ux447ux435ux441ux43aux438ux435-ux43fux440ux435ux438ux43cux443ux449ux435ux441ux442ux432ux430-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438]{6.1
+Экономические преимущества разработки 17}
+
+\hyperref[ux441ux442ux430ux434ux438ux438-ux438-ux44dux442ux430ux43fux44b-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438]{7
+Стадии и этапы разработки 18}
+
+\hyperref[ux441ux442ux430ux434ux438ux438-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438]{7.1
+Стадии разработки 18}
+
+\hyperref[ux441ux43eux434ux435ux440ux436ux430ux43dux438ux435-ux440ux430ux431ux43eux442-ux43fux43e-ux44dux442ux430ux43fux430ux43c]{7.2
+Содержание работ по этапам 19}
+
+\hyperref[_mqq6yz6vxe9d]{8 Порядок контроля и приемки 19}
+
+\hyperref[ux432ux438ux434ux44b-ux438ux441ux43fux44bux442ux430ux43dux438ux439]{8.1
+Виды испытаний 20}
+
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.1]{Приложение
+Б.1} --
+\hyperref[ux434ux438ux430ux433ux440ux430ux43cux43cux430-ux432ux430ux440ux438ux430ux43dux442ux43eux432-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f]{Диаграмма
+вариантов использования 21}
+
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.2]{Приложение
+Б.2} --
+\hyperref[ux441ux446ux435ux43dux430ux440ux438ux438-ux432ux430ux440ux438ux430ux43dux442ux43eux432-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f]{Сценарии
+вариантов использования 22}
+
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.3]{Приложение
+Б.3}
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.3]{--}
+\hyperref[ux43cux430ux43aux435ux442ux44b-ux44dux43aux440ux430ux43dux43dux44bux445-ux444ux43eux440ux43c]{Макеты
+экранных форм 25}
+
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.4]{Приложение
+Б.4}
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.4]{--}
+\hyperref[ux441ux442ux440ux443ux43aux442ux443ux440ux430-ux438-ux444ux43eux440ux43cux430ux442-ux434ux430ux43dux43dux44bux445]{Структура
+и формат данных 27}
+
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.5]{Приложение
+Б.5}
+\hyperref[ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.5]{--}
+\hyperref[ux441ux43eux441ux442ux43eux44fux43dux438ux44f-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f-ux43cux43eux434ux435ux43bux438-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430]{Состояния
+физического уровня модели приёмопередатчика 28}
+
+\section{Введение}\label{ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\section{1.1 Наименование
+программы}\label{ux43dux430ux438ux43cux435ux43dux43eux432ux430ux43dux438ux435-ux43fux440ux43eux433ux440ux430ux43cux43cux44b}
+
+Наименование программы: ``Программный модуль модели гидроакустического
+приёмопередатчика для Ns-3''.
+
+\section{1.2 Область
+применения}\label{ux43eux431ux43bux430ux441ux442ux44c-ux43fux440ux438ux43cux435ux43dux435ux43dux438ux44f}
+
+Модель применяется для:
+
+\begin{itemize}
+\item
+  Виртуальных испытаний и исследовательского моделирования
+  гидроакустических приёмопередатчиков и каналов связи;
+\item
+  Воспроизведения сценариев передачи сообщений между подводными
+  объектами/узлами в условиях, характерных для гидроакустики;
+\item
+  Отработки алгоритмов верхнего уровня на базе результатов моделирования
+  канала и приёмопередатчика.
+\end{itemize}
+
+При этом модуль предназначен для предоставления сетевой и физической
+модели гидроакустического канала связи и обмена сообщениями между узлами
+в среде ns-3. Алгоритмы верхнего уровня в состав модуля не входят и
+могут разрабатываться и отрабатываться на его базе с использованием
+предоставляемых средств моделирования.
+
+Модуль ориентирован на применение инженерами и исследователями
+организации, занимающейся гидроакустикой, на рабочих станциях
+специалистов.
+
+\section{2. Основание для
+разработки}\label{ux43eux441ux43dux43eux432ux430ux43dux438ux435-ux434ux43bux44f-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438}
+
+Разработка программы ведётся на основании задания на выпускную работу
+бакалавра, полученного в соответствии с приказом №1203-ст от 05 сентября
+2025 года «Об утверждении тем и руководителей выпускных работ
+бакалавров» по кафедре ПОАС на тему «Разработка компьютерной модели
+программно-аппаратного гидроакустического приёмопередатчика для его
+виртуальных испытаний» и согласовано с ФГУП ВНИИА им. Духова НПЦ
+``Гидросвязь''.
+
+\section{3. Назначение
+разработки}\label{ux43dux430ux437ux43dux430ux447ux435ux43dux438ux435-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438}
+
+Цель разработки: сократить расходы и время на разработку систем
+гидроакустической связи за счёт разработки компьютерной модели
+программно-аппаратного гидроакустического приёмопередатчика для
+виртуальных испытаний систем гидроакустической связи и отработки
+алгоритмов функционирования мультиагентных систем.
+
+Программный модуль предназначен для эксплуатации инженерами и
+программистами в ФГУП ВНИИА им. Духова НПЦ ``Гидросвязь''.
+
+\section{4 Требования к
+программе}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux435}
+
+\section{4.1 Требования к функциональным
+характеристикам}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux444ux443ux43dux43aux446ux438ux43eux43dux430ux43bux44cux43dux44bux43c-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43aux430ux43c}
+
+4.1.1 Состав программного модуля
+
+Программный модуль должен включать:
+
+\begin{itemize}
+\item
+  Модель гидроакустического приёмопередатчика;
+\item
+  Модель гидроакустического канала связи;
+\item
+  Набор базовых компонентов, необходимых для реализации других моделей
+  гидроакустических приёмопередатчиков;
+\item
+  Набор базовых компонентов, необходимых для реализации других моделей
+  гидроакустических каналов связи.
+\end{itemize}
+
+Программный модуль должен содержать не только конкретные реализации
+моделей, но и предлагать компоненты и архитектурные подходы, необходимые
+для реализации других моделей.
+
+\section{4.1.2 Требования к архитектуре модели программно-аппаратного
+приёмопередатчика}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux430ux440ux445ux438ux442ux435ux43aux442ux443ux440ux435-ux43cux43eux434ux435ux43bux438-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43e-ux430ux43fux43fux430ux440ux430ux442ux43dux43eux433ux43e-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430}
+
+\section{4.1.2.1 Общие
+требования}\label{ux43eux431ux449ux438ux435-ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f}
+
+Архитектура модели приёмопередатчика должна обеспечивать реализацию
+физического и канального уровней устройства связи по модели OSI.
+
+Архитектура модели приёмопередатчика должна обеспечивать совместимость с
+моделями каналов гидроакустической связи.
+
+Архитектура модели приёмопередатчика должна обеспечивать возможность
+реализации конкретных моделей приёмопередатчиков без необходимости
+изменения интерфейсов базовых классов.
+
+\section{4.1.2.2 Независимость
+уровней}\label{ux43dux435ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux44c-ux443ux440ux43eux432ux43dux435ux439}
+
+Физический и канальный уровень приёмопередатчика должны быть разделены.
+
+Взаимодействие между уровнями должно быть организовано через чётко
+определённые интерфейсы и регламентированные механизмы обратного вызова.
+
+Архитектура физического уровня должна быть независима от архитектуры
+канального уровня.
+
+\section{4.1.2.3 Функции физического
+уровня}\label{ux444ux443ux43dux43aux446ux438ux438-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f}
+
+Физический уровень приёмопередатчика должен обеспечивать:
+
+\begin{itemize}
+\item
+  Формирование передаваемого сигнала на основе входящего информационного
+  пакета;
+\item
+  \hl{Сигнал на физическом уровне описывается спектральной плотностью
+  мощности и его продолжительностью;}
+\item
+  Передачу сигнала в модель гидроакустического канала связи;
+\item
+  Приём сигнала из модели гидроакустического канала связи;
+\item
+  Обработку принятого сигнала и извлечение полезной нагрузки (полезной
+  информации) из принятого сигнала.
+\end{itemize}
+
+\section{4.1.2.4 Модели
+интерференции}\label{ux43cux43eux434ux435ux43bux438-ux438ux43dux442ux435ux440ux444ux435ux440ux435ux43dux446ux438ux438}
+
+Архитектура приёмопередатчика должна поддерживать работу с различными
+моделями интерференции.
+
+Модель интерференции должна рассчитывать значение отношения сигнал/шум
+(ОСШ) для каждого входящего сигнала, который потенциально может быть
+принят и декодирован.
+
+Решение о том, будет ли корректно принят и декодирован входящий сигнал,
+принимается в конкретных реализациях моделей приёмопередатчиков, в том
+числе на основании рассчитанных моделями интерференции характеристик
+качества приёма сигнала.
+
+\section{4.1.3 Требования к архитектуре модели гидроакустического канала
+связи}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux430ux440ux445ux438ux442ux435ux43aux442ux443ux440ux435-ux43cux43eux434ux435ux43bux438-ux433ux438ux434ux440ux43eux430ux43aux443ux441ux442ux438ux447ux435ux441ux43aux43eux433ux43e-ux43aux430ux43dux430ux43bux430-ux441ux432ux44fux437ux438}
+
+Архитектура модели гидроакустического канала связи должна обеспечивать
+взаимодействие с физическим уровнем модели приёмопередатчика, включая
+передачу сигналов от физического уровня в модель среды распространения и
+обратно.
+
+Архитектура канала должна предусматривать возможность создания
+конкретных реализаций моделей каналов связи.
+
+Расчёт таких эффектов, как задержка, затухание, многолучёвость, эффект
+Доплера, должен осуществляться через регламентированные интерфейсы.
+Модели каналов связи для расчёта свойств распространения сигналов должны
+использовать эти интерфейсы.\hl{}
+
+\hl{}
+
+\section{4.1.4 Требования к реализации модели
+приёмопередатчика}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux440ux435ux430ux43bux438ux437ux430ux446ux438ux438-ux43cux43eux434ux435ux43bux438-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430}
+
+\hl{}
+
+\section{4.1.4.1 Общие
+положения}\label{ux43eux431ux449ux438ux435-ux43fux43eux43bux43eux436ux435ux43dux438ux44f}
+
+Модель приёмопередатчика должна быть основана на архитектуре
+программно-аппаратного гидроакустического приёмопередатчика, требования
+к которой были описаны ранее.
+
+Модель приёмопередатчика должна реализовывать физический и канальный
+уровень модели OSI.
+
+Модель приёмопередатчика поддерживает только один формат передаваемого и
+принимаемого сигнала. Сигналы другого типа приёмопередатчик принимать не
+должен.
+
+\section{4.1.4.2 Состояния физического
+уровня}\label{ux441ux43eux441ux442ux43eux44fux43dux438ux44f-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f}
+
+Физический уровень модели приёмопередатчика должен реализовывать
+конечный автомат со следующими состояниями:
+
+\begin{itemize}
+\item
+  OFF -- устройство отключено (передача и приём не выполняются);
+\item
+  IDLE -- устройство находится в режиме ожидания и осуществляет
+  прослушивание канала, готово к отправке и приёму сигналов;
+\item
+  RX -- устройство находится в состоянии приёма и обработки входящего
+  сигнала;
+\item
+  TX -- устройство находится в состоянии передачи сигнала.
+\end{itemize}
+
+Физический уровень модели должен находиться только в одном состоянии в
+каждый момент модельного времени.
+
+Базовая реализация приёмопередатчика должна обеспечивать режим
+half-duplex: одновременные передача и приём не допускаются.
+
+Подробное описание поведения конечного автомата физического уровня
+приведено на диаграмме состояний, представленной в приложении Б.5.
+
+\section{4.1.4.3 Функции канального
+уровня}\label{ux444ux443ux43dux43aux446ux438ux438-ux43aux430ux43dux430ux43bux44cux43dux43eux433ux43e-ux443ux440ux43eux432ux43dux44f}
+
+Канальный уровень модели приёмопередатчика должен обеспечивать
+буферизацию данных на передачу в виде очереди пакетов. Пользователь
+должен иметь возможность задать максимальный размер очереди
+(определяется количеством пакетов). При достижении максимального размера
+очереди, новые пакеты должны быть отброшены.
+
+Приёмопередатчик должен иметь MAC-адрес (уникальный идентификатор
+канального уровня).
+
+\hl{MAC-адрес состоит из 8 бит.}
+
+Канальный уровень модели приёмопередатчика должен добавлять к
+передаваемым данным заголовок, содержащий:
+
+\begin{itemize}
+\item
+  MAC-адрес отправителя;
+\item
+  MAC-адрес получателя.
+\end{itemize}
+
+\section{4.1.4.4 Используемая модель
+интерференции}\label{ux438ux441ux43fux43eux43bux44cux437ux443ux435ux43cux430ux44f-ux43cux43eux434ux435ux43bux44c-ux438ux43dux442ux435ux440ux444ux435ux440ux435ux43dux446ux438ux438}
+
+\hl{Модель интерференции должна вычислять отношение сигнал к шуму по
+следующим формулам} (см.~формулы~1-4):\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(P_{s} = \int_{f_{1}}^{f_{2}}{S_{rx}(f){df}}\) & (1) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{s}\) -- мощность полезного сигнала в рабочей полосе, Па²;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(f_{1}\) -- нижняя граница рабочей полосы, Гц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(f_{2}\) -- верхняя граница рабочей полосы, Гц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(S_{rx}\) -- спектральная плотность мощности полезного сигнала на входе
+приёмника, Па²/Гц.} \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(P_{n} = \int_{f_{1}}^{f_{2}}{S_{n}(f){df}}\) & (2) \\
+& \(P_{i} = \int_{f_{1}}^{f_{2}}{S_{i}(f){df}}\) & (3) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{n}\) -- мощность шума в рабочей полосе, Па²;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(S_{n}\) -- спектральная плотность мощности шума, Па²/Гц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{i}\) -- мощность помехи (другого сигнала) в рабочей полосе,
+Па²;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(S_{i}\) -- спектральная плотность мощности помехи на входе приёмника,
+Па²/Гц.} \\
+\end{longtable}
+
+\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(SINR = \frac{P_{s}}{\sum_{k = 1}^{N_{i}}{(P_{i,k})}\  + \ P_{n}}\) &
+(4) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(SINR\) -- отношение мощности полезного сигнала к суммарной мощности
+шума и помех;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{s}\) -- мощность полезного сигнала в рабочей полосе, Па²;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{n}\) -- мощность шума в рабочей полосе, Па²;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(N_{i}\) -- число мешающих передач (других сигналов);} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(P_{i,k}\) -- мощность k-й помехи (другого сигнала) в рабочей полосе,
+Па².} \\
+\end{longtable}
+
+\section{4.1.4.5 Решение об успешном приёме и декодировании
+сигнала}\label{ux440ux435ux448ux435ux43dux438ux435-ux43eux431-ux443ux441ux43fux435ux448ux43dux43eux43c-ux43fux440ux438ux451ux43cux435-ux438-ux434ux435ux43aux43eux434ux438ux440ux43eux432ux430ux43dux438ux438-ux441ux438ux433ux43dux430ux43bux430}
+
+Модель приёмопередатчика считает сигнал успешно принятым и
+декодированным, если тип сигнала соответствует типу, который может
+декодировать этот приёмопередатчик, и значение ОСШ для этого сигнала
+выше порогового значения, заданного пользователем (см.~формулу~5):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(SINR \geq \gamma_{th}\) & (5) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(SINR\) -- отношение мощности полезного сигнала к суммарной мощности
+шума и помех;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(\gamma_{th}\) -- порог успешного приёма.} \\
+\end{longtable}
+
+\hl{}
+
+\section{4.1.4.6
+Трассировка}\label{ux442ux440ux430ux441ux441ux438ux440ux43eux432ux43aux430}
+
+Модель приёмопередатчика должна поддерживать вывод результатов
+трассировки в формате pcap. Файл должен содержать информацию о принятых
+и отправленных пакетах.
+
+\section{4.1.5 Требования к модели гидроакустического канала
+связи}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43cux43eux434ux435ux43bux438-ux433ux438ux434ux440ux43eux430ux43aux443ux441ux442ux438ux447ux435ux441ux43aux43eux433ux43e-ux43aux430ux43dux430ux43bux430-ux441ux432ux44fux437ux438}
+
+\section{4.1.5.1 Расчёт характеристик
+распространения}\label{ux440ux430ux441ux447ux451ux442-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43a-ux440ux430ux441ux43fux440ux43eux441ux442ux440ux430ux43dux435ux43dux438ux44f}
+
+Базовая модель канала связи должна обеспечивать:
+
+\begin{itemize}
+\item
+  расчёт времени распространения сигнала от точки излучения до точки
+  приёма;
+\item
+  расчёт затухания (потерь) сигнала при прохождении из точки излучения в
+  точку приёма.
+\end{itemize}
+
+\section{4.1.5.2 Расчёт времени
+распространения}\label{ux440ux430ux441ux447ux451ux442-ux432ux440ux435ux43cux435ux43dux438-ux440ux430ux441ux43fux440ux43eux441ux442ux440ux430ux43dux435ux43dux438ux44f}
+
+Базовая модель канала должна осуществлять расчёт времени распространения
+сигнала на основании 2 заданных параметров:
+
+\begin{itemize}
+\item
+  Координата излучателя в трёхмерном пространстве;
+\item
+  Координата приёмника в трёхмерном пространстве.
+\end{itemize}
+
+Для расчёта времени распространения считать:
+
+\begin{itemize}
+\item
+  Скорость распространения звука в воде постоянная;
+\item
+  Сигнал однолучевой;
+\item
+  Расстояние между узлами определяется как евклидово расстояние между их
+  координатами (см. формулу 6).
+\end{itemize}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(d = \left\| r_{rx} - r_{tx} \right\|\) & (6) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(d\) -- расстояние между передатчиком и приёмником, м;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(r_{tx}\) -- радиус-вектор передатчика;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(r_{rx}\) -- радиус-вектор приёмника.} \\
+\end{longtable}
+
+Время распространения определяется по формуле 7:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(\tau = \frac{d}{c}\) & (7) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(\tau\) -- задержка распространения сигнала, с.} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(d\) -- расстояние между передатчиком и приёмником, м.} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(c\) -- скорость звука в воде, м/с.} \\
+\end{longtable}
+
+\section{4.1.5.3 Расчёт затухания (потерь)
+сигнала}\label{ux440ux430ux441ux447ux451ux442-ux437ux430ux442ux443ux445ux430ux43dux438ux44f-ux43fux43eux442ux435ux440ux44c-ux441ux438ux433ux43dux430ux43bux430}
+
+Базовая модель канала должна осуществлять расчёт затухания сигнала на
+основании 3 заданных параметров:
+
+\begin{itemize}
+\item
+  координата излучателя в трёхмерном пространстве;
+\item
+  координата приёмника в трёхмерном пространстве;
+\item
+  мощность сигнала на выходе излучателя.
+\end{itemize}
+
+Модель потерь состоит из нескольких составляющих (см. формулу 8):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8990}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0487}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(TL(f,d) = {TL}_{geom}(d) + {TL}_{abs}(f,d)\) & (8) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(TL\) (Transmission loss) -- суммарные потери сигнала на частоте \(f\)
+при расстоянии \(d\), дБ;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\({TL}_{geom}\) -- потери на геометрическое расхождение, дБ;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\({TL}_{abs}\) -- потери на абсорбцию, дБ;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(f\) -- частота сигнала, Гц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(d\) -- расстояние, пройденное сигналом, м.} \\
+\end{longtable}
+
+Потери на геометрическое расхождение вычисляются по формуле 9:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8987}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0490}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \({TL}_{geom}(d) = 10n\log_{10}d\)~ & (9) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\({TL}_{geom}\) -- потери на геометрическое расхождение, дБ;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(n\) -- коэффициент расхождения;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(d\) -- расстояние, пройденное сигналом, м.} \\
+\end{longtable}
+
+\hl{Коэффициент n является настраиваемым и находится в диапазоне
+n~∈~{[}1;2{]}.}
+
+Потери на абсорбцию вычисляются по формуле 10:\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0521}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8799}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0680}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \({TL}_{abs}(f,\ d) = \alpha(f)*d*10^{3}\) & (10) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9479} + 2\tabcolsep}@{}}{%
+\({TL}_{abs}\) -- потери на абсорбцию, дБ;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9479} + 2\tabcolsep}@{}}{%
+\(\alpha\) -- коэффициент поглощения, дБ/км;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9479} + 2\tabcolsep}@{}}{%
+\(d\) -- расстояние, пройденное сигналом, м.} \\
+\end{longtable}
+
+\hl{Для вычисления коэффициента поглощения используются формулы Торпа}
+(см.~формулу~11) и Франсуа-Гаррисона\hl{} (см.~формулу~12):\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0523}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8826}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0651}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+&
+\(\alpha(f) \approx \frac{0.11\ f^{2}}{1\  + \ f^{2}} + \frac{40f^{2}}{4100 + f^{2}} + \frac{0,03f^{2}}{36 + f^{2}}\ \)
+& (11) \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(\alpha\) -- коэффициент поглощения, дБ/км;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9477} + 2\tabcolsep}@{}}{%
+\(f\) -- частота звука, кГц.} \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0661}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8684}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0654}}@{}}
+\toprule\noalign{}
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+&
+\(\alpha(f) \approx \frac{A_{1}P_{1}f_{1}f^{2}}{f_{1}^{2} + f^{2}} + \frac{A_{2}P_{2}f_{2}f^{2}}{f_{2}^{2} + f^{2}} + A_{3}P_{3}f^{2}\)
+& (12) \\
+& \(\begin{matrix}
+A_{1} = \frac{8.86}{c} \cdot {10}^{0.78pH - 5}
+\end{matrix}\), \(P_{1} = 1\)
+
+\(\begin{matrix}
+f_{1} = 2.8\sqrt[]{\frac{S}{35}} \cdot 10^{4\  - \ \frac{1245}{273 + T}}
+\end{matrix}\)
+
+\(\begin{matrix}
+A_{2} = 21.44\frac{S}{c}(1 + 0.025T)
+\end{matrix}\)
+
+\(\begin{matrix}
+P_{2} = 1 - 1.37 \cdot 10^{- 4}D + 6.2 \cdot 10^{- 9}D^{2}
+\end{matrix}\)
+
+\(\begin{matrix}
+f_{2} = \frac{8.17 \cdot 10^{8 - \frac{1990}{273 + T}}}{1 + 0.0018(S - 35)}
+\end{matrix}\)
+
+\(\begin{matrix}
+A_{3} = \left\{ \begin{matrix}
+4.937 \cdot 10^{- 4} - 2.59 \cdot 10^{- 5}T + 9.11 \cdot 10^{- 7}T^{2} - 1.50 \cdot 10^{- 8}T^{3}, & T \geq 20, \\
+3.964 \cdot 10^{- 4} - 1.146 \cdot 10^{- 5}T + 1.45 \cdot 10^{- 7}T^{2} - 6.5 \cdot 10^{- 10}T^{3}, & T < 20.
+\end{matrix} \right.\ 
+\end{matrix}\)
+
+\(\begin{matrix}
+P_{3} = 1 - 3.83 \cdot 10^{- 5}D + 4.9 \cdot 10^{- 10}D^{2}
+\end{matrix}\)
+
+\(\begin{matrix}
+c = 1412 + 3.21T + 1.19S + 0.0167D
+\end{matrix}\) & \\
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{1.0000} + 4\tabcolsep}@{}}{%
+} \\
+где~ &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(\alpha\) -- коэффициент поглощения, дБ/км;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(f\) -- частота звука, кГц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(A_{1}\) -- амплитудный коэффициент вклада борной кислоты;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(A_{2}\) -- амплитудный коэффициент вклада сульфата магния;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(A_{3}\) -- амплитудный коэффициент вклада чистой воды;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(P_{1},\ P_{2},{\ P}_{3}\) -- поправочные множители на
+давление/глубину;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(f_{1}\) -- релаксационная частота борной кислоты, кГц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(f_{2}\) -- релаксационная частота сульфата магния, кГц;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(T\) -- температура воды, °C;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(S\) -- солёность, ‰;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(D\) -- глубина, м;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(pH\) -- водородный показатель воды;} \\
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9339} + 2\tabcolsep}@{}}{%
+\(c\) -- скорость звука в воде, м/с.} \\
+\end{longtable}
+
+Выбор формулы осуществляется пользователем.
+
+\section{4.2 Требования к
+надёжности}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43dux430ux434ux451ux436ux43dux43eux441ux442ux438}
+
+\section{4.2.1 Требования к обеспечению надёжного функционирования
+программы}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43eux431ux435ux441ux43fux435ux447ux435ux43dux438ux44e-ux43dux430ux434ux451ux436ux43dux43eux433ux43e-ux444ux443ux43dux43aux446ux438ux43eux43dux438ux440ux43eux432ux430ux43dux438ux44f-ux43fux440ux43eux433ux440ux430ux43cux43cux44b}
+
+Некорректные критические параметры конфигурации модуля должны выявляться
+с выдачей диагностических сообщений такими средствами ns-3 как механизмы
+assert, abort и fatal diagnostics.
+
+\section{4.2.2 Время восстановления после
+отказа}\label{ux432ux440ux435ux43cux44f-ux432ux43eux441ux441ux442ux430ux43dux43eux432ux43bux435ux43dux438ux44f-ux43fux43eux441ux43bux435-ux43eux442ux43aux430ux437ux430}
+
+Требования к времени восстановления после отказа не предъявляются, так
+как модуль является симуляционной библиотекой и не выполняет
+автоматическое восстановление состояния после критических ошибок
+конфигурации.
+
+\section{4.2.3 Отказы из-за некорректных действий
+пользователя}\label{ux43eux442ux43aux430ux437ux44b-ux438ux437-ux437ux430-ux43dux435ux43aux43eux440ux440ux435ux43aux442ux43dux44bux445-ux434ux435ux439ux441ux442ux432ux438ux439-ux43fux43eux43bux44cux437ux43eux432ux430ux442ux435ux43bux44f}
+
+Для предотвращения отказов из-за некорректных действий пользователя в
+документации должны быть описаны допустимые значения ключевых
+параметров.
+
+В случае если пользователь запускает программу с некорректными
+значениями программа должна завершить выполнение, выдать диагностическое
+сообщение и корректно завершить работу.
+
+\section{4.3 Требования к условиям
+эксплуатации}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux443ux441ux43bux43eux432ux438ux44fux43c-ux44dux43aux441ux43fux43bux443ux430ux442ux430ux446ux438ux438}
+
+\section{4.3.1 Климатические условия
+эксплуатации}\label{ux43aux43bux438ux43cux430ux442ux438ux447ux435ux441ux43aux438ux435-ux443ux441ux43bux43eux432ux438ux44f-ux44dux43aux441ux43fux43bux443ux430ux442ux430ux446ux438ux438}
+
+Требования к климатическим условиям эксплуатации не предъявляются.
+
+\section{4.3.2 Требования к квалификации и численности
+персонала}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43aux432ux430ux43bux438ux444ux438ux43aux430ux446ux438ux438-ux438-ux447ux438ux441ux43bux435ux43dux43dux43eux441ux442ux438-ux43fux435ux440ux441ux43eux43dux430ux43bux430}
+
+Для эксплуатации программного модуля достаточно 1 пользователя,
+обладающего квалификацией инженера-программиста и владеющего следующими
+навыками:
+
+\begin{itemize}
+\item
+  Навык сборки С++ проектов;
+\item
+  Базовые навыки работы с библиотекой Ns-3.
+\end{itemize}
+
+\section{4.4 Требования к составу и параметрам технических
+средств}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux441ux43eux441ux442ux430ux432ux443-ux438-ux43fux430ux440ux430ux43cux435ux442ux440ux430ux43c-ux442ux435ux445ux43dux438ux447ux435ux441ux43aux438ux445-ux441ux440ux435ux434ux441ux442ux432}
+
+Для работы с программным модулем и библиотекой Ns-3 требуется ПК со
+следующими характеристиками:
+
+\begin{itemize}
+\item
+  Операционная система - Linux;
+\item
+  Процессор - x86-64, не менее 4 логических ядер;
+\item
+  ОЗУ - не менее 8 ГБ;
+\item
+  Свободное место на диске - не менее 5 ГБ (исходный код программы,
+  сборка, результаты).
+\end{itemize}
+
+\section{4.5 Требования к информационной и программной
+совместимости}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux43eux43dux43dux43eux439-ux438-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43eux439-ux441ux43eux432ux43cux435ux441ux442ux438ux43cux43eux441ux442ux438}
+
+\section{4.5.1 Требования к информационным структурам и методам
+решения}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux43eux43dux43dux44bux43c-ux441ux442ux440ux443ux43aux442ux443ux440ux430ux43c-ux438-ux43cux435ux442ux43eux434ux430ux43c-ux440ux435ux448ux435ux43dux438ux44f}
+
+Модуль должен поддерживать:
+
+\begin{itemize}
+\item
+  Механизмы задания параметров конфигурации, принятые в библиотеке Ns-3;
+\item
+  Исходный код модуля должен быть оформлен в стиле, принятом в
+  Ns-3-модулях (структура каталогов, нейминг, документирование).
+\end{itemize}
+
+\section{4.5.2 Требования к исходным кодам и языкам
+программирования}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux438ux441ux445ux43eux434ux43dux44bux43c-ux43aux43eux434ux430ux43c-ux438-ux44fux437ux44bux43aux430ux43c-ux43fux440ux43eux433ux440ux430ux43cux43cux438ux440ux43eux432ux430ux43dux438ux44f}
+
+Исходный код должен представлять собой форк репозитория Ns-3 с
+разработанным программным модулем.
+
+Компилятор C++ (gcc/clang) с поддержкой стандарта C++20.
+
+\section{4.5.3 Требования к программным средствам, используемым
+программой}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux44bux43c-ux441ux440ux435ux434ux441ux442ux432ux430ux43c-ux438ux441ux43fux43eux43bux44cux437ux443ux435ux43cux44bux43c-ux43fux440ux43eux433ux440ux430ux43cux43cux43eux439}
+
+Для работы модуля используется ns-3 с модулями core, network, mobility,
+spectrum, propagation. Для трассировки используется pcap/trace-helper.
+Для сборки используется CMake/ns3 build system, компилятор gcc или clang
+с поддержкой C++20.
+
+\section{4.5.4 Требования к защите
+информации}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux437ux430ux449ux438ux442ux435-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux438}
+
+Требования к защите информации не предъявляются (модуль не реализует
+механизмы аутентификации/авторизации и не обрабатывает персональные
+данные).
+
+\section{4.6 Требования к маркировке и
+упаковке}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43cux430ux440ux43aux438ux440ux43eux432ux43aux435-ux438-ux443ux43fux430ux43aux43eux432ux43aux435}
+
+Требования к маркировке и упаковке не предъявляются. Поставка
+программного модуля осуществляется в виде форка библиотеки Ns-3 с
+разработанным программным модулем.
+
+\section{4.7 Требования к транспортированию и
+хранению}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux442ux440ux430ux43dux441ux43fux43eux440ux442ux438ux440ux43eux432ux430ux43dux438ux44e-ux438-ux445ux440ux430ux43dux435ux43dux438ux44e}
+
+Хранение исходного кода программы должно быть выполнено с помощью
+системы контроля версий Git.
+
+\section{4.8 Специальные
+требования}\label{ux441ux43fux435ux446ux438ux430ux43bux44cux43dux44bux435-ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f}
+
+При разработке программного модуля необходимо использовать стандартные
+интерфейсы, используемые в Ns-3 для повышения совместимости с такими
+модулями, как network, propagation, mobility, spectrum.
+
+\section{5 Требования к программной
+документации}\label{ux442ux440ux435ux431ux43eux432ux430ux43dux438ux44f-ux43a-ux43fux440ux43eux433ux440ux430ux43cux43cux43dux43eux439-ux434ux43eux43aux443ux43cux435ux43dux442ux430ux446ux438ux438}
+
+Состав разрабатываемой программной документации должен включать в себя:
+
+\begin{itemize}
+\item
+  Техническое задание, оформленное в соответствии с Учебно-методическим
+  пособием «Подготовка, оформление выпускной квалификационной работы и
+  преддипломной практики»;
+\item
+  Пояснительную записку, оформленную в соответствии с
+  Учебно-методическим пособием «Подготовка, оформление выпускной
+  квалификационной работы и преддипломной практики»;
+\item
+  Руководство системного программиста, оформленное в соответствии с
+  учебно-методическим пособием «Подготовка, оформление выпускной
+  квалификационной работы и преддипломной практики».
+\end{itemize}
+
+\section{6 Технико-экономические
+показатели}\label{ux442ux435ux445ux43dux438ux43aux43e-ux44dux43aux43eux43dux43eux43cux438ux447ux435ux441ux43aux438ux435-ux43fux43eux43aux430ux437ux430ux442ux435ux43bux438}
+
+\section{6.1 Экономические преимущества
+разработки}\label{ux44dux43aux43eux43dux43eux43cux438ux447ux435ux441ux43aux438ux435-ux43fux440ux435ux438ux43cux443ux449ux435ux441ux442ux432ux430-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438}
+
+Разработка программного модуля модели программно-аппаратного
+гидроакустического приёмопередатчика для проведения виртуальных
+испытаний и подготовительных исследований для последующих полунатурных
+испытаний обеспечивает сокращение временных и финансовых затрат на
+создание и отработку систем гидроакустической связи.
+
+Применение компьютерного моделирования позволяет перенести значительную
+часть проверок и исследований с этапа изготовления опытного образца на
+этап проектирования. Это снижает объём натурных испытаний, требующих
+привлечения специализированного оборудования, испытательных акваторий и
+обслуживающего персонала, что приводит к уменьшению прямых
+эксплуатационных расходов.
+
+Использование модели на ранних стадиях разработки обеспечивает выявление
+архитектурных и алгоритмических ошибок до изготовления аппаратной части.
+В результате сокращаются затраты, связанные с внесением изменений в
+опытные образцы, переработкой конструкторской документации и повторным
+проведением испытаний.
+
+Реализация возможности многократного воспроизведения сценариев
+эксплуатации в виртуальной среде позволяет ускорить процесс отработки
+алгоритмов функционирования мультиагентных систем и оптимизации
+параметров связи. Это способствует сокращению общего срока разработки и
+повышению качества проектных решений.
+
+Таким образом, внедрение разработанного программного модуля обеспечивает
+снижение совокупной стоимости разработки гидроакустических систем связи,
+уменьшение сроков создания опытных образцов и повышение эффективности
+проведения испытаний.
+
+\section{7 Стадии и этапы
+разработки}\label{ux441ux442ux430ux434ux438ux438-ux438-ux44dux442ux430ux43fux44b-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438}
+
+\section{7.1 Стадии
+разработки}\label{ux441ux442ux430ux434ux438ux438-ux440ux430ux437ux440ux430ux431ux43eux442ux43aux438}
+
+Разработка проходит в шесть этапов в соответствии с таблицей Б.1.
+
+Таблица Б.1 -- Стадии разработки
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3194}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3467}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3339}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Название этапа & Сроки & Артефакт(-ы) \\
+Анализ требований
+
+и предметной области & 05.09.2025 -- 30.09.2025 & Неформализованный
+набор требований \\
+Формализация
+
+требований & 01.10.2025 -- 31.10.2025 & Техническое задание \\
+Проектирование
+
+модуля & 01.11.2025 -- 30.11.2025 & Диаграммы классов,
+
+использования и т.д. \\
+Разработка программного модуля & 01.12.2025 -- 28.02.2026 & Рабочий
+прототип гидроакустического модуля \\
+Тестирование модуля & 01.03.2026 -- 30.04.2026 & Журнал тестирования \\
+Документирование & 01.05.2026 -- 31.05.2026 & Пояснительная записка \\
+\end{longtable}
+
+\section{7.2 Содержание работ по
+этапам}\label{ux441ux43eux434ux435ux440ux436ux430ux43dux438ux435-ux440ux430ux431ux43eux442-ux43fux43e-ux44dux442ux430ux43fux430ux43c}
+
+На стадии анализа требований и предметной области должны быть выполнены
+следующие виды работ:
+
+\begin{itemize}
+\item
+  Сбор требований;
+\item
+  Исследование предметной области;
+\item
+  Разработка технического задания.
+\end{itemize}
+
+На стадии проектирования модуля должны быть выполнены:
+
+\begin{itemize}
+\item
+  Разработка диаграммы вариантов использования;
+\item
+  Разработка диаграммы классов проектного уровня.
+\end{itemize}
+
+На стадии разработки модуля должно быть выполнено кодирование модуля.
+
+На стадии тестирования модуля должен быть протестирован функционал
+модуля.
+
+На стадии документирования должна быть выполнена разработка
+пояснительной записки.
+
+\section{8 Порядок контроля и
+приёмки}\label{ux43fux43eux440ux44fux434ux43eux43a-ux43aux43eux43dux442ux440ux43eux43bux44f-ux438-ux43fux440ux438ux451ux43cux43aux438}
+
+\section{8.1 Виды
+испытаний}\label{ux432ux438ux434ux44b-ux438ux441ux43fux44bux442ux430ux43dux438ux439}
+
+Программа сдаётся на проверку заказчику 05.06.2026. При обнаружении в
+программе ошибок или недостатков исполнитель обязуется устранить их в
+недельный срок и предоставить программу на повторную проверку.
+
+Программа сдаётся на проверку независимому тестировщику не позднее
+09.06.2026. Результаты тестирования предоставляются на защите дипломного
+проекта членам ГАК.
+
+\section{\texorpdfstring{\hfill\break
+}{ }}\label{section}
+
+\section{Приложение
+Б.1}\label{ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.1}
+
+\section{}\label{section-1}
+
+\section{Диаграмма вариантов
+использования}\label{ux434ux438ux430ux433ux440ux430ux43cux43cux430-ux432ux430ux440ux438ux430ux43dux442ux43eux432-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f}
+
+На рисунке Б.1.1 представлена диаграмма вариантов использования.
+
+Рисунок Б.1.1 -- Диаграмма вариантов использования «Use Case».
+
+\section{Приложение
+Б.2}\label{ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.2}
+
+\section{Сценарии вариантов
+использования}\label{ux441ux446ux435ux43dux430ux440ux438ux438-ux432ux430ux440ux438ux430ux43dux442ux43eux432-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f}
+
+1. Запуск симуляции с двумя узлами
+
+1.1 Параметры по умолчанию
+
+\begin{itemize}
+\item
+  Пользователь запускает сборку тестового примера «передача сообщения
+  между двумя узлами с гидроакустическими приёмопередатчиками».
+\item
+  Пользователь запускает программу без параметров командной строки.
+\item
+  Если межузловое расстояние не задано, используется значение по
+  умолчанию (1 км).
+\item
+  Программа формирует отчёт симуляции, содержащий:
+
+  \begin{itemize}
+  \item
+    параметры сценария, включая межузловое расстояние по умолчанию;
+  \item
+    время отправки сообщения;
+  \item
+    результат приёма сообщения (успех);
+  \item
+    время приёма сообщения;
+  \item
+    адрес устройства-отправителя;
+  \item
+    адрес устройства-получателя;
+  \item
+    полезную нагрузку сообщения;
+  \item
+    среднее значение ОСШ.
+  \end{itemize}
+\item
+  Сообщение принято успешно.
+\end{itemize}
+
+1.2 Увеличенное межузловое расстояние
+
+\begin{itemize}
+\item
+  Пользователь запускает сборку тестового примера «передача сообщения
+  между двумя узлами с гидроакустическими приёмопередатчиками».
+\item
+  Пользователь запускает программу с параметром командной строки,
+  задающим межузловое расстояние в 10 км.
+\item
+  Программа формирует отчёт симуляции, содержащий:
+
+  \begin{itemize}
+  \item
+    параметры сценария, включая пользовательское значение межузлового
+    расстояния;
+  \item
+    результат приёма сообщения (неудача).
+  \end{itemize}
+\item
+  При достаточно большом межузловом расстоянии сообщение не принимается
+  успешно.
+\end{itemize}
+
+\hl{2. Запуск симуляции с тремя узлами}
+
+\hl{2.1 Одновременная передача двумя узлами-отправителями при одинаковом
+расстоянии до узла-получателя}
+
+\begin{itemize}
+\item
+  Пользователь запускает сборку тестового примера «одновременная
+  передача сообщений двумя узлами-отправителями одному узлу-получателю».
+\item
+  Пользователь запускает программу без параметров командной строки.
+\item
+  Если межузловые расстояния не заданы, используются значения по
+  умолчанию, при которых оба узла-отправителя находятся на одинаковом
+  расстоянии от узла-получателя.
+\item
+  Программа формирует отчёт симуляции, содержащий:
+
+  \begin{itemize}
+  \item
+    параметры сценария, включая межузловые расстояния по умолчанию;
+  \item
+    время отправки первого сообщения;
+  \item
+    время отправки второго сообщения;
+  \item
+    результат приёма первого сообщения (неудача);
+  \item
+    результат приёма второго сообщения (неудача);
+  \item
+    среднее значение ОСШ для сообщения, если оно доступно;
+  \item
+    среднее значение ОСШ для сообщения, если оно доступно;
+  \end{itemize}
+\item
+  При одновременной передаче сообщений от двух узлов-отправителей,
+  находящихся на одинаковом расстоянии от узла-получателя, оба сообщения
+  не принимаются успешно из-за взаимной интерференции.
+\end{itemize}
+
+\hl{}
+
+\hl{2.2 Одновременная передача двумя узлами-отправителями при разном
+расстоянии до узла-получателя}
+
+\begin{itemize}
+\item
+  Пользователь запускает сборку тестового примера «одновременная
+  передача сообщений двумя узлами-отправителями одному узлу-получателю».
+\item
+  Пользователь запускает программу с параметрами командной строки,
+  задающими межузловые расстояния от каждого узла-отправителя до
+  узла-получателя.
+\item
+  Программа формирует отчёт симуляции, содержащий:
+
+  \begin{itemize}
+  \item
+    параметры сценария, включая пользовательские значения межузловых
+    расстояний;
+  \item
+    время отправки первого сообщения;
+  \item
+    время отправки второго сообщения;
+  \item
+    результат приёма первого сообщения (успех);
+  \item
+    время приёма первого сообщения;
+  \end{itemize}
+
+  \begin{itemize}
+  \item
+    среднее значение ОСШ для первого сообщения, если оно доступно;
+  \end{itemize}
+
+  \begin{itemize}
+  \item
+    результат приёма второго сообщения (неудача);
+  \item
+    среднее значение ОСШ для второго сообщения, если оно доступно.
+  \end{itemize}
+\item
+  При одновременной передаче сообщений от двух узлов-отправителей,
+  находящихся на разном расстоянии от узла-получателя, сообщение от
+  ближнего узла принимается успешно, а сообщение от дальнего узла не
+  принимается успешно.\hl{}
+\end{itemize}
+
+\section{Приложение
+Б.3}\label{ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.3}
+
+\section{}\label{section-2}
+
+\section{Макеты экранных
+форм}\label{ux43cux430ux43aux435ux442ux44b-ux44dux43aux440ux430ux43dux43dux44bux445-ux444ux43eux440ux43c}
+
+Макеты экранных форм работы модуля представлены на рисунках Б.3.1 -
+Б.3.3.
+
+Рисунок Б.3.1 -- Отображение результатов трассировки в программе
+Wireshark
+
+Рисунок Б.3.2 -- Отображение результатов работы сценария с двумя
+узлами\hl{}
+
+\hl{}
+
+\hl{}
+
+Рисунок Б.3.3 -- Отображение результатов работы сценария с тремя
+узлами\hl{}
+
+\section{Приложение
+Б.4}\label{ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.4}
+
+\section{}\label{section-3}
+
+\section{Структура и формат
+данных}\label{ux441ux442ux440ux443ux43aux442ux443ux440ux430-ux438-ux444ux43eux440ux43cux430ux442-ux434ux430ux43dux43dux44bux445}
+
+\hl{}
+
+\section{Б.4.1 Сценарий №1 --- взаимодействие двух
+узлов}\label{ux431.4.1-ux441ux446ux435ux43dux430ux440ux438ux439-1-ux432ux437ux430ux438ux43cux43eux434ux435ux439ux441ux442ux432ux438ux435-ux434ux432ux443ux445-ux443ux437ux43bux43eux432}
+
+Б.4.1.1 Входные данные\hl{}
+
+Входные данные представляют собой параметры командной строки \hl{и}
+представлены в таблице Б.4.1\hl{}
+
+Таблица Б.4.1 --- Входные данные сценария взаимодействия двух узлов\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1969}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2423}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2120}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1666}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1822}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Параметр командной строки
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Назначение
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Тип данных
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Единица измерения
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Значение по умолчанию
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+-\/-sound-speed & Скорость распространения звука в среде & вещественное
+число & м/с & 1500 \\
+-\/-geometric-coefficient & Коэффициент геометрического расхождения &
+вещественное число & нет & 2.0 \\
+-\/-absorption-model & Имя модели поглощения сигнала & строка & нет &
+ns3::FrancoisGarrisonPropagationLossModel \\
+-\/-snr-threshold & Минимальное среднее значение ОСШ, необходимое для
+успешного приёма & вещественное число & нет & 10 \\
+-\/-distance & Межузловое расстояние между узлом-отправителем и
+узлом-получателем & вещественное число & м & 1000 \\
+\end{longtable}
+
+Б.4.1.2 Выходные данные\hl{}
+
+\hl{Выходные данные формируются в текстовом виде и выводятся в
+стандартный поток вывода (stdout) и имеют следующий вид:}
+
+\emph{\hl{Simulation with 2 nodes.}}
+
+\emph{\hl{Parameters:}}
+
+\emph{\hl{Inter-node distance: \textless значение\textgreater{} m}}
+
+\emph{\hl{Sound speed: \textless значение\textgreater{} m/s}}
+
+\emph{\hl{Geometric spreading loss coefficient:
+\textless значение\textgreater{}}}
+
+\emph{\hl{Absorption loss model: \textless значение\textgreater{}}}
+
+\emph{\hl{SNR threshold: \textless значение\textgreater{}}}
+
+\emph{\hl{Carrier frequency: \textless значение\textgreater{} Hz}}
+
+\emph{\hl{Bandwidth: \textless значение\textgreater{} Hz}}
+
+\emph{\hl{Power: \textless значение\textgreater{} uPa\^{}2}}
+
+\emph{\hl{PSD: \textless значение\textgreater{} uPa\^{}2/Hz}}
+
+\emph{\hl{Send time: \textless значение\textgreater{} ms}}
+
+\emph{\hl{Receive result: success\textbar failure}}
+
+\hl{При успешном приёме дополнительно выводятся:}
+
+\emph{\hl{Receive time: \textless значение\textgreater{} ms}}
+
+\emph{\hl{Sender address: \textless значение\textgreater{}}}
+
+\emph{\hl{Receiver address: \textless значение\textgreater{}}}
+
+\emph{\hl{Payload: \textless значение\textgreater{}}}
+
+\emph{\hl{Mean SNR: \textless значение\textgreater{}}}
+
+\hl{При неуспешном приёме дополнительно выводится:}
+
+\hl{\emph{Message was not received successfully.}}
+
+\section{\texorpdfstring{\hl{}}{}}\label{section-4}
+
+\section{Б.4.2 Сценарий №2 --- взаимодействие трёх
+узлов}\label{ux431.4.2-ux441ux446ux435ux43dux430ux440ux438ux439-2-ux432ux437ux430ux438ux43cux43eux434ux435ux439ux441ux442ux432ux438ux435-ux442ux440ux451ux445-ux443ux437ux43bux43eux432}
+
+Б.4.2.1 Входные данные\hl{}
+
+Входные данные представляют собой параметры командной строки \hl{и}
+представлены в таблице Б.4.2\hl{}
+
+Таблица Б.4.2 --- Входные данные сценария взаимодействия трёх узлов\hl{}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1969}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2423}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2120}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1666}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1822}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Параметр командной строки
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Назначение
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Тип данных
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Единица измерения
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Значение по умолчанию
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+-\/-sound-speed & Скорость распространения звука в среде & вещественное
+число & м/с & 1500 \\
+-\/-geometric-coefficient & Коэффициент геометрического расхождения &
+вещественное число & нет & 2.0 \\
+-\/-absorption-model & Имя модели поглощения сигнала & строка & нет &
+ns3::FrancoisGarrisonPropagationLossModel \\
+-\/-snr-threshold & Минимальное среднее значение ОСШ, необходимое для
+успешного приёма & вещественное число & нет & 10 \\
+-\/-sender1-distance & Расстояние от первого узла-отправителя до
+узла-получателя & вещественное число & м & 1000 \\
+-\/-sender2-distance & Расстояние от второго узла-отправителя до
+узла-получателя & вещественное число & м & 1000 \\
+\end{longtable}
+
+Б.4.2.2 Выходные данные\hl{}
+
+\hl{Выходные данные формируются в текстовом виде и выводятся в
+стандартный поток вывода (stdout) и имеют следующий вид:}
+
+\emph{\hl{Simulation with 3 nodes.}}
+
+\emph{\hl{Parameters:}}
+
+\emph{\hl{Sender 1 distance: \textless значение\textgreater{} m}}
+
+\emph{\hl{Sender 2 distance: \textless значение\textgreater{} m}}
+
+\emph{\hl{Sound speed: \textless значение\textgreater{} m/s}}
+
+\emph{\hl{Geometric spreading loss coefficient:
+\textless значение\textgreater{}}}
+
+\emph{\hl{Absorption loss model: \textless значение\textgreater{}}}
+
+\emph{\hl{SNR threshold: \textless значение\textgreater{}}}
+
+\emph{\hl{Carrier frequency: \textless значение\textgreater{} Hz}}
+
+\emph{\hl{Bandwidth: \textless значение\textgreater{} Hz}}
+
+\emph{\hl{Power: \textless значение\textgreater{} uPa\^{}2}}
+
+\emph{\hl{PSD: \textless значение\textgreater{} uPa\^{}2/Hz}}
+
+\emph{\hl{Message 1:}}
+
+\emph{\hl{Send time: \textless значение\textgreater{} ms}}
+
+\emph{\hl{Receive result: success\textbar failure}}
+
+\emph{\hl{Mean SNR: \textless значение\textgreater\textbar not
+available}}
+
+\emph{\hl{Message 2:}}
+
+\emph{\hl{Send time: \textless значение\textgreater{} ms}}
+
+\emph{\hl{Receive result: success\textbar failure}}
+
+\emph{\hl{Mean SNR: \textless значение\textgreater\textbar not
+available}}
+
+\hl{При успешном приёме для каждого сообщения дополнительно выводятся:}
+
+\emph{\hl{Receive time: \textless значение\textgreater{} ms}}
+
+\emph{\hl{Sender address: \textless значение\textgreater{}}}
+
+\emph{\hl{Receiver address: \textless значение\textgreater{}}}
+
+\emph{\hl{Payload: \textless значение\textgreater{}}}\\
+\hl{}
+
+\section{Приложение
+Б.5}\label{ux43fux440ux438ux43bux43eux436ux435ux43dux438ux435-ux431.5}
+
+\section{}\label{section-5}
+
+\section{Состояния физического уровня модели
+приёмопередатчика}\label{ux441ux43eux441ux442ux43eux44fux43dux438ux44f-ux444ux438ux437ux438ux447ux435ux441ux43aux43eux433ux43e-ux443ux440ux43eux432ux43dux44f-ux43cux43eux434ux435ux43bux438-ux43fux440ux438ux451ux43cux43eux43fux435ux440ux435ux434ux430ux442ux447ux438ux43aux430}
+
+На рисунке Б.5.1 представлена диаграмма машины состояний.
+
+\section{}\label{section-6}
+
+Рисунок Б.5.1 --- Диаграмма состояний физического уровня модели
+приёмопередатчика
