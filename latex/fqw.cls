@@ -165,35 +165,50 @@
 \renewcommand{\theparagraph}{\thesubsubsection.\arabic{paragraph}}
 
 \titleformat{\section}
-{\normalfont\bfseries\raggedright}
+{\normalfont}
 {\thesection}
 {0.7em}
 {}
 \titleformat{name=\section,numberless}
-{\normalfont\bfseries\raggedright}
+{\normalfont}
 {}
 {0pt}
 {}
 \titleformat{\subsection}
-{\normalfont\bfseries\raggedright}
+{\normalfont}
 {\thesubsection}
 {0.7em}
 {}
 \titleformat{\subsubsection}
-{\normalfont\bfseries\raggedright}
+{\normalfont}
 {\thesubsubsection}
 {0.7em}
 {}
 \titleformat{\paragraph}
-{\normalfont\bfseries\raggedright}
+{\normalfont}
 {\theparagraph}
 {0.7em}
 {}
 
-\titlespacing*{\section}{1.25cm}{0pt}{1\baselineskip}
-\titlespacing*{\subsection}{1.25cm}{1\baselineskip}{0.5\baselineskip}
-\titlespacing*{\subsubsection}{1.25cm}{1\baselineskip}{0.5\baselineskip}
-\titlespacing*{\paragraph}{1.25cm}{1\baselineskip}{0.5\baselineskip}
+\titlespacing*{\section}
+{1.25cm}
+{1\baselineskip}
+{1\baselineskip}
+
+\titlespacing*{\subsection}
+{1.25cm}
+{1\baselineskip}
+{1\baselineskip}
+
+\titlespacing*{\subsubsection}
+{1.25cm}
+{1\baselineskip}
+{1\baselineskip}
+
+\titlespacing*{\paragraph}
+{1.25cm}
+{1\baselineskip}
+{1\baselineskip}
 
 \newcommand{\FqwUnnumberedSection}[1]{%
     \phantomsection%
@@ -201,16 +216,18 @@
     \addcontentsline{toc}{section}{#1}%
 }
 
-\renewcommand{\contentsname}{Содержание}
-\renewcommand{\cfttoctitlefont}{\normalfont\bfseries}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\setlength{\cftbeforesecskip}{0pt}
-\setlength{\cftbeforesubsecskip}{0pt}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cftsecfont}{\normalfont}
-\renewcommand{\cftsecpagefont}{\normalfont}
-\renewcommand{\cftsubsecfont}{\normalfont}
-\renewcommand{\cftsubsecpagefont}{\normalfont}
+%% Настройки содержания
+\renewcommand{\contentsname}{Содержание}                    % переименовать заголовок оглавления на русский
+\renewcommand{\cfttoctitlefont}{\normalfont}                % использовать обычный шрифт для заголовка оглавления
+\setlength{\cftaftertoctitleskip}{2\baselineskip}           % отступ снизу после заголовка оглавления в 2 строки
+\setlength{\cftbeforesecskip}{0pt}                          % убрать вертикальный отступ перед пунктами разделов в оглавлении
+\setlength{\cftbeforesubsecskip}{0pt}                       % убрать вертикальный отступ перед пунктами подразделов в оглавлении
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}       % включить точки-лидеры между названием раздела и номером страницы
+\renewcommand{\cftsecfont}{\normalfont}                     % использовать обычный шрифт для названий разделов в оглавлении
+\renewcommand{\cftsecpagefont}{\normalfont}                 % использовать обычный шрифт для номеров страниц разделов
+\renewcommand{\cftsubsecfont}{\normalfont}                  % использовать обычный шрифт для названий подразделов в оглавлении
+\renewcommand{\cftsubsecpagefont}{\normalfont}              % использовать обычный шрифт для номеров страниц подразделов
+
 
 \DeclareCaptionLabelSeparator{fqwsep}{\space\textendash\space}
 \captionsetup{
@@ -307,6 +324,13 @@
 \setlength{\belowdisplayskip}{1\baselineskip}
 \setlength{\abovedisplayshortskip}{1\baselineskip}
 \setlength{\belowdisplayshortskip}{1\baselineskip}
+
+\AtBeginDocument{%
+    \setlength{\abovedisplayskip}{\baselineskip}%
+    \setlength{\belowdisplayskip}{\baselineskip}%
+    \setlength{\abovedisplayshortskip}{\baselineskip}%
+    \setlength{\belowdisplayshortskip}{\baselineskip}%
+}
 
 \newlength{\FqwWhereLabelWidth}
 \setlength{\FqwWhereLabelWidth}{1.7em}
