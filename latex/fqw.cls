@@ -122,7 +122,7 @@
 % после начала документа
 \AtBeginDocument{\fqw@SetupBaseTextStype}
 
-\newcommand{\nbspace}{\nobreak\hspace{0.333em}\ignorespaces}
+\newcommand{\nbspace}{\nobreak\kern0.333em\ignorespaces}
 
 \hypersetup{                                                   % начать настройку параметров пакета hyperref
     unicode=true,                                              % включить Unicode в PDF-закладках и метаданных
@@ -162,7 +162,7 @@
 {}                                                             % не добавлять дополнительный код перед текстом заголовка
 \titleformat{name=\section,numberless}[block]                         % начать настройку формата ненумерованного заголовка \section*
 {\normalfont}                                                  % задать обычный шрифт ненумерованного заголовка
-{}                                                             % не выводить номер у ненумерованного заголовка
+{\hspace*{1.25cm}}                                                             % не выводить номер у ненумерованного заголовка
 {0pt}                                                          % задать нулевой интервал между отсутствующим номером и текстом
 {}                                                             % не добавлять дополнительный код перед текстом ненумерованного заголовка
 \titleformat{\subsection}[block]                                      % начать настройку формата заголовка \subsection
@@ -170,6 +170,11 @@
 {\hspace*{1.25cm}\thesubsection}                                               % выводить номер подраздела в формате \thesubsection
 {0.7em}                                                        % задать интервал между номером подраздела и текстом заголовка
 {}                                                             % не добавлять дополнительный код перед текстом заголовка подраздела
+\titleformat{name=\subsection,numberless}[block]                                      % начать настройку формата заголовка \subsection
+{\normalfont}                                                  % задать обычный шрифт заголовка подраздела
+{\hspace*{1.25cm}}                                               % выводить номер подраздела в формате \thesubsection
+{0em}                                                        % задать интервал между номером подраздела и текстом заголовка
+{}
 \titleformat{\subsubsection}[block]                                   % начать настройку формата заголовка \subsubsection
 {\normalfont}                                                  % задать обычный шрифт заголовка пункта третьего уровня
 {\hspace*{1.25cm}\thesubsubsection}                                            % выводить номер пункта в формате \thesubsubsection
