@@ -1599,56 +1599,39 @@
         средний процент ошибки по всем предсказаниям.
     \end{itemize}
 
-    Выполним оценку работы следующих модемов, характеристики которых представлены в таблице 4.1.
+    Выполним оценку работы следующих модемов, характеристики которых представлены в таблице~\ref{tab:hydroacoustic-modems}.
 
-    Таблица 4.1 -- характеристики гидроакустических модемов
+    \begin{longtable}{
+        @{}
+            >{\raggedright\arraybackslash}p{0.40\textwidth}
+            >{\centering\arraybackslash}p{0.15\textwidth}
+            >{\centering\arraybackslash}p{0.225\textwidth}
+            >{\centering\arraybackslash}p{0.225\textwidth}
+        @{}
+    }
+        \caption{Характеристики гидроакустических модемов}
+        \label{tab:hydroacoustic-modems}\\
 
-    \begin{longtable}[]{@{}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3939}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1507}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2248}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2305}}@{}}
-        \caption[Таблица 4.1 -- характеристики гидроакустических
-        модемов]{Таблица 4.1 -- характеристики гидроакустических
-        модемов}\tabularnewline
-        \toprule\noalign{}
-        \begin{minipage}[b]{\linewidth}
-            \raggedright
-            \textbf{Модем}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Полоса частот,\hl{}}
-
-                             \textbf{\hl{kHz}}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Излучаемое давление, dB re 1 uPa @ 1 m}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Максимальная дальность приёма, km}
-        \end{minipage} \\
-        \midrule\noalign{}
+        \toprule
+        \textbf{Модем} &
+        \textbf{Полоса частот, kHz} &
+        \textbf{Излучаемое давление, dB re 1 uPa @ 1 m} &
+        \textbf{Максимальная дальность приёма, km} \\
+        \midrule
         \endfirsthead
-        \toprule\noalign{}
-        \begin{minipage}[b]{\linewidth}
-            \raggedright
-            \textbf{Модем}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Полоса частот,\hl{}}
 
-                             \textbf{\hl{kHz}}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Излучаемое давление, dB re 1 uPa @ 1 m}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Максимальная дальность приёма, km}
-        \end{minipage} \\
-        \midrule\noalign{}
+        \multicolumn{4}{@{}l}{Продолжение таблицы~\thetable}\\[0.5\baselineskip]
+        \toprule
+        \textbf{Модем} &
+        \textbf{Полоса частот, kHz} &
+        \textbf{Излучаемое давление, dB re 1 uPa @ 1 m} &
+        \textbf{Максимальная дальность приёма, km} \\
+        \midrule
         \endhead
-        \bottomrule\noalign{}
+
+        \bottomrule
         \endlastfoot
+
         uWave underwater acoustic modem{[}28{]} & 10..30 & 169 dB & 1.092 \\
         uWave max underwater acoustic modem{[}29{]} & 10..30 & 175 dB & 3 \\
         EvoLogic PRO 48/78{[}30{]} & 48..78 & 186 & 1 \\
@@ -1668,62 +1651,13 @@
         Modem 6 OEM Nano (subsea) Type 8262{[}43{]} & 20..34 & 175 & 2 \\
         Modem 6 standard (subsea) Type 8307-3111{[}44{]} & 20..34 & 196 & 5 \\
         Teledyne UCM-900 Series{[}45{]} & 20..30 & 175 & 1.8 \\
-    \end{longtable}
-
-    Продолжение таблицы 4.1
-
-    \begin{longtable}[]{@{}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3939}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1507}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2248}}
-            >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2305}}@{}}
-        \caption[Таблица 4.1 -- характеристики гидроакустических
-        модемов]{Таблица 4.1 -- характеристики гидроакустических
-        модемов}\tabularnewline
-        \toprule\noalign{}
-        \begin{minipage}[b]{\linewidth}
-            \raggedright
-            \textbf{Модем}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Полоса частот,\hl{}}
-
-                             \textbf{\hl{kHz}}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Излучаемое давление, dB re 1 uPa @ 1 m}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Максимальная дальность приёма, km}
-        \end{minipage} \\
-        \midrule\noalign{}
-        \endfirsthead
-        \toprule\noalign{}
-        \begin{minipage}[b]{\linewidth}
-            \raggedright
-            \textbf{Модем}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Полоса частот,\hl{}}
-
-                             \textbf{\hl{kHz}}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Излучаемое давление, dB re 1 uPa @ 1 m}
-        \end{minipage} & \begin{minipage}[b]{\linewidth}
-                             \raggedright
-                             \textbf{Максимальная дальность приёма, km}
-        \end{minipage} \\
-        \midrule\noalign{}
-        \endhead
-        \bottomrule\noalign{}
-        \endlastfoot
         Teledyne CM-900 Series (LF) & 9..14 & 170 & 4 \\
         Teledyne CM-900 Series (MF) & 16..21 & 170 & 2 \\
         Teledyne CM-900 Series (WideBand C) & 20..30 & 172 & 1 \\
         Teledyne ATM-910 Series (LF) & 9..14 & 185 & 6 \\
         Teledyne ATM-910 Series (MF) & 16..21 & 183 & 4 \\
         Teledyne ATM-910 Series (WideBand C) & 20..30 & 178 & 1.8 \\
+
     \end{longtable}
 
     Для проведения валидации необходимо выбрать уровень шума среды и
