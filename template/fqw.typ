@@ -115,6 +115,17 @@
   #pagebreak()
 ]
 
+#let fqw-introduction(label: none, heading-counter: none) = [
+  #heading(numbering: none)[Введение]
+  #fqw-indent-before-text
+  #if label != none {
+    label
+  }
+  #if heading-counter != none {
+    counter(heading).update(heading-counter)
+  }
+]
+
 #let fqw-equation-list(equations) = {
   block(spacing: fqw-baseline)[
     #for (i, item) in equations.enumerate() {

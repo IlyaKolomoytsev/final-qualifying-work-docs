@@ -21,8 +21,12 @@
 #pagebreak()
 #fqw-outline()
 
-= Введение
-= 1.1 Наименование программы
+#fqw-introduction(label: <sec:introduction>, heading-counter: 1)
+
+== Наименование программы
+#fqw-indent-before-text
+<sec:program_name>
+
 Наименование программы: «Программный модуль модели гидроакустического
 приёмопередатчика для Ns-3».
 

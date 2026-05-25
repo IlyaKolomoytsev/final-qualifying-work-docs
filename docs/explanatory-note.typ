@@ -36,9 +36,7 @@
 
 #fqw-outline()
 
-#heading(numbering: none)[Введение]
-#fqw-indent-before-text
-<sec:introduction>
+#fqw-introduction(label: <sec:introduction>)
 
 // Вступление
 Системы связи играют ключевую роль в развитии современного общества,
