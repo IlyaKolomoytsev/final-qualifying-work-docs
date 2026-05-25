@@ -443,8 +443,8 @@ $ alpha(f) approx (0.11 f^2) / (1 + f^2) + (40 f^2) / (4100 + f^2) + (0.03 f^2) 
   [$ f_2 = (8.17 dot 10^(8 - 1990 / (273 + T))) / (1 + 0.0018 (S - 35)) $],
   [$
     A_3 = cases(
-      4.937 dot 10^(-4) -- 2.59 dot 10^(-5) T + 9.11 dot 10^(-7) T^2 - 1.50 dot 10^(-8) T^3 & "если " T >= 20,
-      3.964 dot 10^(-4) -- 1.146 dot 10^(-5) T + 1.45 dot 10^(-7) T^2 - 6.5 dot 10^(-10) T^3 & "если " T < 20
+      4.937 dot 10^(-4) - 2.59 dot 10^(-5) T + 9.11 dot 10^(-7) T^2 - 1.50 dot 10^(-8) T^3 & "если " T >= 20,
+      3.964 dot 10^(-4) - 1.146 dot 10^(-5) T + 1.45 dot 10^(-7) T^2 - 6.5 dot 10^(-10) T^3 & "если " T < 20
     )
   $],
   [$ P_3 = 1 - 3.83 dot 10^(-5) D + 4.9 dot 10^(-10) D^2 $],
@@ -529,7 +529,7 @@ $ alpha(f) approx (0.11 f^2) / (1 + f^2) + (40 f^2) / (4100 + f^2) + (0.03 f^2) 
 Для работы с программным модулем и библиотекой Ns-3 требуется
 ПК со следующими характеристиками:
 
-- Операционная система - Linux;
+- Операционная система -- Linux;
 
 - Процессор - x86-64, не менее 4 логических ядер;
 
@@ -756,8 +756,6 @@ network, propagation, mobility, spectrum.
   title-label: <sec:appendix_b_1_use_case_diagram>,
   next-paragraph: true,
 )
-#fqw-indent-before-text
-#fqw-indent-before-text
 
 На рисунке~#fqw-figure-ref(<fig:use-case-diagram>)
 представлена диаграмма вариантов использования.
@@ -773,8 +771,6 @@ network, propagation, mobility, spectrum.
   title-label: <sec:appendix_b_2_use_case_scenarios>,
   next-paragraph: true,
 )
-#fqw-indent-before-text
-#fqw-indent-before-text
 
 #block()[
   #set enum(
@@ -927,24 +923,23 @@ network, propagation, mobility, spectrum.
   title-label: <sec:appendix_b_4_data_structure>,
   next-paragraph: true,
 )
-#fqw-indent-before-text
 
 #fqw-subappendix-section(
-  [Сценарий №1 -- взаимодействие двух узлов],
+  [Взаимодействие двух узлов],
   label: <sec:appendix_b_4_1>,
 )
 
 #fqw-subappendix-subsection([Входные данные])
 
 Входные данные представляют собой параметры командной строки и
-представлены в таблице #fqw-table-ref(<tbl:appendix_b_4_1>)
+представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_1>):
 
 #fqw-table(
   [Входные данные сценария взаимодействия двух узлов],
   columns: (1.3fr, 1.5fr, 1fr, 1fr, 1fr),
   align: left + horizon,
   inset: 4pt,
-  label: <tbl:appendix_b_4_1>,
+  label: <tabl:appendix_b_4_1>,
   header: (
     [Параметр командной строки],
     [Назначение],
@@ -979,7 +974,7 @@ Simulation with 2 nodes.                            #parbreak()
 Parameters:                                         #parbreak()
 Inter-node distance: \<значение\> m                 #parbreak()
 Sound speed: \<значение\> m/s                       #parbreak()
-Geometric spreading loss coefficient: \<значение    #parbreak()
+Geometric spreading loss coefficient: \<значение\>  #parbreak()
 Absorption loss model: \<значение\>                 #parbreak()
 SNR threshold: \<значение\>                         #parbreak()
 Carrier frequency: \<значение\> Hz                  #parbreak()
@@ -1006,21 +1001,21 @@ _
 _Message was not received successfully._
 
 #fqw-subappendix-section(
-  [Сценарий №2 --- взаимодействие трёх узлов],
+  [Взаимодействие трёх узлов],
   label: <sec:appendix_b_4_2>,
 )
 
 #fqw-subappendix-subsection([Входные данные])
 
 Входные данные представляют собой параметры командной строки и
-представлены в таблице #fqw-table-ref(<tbl:appendix_b_4_2>)
+представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_2>)
 
 #fqw-table(
   [Входные данные сценария взаимодействия трёх узлов],
   columns: (1.3fr, 2fr, 1.2fr, 0.9fr, 1.7fr),
   align: left + horizon,
   inset: 4pt,
-  label: <tbl:appendix_b_4_2>,
+  label: <tabl:appendix_b_4_2>,
   header: (
     [Параметр командной строки],
     [Назначение],

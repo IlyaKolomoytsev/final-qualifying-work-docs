@@ -292,7 +292,7 @@
   inset: 6pt,
   label: none,
   caption-gap: 0.5em,
-) = [
+) = block(spacing: fqw-baseline)[
   #set par(first-line-indent: 0pt)
   #counter("fqw-table").step()
   #set text(hyphenate: true)
@@ -307,8 +307,6 @@
   } else {
     columns.len()
   }
-
-  #v(fqw-baseline)
 
   #block(
     sticky: true,
@@ -348,7 +346,6 @@
     ..rows,
   )
 
-  #v(fqw-baseline)
 ]
 
 #let fqw-landscape(body, document-code: none) = page(
@@ -438,7 +435,13 @@
 #let fqw-subappendix-subsection(title, label: none, outlined: false) = [
   #counter("fqw-subappendix-subsection").step()
   #context {
-    let subsection-number = fqw-subappendix-number() + "." + str(counter("fqw-subappendix-section").get().first()) + "." + str(counter("fqw-subappendix-subsection").get().first())
+    let subsection-number = (
+      fqw-subappendix-number()
+        + "."
+        + str(counter("fqw-subappendix-section").get().first())
+        + "."
+        + str(counter("fqw-subappendix-subsection").get().first())
+    )
     heading(level: 3, numbering: none, outlined: outlined)[
       #subsection-number
       #h(0.5em)
