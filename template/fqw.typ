@@ -72,8 +72,8 @@
   }
 
   // lists markers
-  #set list(marker: [--], indent: 1.25cm)
-  #set enum(numbering: "1.", indent: 1.25cm)
+  #set list(marker: [--])
+  #set enum(numbering: "1.")
 
   // numbering
   #set heading(numbering: "1.1")
@@ -179,33 +179,101 @@
   ]
 ]
 
-#let fqw-eq-ref(label) = context numbering("(1.1)", ..counter(math.equation).at(label))
-
-#let fqw-figure-ref(label) = context numbering(
-  "1.1",
+#let fqw-eq-ref(label) = context numbering(
+  "(1.1)",
   counter(heading).at(label).first(),
-  counter(figure.where(kind: image)).at(label).first(),
+  counter(math.equation).at(label).first(),
 )
 
-#let fqw-table-number() = context numbering(
-  "1.1",
-  counter(heading).get().first(),
-  counter("fqw-table").get().first(),
-)
+#let fqw-appendix-letter(number) = {
+  let letters = (
+    "А",
+    "Б",
+    "В",
+    "Г",
+    "Д",
+    "Е",
+    "Ж",
+    "И",
+    "К",
+    "Л",
+    "М",
+    "Н",
+    "П",
+    "Р",
+    "С",
+    "Т",
+    "У",
+    "Ф",
+    "Х",
+    "Ц",
+    "Ш",
+    "Щ",
+    "Э",
+    "Ю",
+    "Я",
+  )
+  letters.at(number - 1)
+}
 
-#let fqw-table-ref(label) = context numbering(
-  "1.1",
-  counter(heading).at(label).first(),
-  counter("fqw-table").at(label).first(),
-)
+#let fqw-in-appendix = state("fqw-in-appendix", false)
 
-#let fqw-figure(body, caption) = figure(
-  kind: image,
-  supplement: [Рисунок],
-  caption: caption,
-)[
-  #align(center)[#body]
-]
+#let fqw-subappendix-number() = {
+  fqw-appendix-letter(counter("fqw-appendix").get().first()) + "." + str(counter("fqw-subappendix").get().first())
+}
+
+#let fqw-smart-figure-numbering(n) = context {
+  if fqw-in-appendix.get() {
+    fqw-subappendix-number() + "." + str(n)
+  } else {
+    numbering("1.1", counter(heading).get().first(), n)
+  }
+}
+
+#let fqw-figure-ref(label) = context {
+  if fqw-in-appendix.at(label) {
+    let app = counter("fqw-appendix").at(label).first()
+    let sub = counter("fqw-subappendix").at(label).first()
+    let fig = counter(figure.where(kind: image)).at(label).first()
+    fqw-appendix-letter(app) + "." + str(sub) + "." + str(fig)
+  } else {
+    numbering("1.1", counter(heading).at(label).first(), counter(figure.where(kind: image)).at(label).first())
+  }
+}
+
+#let fqw-table-number() = context {
+  if fqw-in-appendix.get() {
+    fqw-subappendix-number() + "." + str(counter("fqw-table").get().first())
+  } else {
+    numbering("1.1", counter(heading).get().first(), counter("fqw-table").get().first())
+  }
+}
+
+#let fqw-table-ref(label) = context {
+  if fqw-in-appendix.at(label) {
+    let app = counter("fqw-appendix").at(label).first()
+    let sub = counter("fqw-subappendix").at(label).first()
+    let tbl = counter("fqw-table").at(label).first()
+    fqw-appendix-letter(app) + "." + str(sub) + "." + str(tbl)
+  } else {
+    numbering("1.1", counter(heading).at(label).first(), counter("fqw-table").at(label).first())
+  }
+}
+
+#let fqw-figure(body, caption, numbering: auto) = {
+  let body = [
+    #align(center)[#body]
+  ]
+
+  figure(
+    kind: image,
+    supplement: [Рисунок],
+    caption: caption,
+    numbering: if numbering != auto { numbering } else { n => fqw-smart-figure-numbering(n) },
+  )[
+    #body
+  ]
+}
 
 #let fqw-placeholder-figure(caption) = fqw-figure(
   rect(width: 120mm, height: 45mm, stroke: 0.8pt)[
@@ -227,6 +295,7 @@
 ) = [
   #set par(first-line-indent: 0pt)
   #counter("fqw-table").step()
+  #set text(hyphenate: true)
 
   #let table-label = if label == none {
     label("fqw-table-" + str(counter("fqw-table").get().first()))
@@ -298,19 +367,87 @@
 #let fqw-appendix(title) = [
   #pagebreak()
   #counter("fqw-appendix").step()
+  #counter("fqw-subappendix").update(0)
   #align(center)[
-    Приложение #context counter("fqw-appendix").display("А")
+    Приложение #context fqw-appendix-letter(counter("fqw-appendix").get().first())
     #linebreak()
     #title
   ]
 ]
 
-#let fqw-subappendix(title) = [
+#let fqw-appendix-group(number: 1) = [
+  #counter("fqw-appendix").update(number)
+  #counter("fqw-subappendix").update(0)
+  #fqw-in-appendix.update(true)
+]
+
+#let fqw-subappendix(title, label: none, title-label: none, outlined: true, next-paragraph: false) = [
+  #pagebreak()
   #counter("fqw-subappendix").step()
-  #align(right)[
-    Приложение #context counter("fqw-appendix").display("А").#sym.dot#context counter("fqw-subappendix").display("1")
+  #counter("fqw-subappendix-section").update(0)
+  #fqw-in-appendix.update(true)
+  // Override heading spacing: 1 line after "Приложение Б.X", 0pt after title
+  // (the document controls spacing after the title via fqw-indent-before-text)
+  #show heading: it => block(
+    spacing: fqw-baseline,
+  )[
+    #if it.level == 1 {
+      counter(figure.where(kind: image)).update(0)
+      counter("fqw-table").update(0)
+    }
+    #show: fqw-text-settings
+    #set par()
+    #par[#it.body]
+    #if next-paragraph { fqw-indent-before-text }
   ]
-  #align(center)[#title]
+
+  #align(right)[
+    #context {
+      heading(numbering: none, outlined: outlined)[Приложение #fqw-subappendix-number()]
+    }
+    #if label != none {
+      label
+    }
+  ]
+
+  #align(center)[
+    #heading(level: 2, numbering: none, outlined: outlined)[#title]
+    #if title-label != none {
+      title-label
+    }
+  ]
+
+]
+
+#let fqw-subappendix-section(title, label: none, outlined: true) = [
+  #counter("fqw-subappendix-section").step()
+  #counter("fqw-subappendix-subsection").update(0)
+  #context {
+    let section-number = fqw-subappendix-number() + "." + str(counter("fqw-subappendix-section").get().first())
+    heading(level: 2, numbering: none, outlined: outlined)[
+      #section-number
+      #h(0.5em)
+      #title
+    ]
+  }
+  #if label != none {
+    label
+  }
+]
+
+#let fqw-subappendix-subsection(title, label: none, outlined: false) = [
+  #counter("fqw-subappendix-subsection").step()
+  #context {
+    let subsection-number = fqw-subappendix-number() + "." + str(counter("fqw-subappendix-section").get().first()) + "." + str(counter("fqw-subappendix-subsection").get().first())
+    heading(level: 3, numbering: none, outlined: outlined)[
+      #subsection-number
+      #h(0.5em)
+      #title
+    ]
+  }
+  #if label != none {
+    label
+  }
 ]
 
 #let document-title(title) = [
