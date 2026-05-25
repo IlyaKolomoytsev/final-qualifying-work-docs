@@ -1,6 +1,8 @@
 #import "../template/fqw.typ": *
 #import "../template/explanatory-note.typ": *
-#import "common.typ": *
+#import "common.typ": explanatory-note-title
+
+#explanatory-note-title
 
 #show: fqw-document
 
