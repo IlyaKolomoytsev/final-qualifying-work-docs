@@ -185,6 +185,15 @@
   counter(math.equation).at(label).first(),
 )
 
+#let fqw-section-ref(label) = context {
+  let counts = counter(heading).at(label)
+  let last-nonzero = 0
+  for (i, v) in counts.enumerate() {
+    if v != 0 { last-nonzero = i }
+  }
+  counts.slice(0, last-nonzero + 1).map(str).join(".")
+}
+
 #let fqw-appendix-letter(number) = {
   let letters = (
     "А",
