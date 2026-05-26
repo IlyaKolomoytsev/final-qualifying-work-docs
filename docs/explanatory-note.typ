@@ -1546,9 +1546,14 @@ HaInterferenceOneBandModel.
 
 = Результаты разработки и апробация
 <sec:development_results_and_validation>
+#fqw-indent-before-text
 
-= Валидация разработанных моделей
-<sec:development_results_and_validation2>
+В данной главе представлены результаты апробации разработанных компьютерных моделей:
+проведена валидация моделей на основе технических характеристик промышленных
+гидроакустических модемов, а также описано участие работы в научно-технических мероприятиях.
+
+== Валидация разработанных моделей
+<sec:validation>
 #fqw-indent-before-text
 
 Для валидации разработанных компьютерных моделей
@@ -1577,7 +1582,7 @@ HaInterferenceOneBandModel.
 
 #fqw-table(
   [Характеристики гидроакустических модемов],
-  columns: (2fr, 0.6fr, 1.05fr, 1.2fr),
+  columns: (2fr, 0.7fr, 1.05fr, 1.2fr),
   label: <tab:hydroacoustic-modems>,
   align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
   header: (
@@ -1606,19 +1611,19 @@ HaInterferenceOneBandModel.
     [Modem 6 OEM Nano (subsea) Type 8262~@Modem6OEM], $[20, 34]$, $175$, $2$,
     [Modem 6 standard (subsea) Type 8307-3111~@Modem6Standard], $[20, 34]$, $196$, $5$,
     [Teledyne UCM-900 Series~@TELEDYNEMARINEWireless], $[20, 30]$, $175$, $1.8$,
-    [Teledyne CM-900 Series (LF)], $[9, 14]$, $170$, $4$,
-    [Teledyne CM-900 Series (MF)], $[16, 21]$, $170$, $2$,
-    [Teledyne CM-900 Series (WideBand C)], $[20, 30]$, $172$, $1$,
-    [Teledyne ATM-910 Series (LF)], $[9, 14]$, $185$, $6$,
-    [Teledyne ATM-910 Series (MF)], $[16, 21]$, $183$, $4$,
-    [Teledyne ATM-910 Series (WideBand C)], $[20, 30]$, $178$, $1.8$,
+    [Teledyne CM-900 Series (LF)~@TELEDYNEMARINEWireless], $[9, 14]$, $170$, $4$,
+    [Teledyne CM-900 Series (MF)~@TELEDYNEMARINEWireless], $[16, 21]$, $170$, $2$,
+    [Teledyne CM-900 Series (WideBand C)~@TELEDYNEMARINEWireless], $[20, 30]$, $172$, $1$,
+    [Teledyne ATM-910 Series (LF)~@TELEDYNEMARINEWireless], $[9, 14]$, $185$, $6$,
+    [Teledyne ATM-910 Series (MF)~@TELEDYNEMARINEWireless], $[16, 21]$, $183$, $4$,
+    [Teledyne ATM-910 Series (WideBand C)~@TELEDYNEMARINEWireless], $[20, 30]$, $178$, $1.8$,
   ),
 )
 
 Для проведения валидации необходимо выбрать
 уровень шума среды и пороговое значение SINR для принятия решения о приёме сигнала.
 
-За уровень шума возьмём значение равное 46 dB ref. uPa^2/Hz
+За уровень шума возьмём значение равное 46 dB ref. uPa^2/Hz,
 что равно 40000 uPa^2/Hz в соответствии со статистическими значениями уровня шума
 для частот около 10 kHz и выше~@asaTechnicalNoteUnderwater[,~рис. 4.2].
 
@@ -1627,24 +1632,20 @@ HaInterferenceOneBandModel.
 что соответствует среднему значению пороговых значений для разных типов модуляций
 ~@liuAdaptiveModulationBasedSteadyStateMeanSquareError2021[,~табл. 1].
 
-В результате моделирования были получены следующие результаты:
-
-- *MAE* = 1017.22
-
-- *MSE* = 3553764.0483
-
-- *R2* = 0.6829 (68.29%)
-
-- *MAPE* = 25.30%
+Моделирование дало следующие результаты:
+- *MAE* = 1017.22 м;
+- *MSE* = 3553764.05 м²;
+- *R2* = 0.6829 (68.29%);
+- *MAPE* = 25.30%.
 
 Средняя абсолютная процентная ошибка равная 25 процентам показывает
 _средний_ показатель точности результатов моделирования.
 Он обусловлен неполнотой имеющейся информации
 о работе гидроакустических модемов и
-о среде в которой проводилась заводская оценка точности приборов.
+о среде, в которой проводилась заводская оценка точности приборов.
 
 == Апробация
-<subsec:validation>
+<subsec:approbation>
 #fqw-indent-before-text
 
 Работа участвовала во XII Всероссийском инженерном конкурсе
