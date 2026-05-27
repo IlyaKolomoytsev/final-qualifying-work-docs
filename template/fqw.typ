@@ -74,6 +74,8 @@
   // lists markers
   #set list(marker: [--])
   #set enum(numbering: "1.")
+  #show list: it => pad(left: 1.25cm, it)
+  #show enum: it => pad(left: 1.25cm, it)
 
   // numbering
   #set heading(numbering: "1.1")
@@ -180,7 +182,7 @@
 ]
 
 #let fqw-eq-ref(label) = context numbering(
-  "(1.1)",
+  "1.1",
   counter(heading).at(label).first(),
   counter(math.equation).at(label).first(),
 )
