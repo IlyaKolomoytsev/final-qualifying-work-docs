@@ -72,10 +72,16 @@
   }
 
   // lists markers
-  #set list(marker: [--])
-  #set enum(numbering: "1.")
-  #show list: it => pad(left: 1.25cm, it)
-  #show enum: it => pad(left: 1.25cm, it)
+  #set list(marker: [--], indent: 1.25cm)
+  #set enum(numbering: "1.", indent: 1.25cm)
+  #show list: it => [
+    #set par(first-line-indent: 1.25cm, hanging-indent: -1.75cm)
+    #it
+  ]
+  #show enum: it => [
+    #set par(first-line-indent: 1.25cm, hanging-indent: -1.25cm)
+    #it
+  ]
 
   // numbering
   #set heading(numbering: "1.1")
@@ -168,17 +174,19 @@
 
 #let fqw-where(items) = block[
   #set par(first-line-indent: 0pt)
-
-  #grid(
-    columns: (auto, 1fr),
-    column-gutter: 0.6em,
-  )[
-    где
-  ][
-    #for (i, item) in items.enumerate() [
-      #item.at(0) -- #item.at(1)#if i == items.len() - 1 [.] else [;] \
+  #pad(left: 1.25cm,[
+    #grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.6em,
+    )[
+      где
+    ][
+      #for (i, item) in items.enumerate() [
+        #item.at(0) -- #item.at(1)#if i == items.len() - 1 [.] else [;] \
+      ]
     ]
-  ]
+  ])
+
 ]
 
 #let fqw-eq-ref(label) = context numbering(
