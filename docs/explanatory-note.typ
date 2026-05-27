@@ -1637,7 +1637,7 @@ HaInterferenceOneBandModel.
 Для порогового значения SINR возьмём $gamma_"th" = 30$
 что приблизительно равно 14.8 dB
 что соответствует среднему значению пороговых значений для разных типов модуляций
-~@liuAdaptiveModulationBasedSteadyStateMeanSquareError2021[,~табл. 1].
+~@busaccaComparativeAnalysisPredictive2024[,~табл. 1].
 
 Моделирование дало следующие результаты:
 - *MAE* = 1017.22 м;
