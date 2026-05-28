@@ -72,8 +72,8 @@
   }
 
   // lists markers
-  #set list(marker: [--], indent: 1.25cm)
-  #set enum(numbering: "1.", indent: 1.25cm)
+  #set list(marker: [--], indent:1.25cm)
+  #set enum(numbering: "1.")
   #show list: it => [
     #set par(first-line-indent: 1.25cm, hanging-indent: -1.75cm)
     #it
@@ -135,6 +135,13 @@
 ]
 
 #let fqw-equation-list(equations) = {
+  show math.equation: it => {
+    block(
+      spacing: 0.5em,
+    )[
+      #it
+    ]
+  }
   block(spacing: fqw-baseline)[
     #for (i, item) in equations.enumerate() {
       let is-last = i == equations.len() - 1
