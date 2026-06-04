@@ -22,7 +22,7 @@
 
 // Суммарные потери при распространении (используется в ПЗ и ТЗ)
 #let eq-propagation-loss(label: <eq:propagation_loss>) = {
-  [$ T L(f, d) = T L_"geom"(d) + T L_"abs"(f, d) $ #label]
+  [$ T L(f, d) = T L_"geom" (d) + T L_"abs" (f, d) $ #label]
   fqw-where((
     ([$T L$ (Transmission loss)], [суммарные потери при распространении на частоте $f$ при расстоянии $d$, дБ]),
     ($T L_"geom"$, [потери на геометрическое расхождение, дБ]),
@@ -34,7 +34,7 @@
 
 // Потери на геометрическое расхождение с нормировкой d/d₀
 #let eq-geometric-loss(label: <eq:geometric_loss>) = {
-  [$ T L_"geom"(d) = 10 n log_10 (d / d_0) $ #label]
+  [$ T L_"geom" (d) = 10 n log_10 (d / d_0) $ #label]
   fqw-where((
     ($T L_"geom"$, [потери на геометрическое расхождение, дБ]),
     ($n$, [коэффициент расхождения]),
@@ -45,7 +45,7 @@
 
 // Потери на абсорбцию
 #let eq-absorption-loss(label: <eq:absorption_loss>) = {
-  [$ T L_"abs"(f, d) = alpha(f) dot d dot 10^(-3) $ #label]
+  [$ T L_"abs" (f, d) = alpha(f) dot d dot 10^(-3) $ #label]
   fqw-where((
     ($T L_"abs"$, [потери на абсорбцию, дБ]),
     ($alpha$, [коэффициент поглощения, дБ/км]),
@@ -107,7 +107,7 @@
 
 // Спектральная плотность мощности на входе приёмника (ПЗ)
 #let eq-received-power-spectral-density(label: <eq:received_power_spectral_density>) = {
-  [$ S_"rx" (f) = S_"tx" (f) dot 10^(-T L(f, d) / 10) $ #label]
+  [$ S_"rx" (f) = S_"tx" (f) dot 10^(-(T L(f, d)) / 10) $ #label]
   fqw-where((
     ($S_"rx" (f)$, [спектральная плотность мощности сигнала на входе приёмника, Па²/Гц]),
     ($S_"tx" (f)$, [спектральная плотность мощности сигнала на выходе передатчика, Па²/Гц]),
@@ -119,7 +119,7 @@
 
 // Мощность полезного сигнала с дифференциалом dif f (ПЗ)
 #let eq-useful-signal-power(label: <eq:useful_signal_power>) = {
-  [$ P_s = integral_(f_1)^(f_2) S_"rx"(f) dif f $ #label]
+  [$ P_s = integral_(f_1)^(f_2) S_"rx" (f) dif f $ #label]
   fqw-where((
     ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
     ($f_1$, [нижняя граница рабочей полосы, Гц]),
@@ -130,7 +130,7 @@
 
 // Мощность полезного сигнала с дифференциалом d f (ТЗ)
 #let eq-signal-power(label: <eq:signal_power>) = {
-  [$ P_s = integral_(f_1)^(f_2) S_"rx"(f) d f $ #label]
+  [$ P_s = integral_(f_1)^(f_2) S_"rx" (f) d f $ #label]
   fqw-where((
     ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
     ($f_1$, [нижняя граница рабочей полосы, Гц]),
@@ -144,8 +144,8 @@
   noise-label: <eq:noise_power>,
   interference-label: <eq:interference_power>,
 ) = {
-  [$ P_n = integral_(f_1)^(f_2) S_n(f) dif f $ #noise-label]
-  [$ P_i = integral_(f_1)^(f_2) S_i(f) dif f $ #interference-label]
+  [$ P_n = integral_(f_1)^(f_2) S_n (f) dif f $ #noise-label]
+  [$ P_i = integral_(f_1)^(f_2) S_i (f) dif f $ #interference-label]
   fqw-where((
     ($P_n$, [мощность шума в рабочей полосе, Па²]),
     ($S_n$, [спектральная плотность мощности шума, Па²/Гц]),
@@ -160,8 +160,8 @@
   interference-label: <eq:interference_power>,
 ) = {
   fqw-equation-list((
-    ([$ P_n = integral_(f_1)^(f_2) S_n(f) d f $], noise-label),
-    ([$ P_i = integral_(f_1)^(f_2) S_i(f) d f $], interference-label),
+    ([$ P_n = integral_(f_1)^(f_2) S_n (f) d f $], noise-label),
+    ([$ P_i = integral_(f_1)^(f_2) S_i (f) d f $], interference-label),
   ))
   fqw-where((
     ($P_n$, [мощность шума в рабочей полосе, Па²]),

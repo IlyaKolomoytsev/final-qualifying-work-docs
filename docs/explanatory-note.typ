@@ -1177,7 +1177,7 @@ V-образную модель разработки программно-апп
 с помощью следующей диаграммы классов (в соответствии с рисунком 4).
 
 #fqw-figure(
-  image("../assets/images/diagrams/Overall transeiver model.png"),
+  image("../assets/images/diagrams/Overall transeiver model.png", height: 90%),
   [Диаграмма классов общей модели гидроакустического приёмопередатчика],
 )<fig:overall_transceiver_movel>
 
@@ -1434,7 +1434,7 @@ HaInterferenceOneBandModel.
 ) <fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>
 
 #fqw-figure(
-  image("../assets/images/diagrams/simple/02. Move mpdu to queue.png"),
+  image("../assets/images/diagrams/simple/02. Move mpdu to queue.png", height: 90%),
   [Диаграмма последовательности взаимодействия очереди с поведением физического уровня],
 ) <fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>
 
@@ -1654,14 +1654,14 @@ HaInterferenceOneBandModel.
         "    \"Exponent\", DoubleValue(spreadingCoefficient));\n" +
         "haChannelHelper.AddPropagationLoss(\n" +
         "    \"ns3::FrancoisGarrisonPropagationLossModel\",\n" +
-        "    \"Frequency\", DoubleValue(SIMPLE_HA_SPECTRUM_MODEL->Begin()->fc));\n" + // упростить
+        "    \"Frequency\", DoubleValue(centralFrequency));\n" + // упростить
         "haChannelHelper.SetPropagationDelay(\n" +
         "    \"ns3::ConstantSpeedPropagationDelayModel\",\n" +
         "    \"Speed\", DoubleValue(soundSpeed));\n" +
         "// ...\n" + // Рассказть что такое алокатор
-        "positionAlloc->Add(Vector(-sender1Distance, 0.0, 0.0)); // Узел 0\n" +
-        "positionAlloc->Add(Vector( sender2Distance, 0.0, 0.0)); // Узел 1\n" +
-        "positionAlloc->Add(Vector(0.0, 0.0, 0.0));              // Узел 2 (получатель)\n" +
+        "node[0]->SetPosition(Vector(-sender1Distance, 0.0, 0.0)); // Узел 0\n" +
+        "node[1]->SetPosition(Vector( sender2Distance, 0.0, 0.0)); // Узел 1\n" +
+        "node[2]->SetPosition(Vector(0.0, 0.0, 0.0)); // Узел 2 (получатель)\n" +
         "// ...\n" +
         "Simulator::Schedule(Seconds(0), sender1Action);\n" +
         "Simulator::Schedule(Seconds(0), sender2Action);\n" +

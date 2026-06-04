@@ -72,16 +72,8 @@
   }
 
   // lists markers
-  #set list(marker: [--], indent:1.25cm)
+  #set list(marker: [--])
   #set enum(numbering: "1.")
-  #show list: it => [
-    #set par(first-line-indent: 1.25cm, hanging-indent: -1.75cm)
-    #it
-  ]
-  #show enum: it => [
-    #set par(first-line-indent: 1.25cm, hanging-indent: -1.25cm)
-    #it
-  ]
 
   // numbering
   #set heading(numbering: "1.1")
