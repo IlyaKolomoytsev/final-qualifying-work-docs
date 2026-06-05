@@ -2,7 +2,7 @@
 
 = Explanatory note title pages
 
-== `#approval-block`
+== `#approval-block-title`
 /// Creates an approval block with a centered title, optional position field,
 /// signature/name fields, and a date line.
 ///
@@ -16,19 +16,20 @@
 ///
 /// Returns:
 /// - A block containing the approval title, optional position field, signature/name fields, and date.
-#let approval-block(
+#let approval-block-title(
   title: [your title],
   position: [],
   signature-date: [],
   name: [],
-  date: [],
+  date: none,
   position-caption: [],
 ) = block[
   #grid(
     columns: (1fr,),
-    row-gutter: 1em
+    row-gutter: 1em,
+    align: center,
   )[
-    #align(center)[#title]
+    #title
   ][
     #if position == [] and position-caption == [] [
       #v(1em)
@@ -45,49 +46,51 @@
       #field(value: name, caption: [(инициалы, фамилия)])
     ]
   ][
-    #align(left)[#date]
+    #block(width: 80%)[#print-date(date)]
   ]
 ]
-#approval-block(
+#approval-block-title(
   title: [Утверждаю],
   position: [и. о. заведующего кафедрой],
   signature-date: [15.05.2026],
   name: [Сычёв О. А.],
-  date: [15.05.2026],
+  date: none,
   position-caption: [должность],
 )
 
-== `#print-date`
-/// Creates a three-part date layout for title-page approval blocks.
-///
-/// Parameters:
-/// - d: A `datetime` value to split into day, month, and year, or `none` to render empty placeholders.
-///
-/// Behavior:
-/// - When `d` is a `datetime`, the function renders the day, month, and year in separate fields.
-/// - When `d` is `none`, the function renders blank fields for the day and month and a placeholder year area.
-///
-/// Returns:
-/// - A centered three-column `grid` with fields for day, month, and year.
-#let print-date(d) = [
+== `#approval-block-task`
+
+#let approval-block-task(
+  title: [Утверждаю],
+  position: [и. о. зав кафедрой],
+  signature-date: [],
+  name: [],
+  date: none,
+  position-caption: [],
+) = grid(
+  columns: (1fr,),
+  row-gutter: 1em,
+  align: center,
+)[
   #grid(
+    columns: (1fr, 1fr),
+    row-gutter: 1em,
+    column-gutter: 1em,
     align: center,
-    columns: (1fr, 3fr, 2fr),
-    column-gutter: 1fr,
   )[
-    \"#field(value: [#if d != none { d.day() }])\"
+    #title
   ][
-    #field(value: [#if d != none { d.month() }])
+    #position
   ][
-    #if d != none {
-      field(value: [#d.year()~~~г.])
-    } else {
-      [20 #box(width: 1fr)[#field()] г.]
-    }
+    #field(value: signature-date, caption: [(подпись)])
+  ][
+    #field(value: name, caption: [(инициалы, фамилия)])
   ]
+][
+  #block(width: 80%)[#print-date(date)]
 ]
-#print-date(none)
-#print-date(datetime(year: 2026, month: 5, day: 25))
+
+#approval-block-task()
 
 == `#explanatory-note-title-page`
 /// Creates the title page for a bachelor's explanatory note.
@@ -138,7 +141,7 @@
   approval-signature-date: [],
   approval-name: [О. А. Сычев],
   approval-date: none,
-  document-title: [ПОЯСНИТЕЛЬНАЯ ЗАПИСКА],
+  document-title: [пояснительная записка],
   work-kind: [выпускной квалификационной работе бакалавра],
   topic: [],
   author: [],
@@ -158,7 +161,7 @@
   norm-controller: [Кузнецова А.С.],
   norm-controller-signature-date: [],
   city: [Волгоград],
-  year: [20#h(8mm)],
+  year: [#datetime.today().year()],
 ) = page(
   paper: "a4",
   margin: (
@@ -207,20 +210,19 @@
         columns: (1fr, 1fr),
         column-gutter: 22mm,
       )[
-        #approval-block(
+        #approval-block-title(
           title: [Согласовано],
           position: agreement-position,
           name: agreement-name,
-          date: align(center)[#block(width: 80%)[#print-date(agreement-date)]],
           position-caption: [должность гл. специалиста предприятия],
         )
       ][
-        #approval-block(
+        #approval-block-title(
           title: [Утверждаю],
           position: approval-position,
           signature-date: approval-signature-date,
           name: approval-name,
-          date: align(center)[#block(width: 80%)[#print-date(approval-date)]],
+          date: approval-date,
           position-caption: [],
         )
       ]
@@ -242,8 +244,10 @@
         ][
           на тему
         ]
-      ][
-        #field(value: topic)
+        #print-field-rows(
+          gutter: gutter,
+          ..makeRows(topic),
+        )
       ]
     ][
       #grid(
@@ -305,6 +309,212 @@
       )
     ][
       #align(center)[#city #year г.]
+    ]
+  ]
+]
+
+== `#explanatory-note-task-page`
+/// Creates the task page for a bachelor's explanatory note.
+///
+/// Parameters:
+/// - ministry: The ministry name shown at the top of the page.
+/// - university: The university name shown below the ministry.
+/// - faculty: The faculty name rendered in the labeled faculty field.
+/// - department-code: The department code shown in the student metadata row.
+/// - document-title: The main document title.
+/// - work-kind: The work type shown between "к" and "на тему".
+/// - topic: The work topic.
+/// - author: The author's full name.
+/// - task-from-scientific-supervisor: Initial data issued by the scientific supervisor.
+/// - contents-of-explanatory-note: Rows for the explanatory note contents and graphic material sections.
+/// - document-code: The document code.
+/// - group: The student group code.
+/// - supervisor: The supervisor's name.
+/// - supervisor-signature-date: The supervisor's signature and signing date.
+/// - consultants: A sequence of consultant records with `section`, `signature-date`, and `name` fields.
+///
+/// Returns:
+/// - A configured `page` containing the explanatory note task layout.
+#let explanatory-note-task-page(
+  ministry: [Министерство науки и высшего образования Российской Федерации],
+  university: [
+    Федеральное государственное бюджетное образовательное учреждение \
+    высшего образования \
+    «Волгоградский государственный технический университет»
+  ],
+  faculty: [Электроники и вычислительной техники],
+  department-code: [10.19],
+  document-title: [задание],
+  work-kind: [выпускную квалификационную работу бакалавра],
+  topic: none,
+  author: [],
+  task-from-scientific-supervisor: warning[Задание, выданное научным руководителем кафедры «ПОАС»],
+  contents-of-explanatory-note: (),
+  document-code: [],
+  group: [],
+  supervisor: [],
+  supervisor-signature-date: [],
+  consultants: (
+    (section: [], signature-date: [], name: []),
+    (section: [], signature-date: [], name: []),
+  ),
+) = page(
+  paper: "a4",
+  margin: (
+    top: 14mm,
+    bottom: 14mm,
+    left: 20mm,
+    right: 15mm,
+  ),
+  header: none,
+  footer: none,
+  numbering: none,
+)[
+  #set text(
+    lang: "ru",
+    font: "Times New Roman",
+    size: 14pt,
+    fill: black,
+  )
+  #set par(
+    first-line-indent: 0pt,
+    justify: false,
+    leading: 0.6em,
+    spacing: 0pt,
+  )
+  #let gutter = 0.8em
+  #let bigGutter = 2em
+  #align(center)[
+    #ministry \
+    #university
+  ]
+
+  #v(bigGutter)
+  #labeled-field([Факультет], value: faculty)
+
+  #v(bigGutter)
+
+  #pad(left: 50%)[
+    #approval-block-task()
+  ]
+
+  #v(bigGutter)
+
+  #grid(
+    columns: (1fr,),
+    row-gutter: gutter,
+  )[
+    #align(center)[#strong(upper(document-title))]
+  ][
+    #grid(
+      columns: (auto, 1fr, auto),
+      column-gutter: 6pt,
+      align: (left, horizon, right),
+    )[
+      к
+    ][
+      #field(value: work-kind, caption: [наименование вида работы])
+    ][
+      на тему
+    ]
+  ][
+    #labeled-field(
+      [Студент],
+      value: author,
+      caption: [фамилия, имя, отчество],
+    )
+  ][
+    #block(width: 90%)[
+      #grid(
+        columns: 4,
+        column-gutter: gutter,
+        row-gutter: gutter,
+      )[
+        Код кафедры
+      ][
+        #field(value: department-code)
+      ][
+        Группа
+      ][
+        #block(width: 80%)[#field(value: group)]
+      ]]
+  ][
+    #let topic-list = ([],)
+    #if type(topic) == array {
+      topic-list = topic
+    } else if type(topic) == content {
+      topic-list = (topic,)
+    }
+    #labeled-field([Тема], value: topic-list.at(0))
+    #for (i, item) in topic-list.enumerate() {
+      if i != 0 {
+        h(gutter)
+        field(value: item)
+      }
+    }
+    #if topic-list.len() < 2 {
+      h(gutter)
+      field()
+    }
+  ][
+    #grid(
+      columns: (5fr, 3fr, 1fr),
+      column-gutter: gutter,
+    )[
+      Утверждена приказом по университету
+    ][
+      #print-date(none)
+    ][
+      #field()
+    ]
+  ][
+    #labeled-field([Срок представления готовой работы (проекта)], caption: [(дата, подпись студента)])
+  ]
+
+  #v(bigGutter)
+
+  #print-field-rows(
+    gutter: gutter,
+    title: [Исходные данные для выполнения работы (проекта)],
+    ..makeRows(task-from-scientific-supervisor, minRowsCount: 2),
+  )
+
+  #v(bigGutter)
+
+  #print-field-rows(
+    gutter: gutter,
+    title: [Содержание основной части пояснительной записки],
+    ..makeRows(contents-of-explanatory-note, minRowsCount: 15),
+  )
+
+  #v(bigGutter)
+
+  #print-field-rows(
+    gutter: gutter,
+    numberic: true,
+    title: align(center)[Перечень графического материала],
+    ..makeRows(contents-of-explanatory-note, minRowsCount: 12),
+  )
+
+  #v(bigGutter)
+
+  #signature-row(
+    [Руководитель работы],
+    signature-date: supervisor-signature-date,
+    name: supervisor,
+    name-caption: [инициалы и фамилия],
+  )
+
+  #v(gutter)
+
+  Консультанты по разделам:
+  #for consultant in consultants [
+    #block(spacing: gutter)[
+      #consultant-row(
+        section: consultant.section,
+        signature-date: consultant.signature-date,
+        name: consultant.name,
+      )
     ]
   ]
 ]

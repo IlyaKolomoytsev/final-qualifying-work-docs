@@ -1,7 +1,7 @@
-#let topic-of-work = [
-  Компьютерное моделирование программно-аппаратных гидроакустических приёмопередатчиков
-  для их виртуальных испытаний
-]
+#let topic-of-work = (
+  [Компьютерное моделирование программно-аппаратных],
+  [гидроакустических приёмопередатчиков для их виртуальных испытаний]
+)
 
 #let author-full = [Коломойцев Илья Сергеевич]
 #let author-short = [Коломойцев И. С.]
@@ -24,7 +24,7 @@
 
 #let year = datetime.today().year()
 
-#import "../template/title-pages/explanatory-note.typ": explanatory-note-title-page
+#import "../template/title-pages/explanatory-note.typ": explanatory-note-task-page, explanatory-note-title-page
 #let explanatory-note-title = explanatory-note-title-page(
   approval-position: approver-status,
   approval-name: reverse-approver-short,
@@ -34,7 +34,18 @@
   group: author-group,
   supervisor: scientific-supervisor-short,
   norm-controller: compliance-officer-short,
-  year: 2005
 )
 
 #explanatory-note-title
+
+// #explanatory-note-title
+
+#let explanatory-note-task = explanatory-note-task-page(
+  topic: topic-of-work,
+  author: author-full,
+  document-code: [ВКРБ-09.03.04-10.19-03-26],
+  group: author-group,
+  supervisor: scientific-supervisor-short,
+)
+
+#explanatory-note-task
