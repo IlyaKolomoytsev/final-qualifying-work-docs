@@ -518,3 +518,158 @@
     ]
   ]
 ]
+
+== `#explanatory-note-title-page2`
+/// Creates the internal title page for the explanatory note document.
+///
+/// Parameters:
+/// - ministry: The ministry name shown at the top of the page.
+/// - university: The university name shown below the ministry.
+/// - department: The department name shown below the university name.
+/// - approval-position: The position shown in the "Утверждаю" block.
+/// - approval-signature-date: The signature value shown before the approver name.
+/// - approval-name: The name shown in the "Утверждаю" block.
+/// - approval-date: A `datetime` value or `none` for the date shown in the "Утверждаю" block.
+/// - document-title: The main document title.
+/// - topic: The work topic.
+/// - document-code: The document code.
+/// - sheets-count: The number of sheets shown below the document code.
+/// - group: The student group code.
+/// - supervisor: The supervisor's name.
+/// - supervisor-signature-date: A `datetime` value or `none` for the supervisor signing date.
+/// - norm-controller: The norm controller's name.
+/// - norm-controller-signature-date: A `datetime` value or `none` for the norm controller signing date.
+/// - author: The executor's full name.
+/// - author-signature-date: A `datetime` value or `none` for the executor signing date.
+/// - city: The city shown at the bottom of the page.
+/// - year: The year shown at the bottom of the page.
+///
+/// Returns:
+/// - A configured `page` containing the explanatory note title-page layout.
+#let explanatory-note-title-page2(
+  ministry: [Министерство науки и высшего образования Российской Федерации],
+  university: [
+    Федеральное государственное бюджетное образовательное учреждение \
+    высшего образования \
+    «Волгоградский государственный технический университет»
+  ],
+  department: [Программное обеспечение автоматизированных систем],
+  approval-position: [и. о. зав. кафедрой],
+  approval-signature-date: [],
+  approval-name: [О. А. Сычев],
+  approval-date: none,
+  document-title: [пояснительная записка],
+  topic: [],
+  document-code: [],
+  sheets-count: [],
+  group: [],
+  supervisor: [],
+  supervisor-signature-date: none,
+  norm-controller: [Кузнецова А.С.],
+  norm-controller-signature-date: none,
+  author: [],
+  author-signature-date: none,
+  city: [Волгоград],
+  year: [#datetime.today().year()],
+) = page(
+  paper: "a4",
+  margin: (
+    top: 14mm,
+    bottom: 14mm,
+    left: 20mm,
+    right: 15mm,
+  ),
+  header: none,
+  footer: none,
+  numbering: none,
+)[
+  #set text(
+    lang: "ru",
+    font: "Times New Roman",
+    size: 14pt,
+    fill: black,
+  )
+  #set par(
+    first-line-indent: 0pt,
+    justify: false,
+    leading: 0.8em,
+    spacing: 0.8em,
+  )
+  #let bigGutter = 2em
+  #let gutter = 0.8em
+
+  #align(center)[
+    #ministry \
+    #university
+  ]
+
+  #v(bigGutter)
+
+  #align(center)[Кафедра «#department»]
+
+  #v(bigGutter)
+
+  #align(right)[
+    #block(width: 40%)[
+      #upper([Утверждаю:])
+
+      #approval-position
+
+      #grid(columns: 2)[#field(value: approval-signature-date)][#approval-name]
+
+      #print-date(approval-date)
+    ]
+  ]
+
+  #v(bigGutter)
+
+  #align(center)[
+    #for row in makeRows(topic) {
+      row
+    }
+  ]
+
+  #v(bigGutter)
+
+  #align(center)[#upper(document-title)]
+
+  #v(bigGutter)
+
+  #align(center)[#document-code]
+
+  #v(bigGutter)
+
+  #align(center)[Листов #sheets-count]
+
+  #v(bigGutter)
+
+  #grid(columns: (1fr, 1fr), gutter: bigGutter,)[
+  ][
+    Руководитель работы
+
+    #if supervisor == none {
+      field()
+      field()
+    } else {
+      field(value: supervisor)
+      field()
+    }
+
+    #block(width: 80%)[#print-date(supervisor-signature-date)]
+  ][
+    Нормоконтролер
+
+    #grid(columns: 2)[#field()][#norm-controller]
+    #field()#block(width: 80%)[#print-date(norm-controller-signature-date)]
+  ][
+    Исполнитель
+
+    студент группы #group
+    #field(value: author)
+    #print-date(author-signature-date)
+  ]
+
+  #v(bigGutter)
+
+  #align(center)[#city #year г.]
+]
