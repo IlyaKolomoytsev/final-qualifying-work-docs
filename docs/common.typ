@@ -1,51 +1,67 @@
-#let topic-of-work = (
-  [Компьютерное моделирование программно-аппаратных],
-  [гидроакустических приёмопередатчиков для их виртуальных испытаний]
+#import "../template/title-pages.typ": (
+  fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-template-subtitle-sheet, person,
 )
 
-#let author-full = [Коломойцев Илья Сергеевич]
-#let author-short = [Коломойцев И. С.]
-#let reverse-autrho-short = [И. С. Коломойцев]
-#let author-group = [ПрИн-466]
+#let author = person("Коломойцев", "Илья", "Сергеевич", group: [ПрИн-466])
+#let scientific-supervisor = person("Матюшечкин", "Дмитрий", "Сергеевич", degree: [к.т.н.])
+#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой])
+#let inspector = person("Кузнецова", "Агнесса", "Сергеевна")
+#let topic-of-work = (
+  [Компьютерное моделирование программно-аппаратных],
+  [гидроакустических приёмопередатчиков для их виртуальных испытаний],
+)
 
-#let scientific-supervisor-full = [Матюшечкин Дмитрий Сергеевич]
-#let scientific-supervisor-short = [Матюшечкин Д. С.]
-#let reverse-scientific-supervisor-short = [Д. С. Матюшечкин]
-#let scientific-degree = [к.т.н.]
-
-#let approver-status = [и. о. зав. кафедрой]
-#let approver-full = [Сычёв Олег Александрович]
-#let approver-short = [Сычёв О. А.]
-#let reverse-approver-short = [О. А. Сычёв]
-
-#let compliance-officer-full = [Кузнецова Агнесса Сергеевна]
-#let compliance-officer-short = [Кузнецова А. С.]
-#let reverse-compliance-officer-short = [А. С. Кузнецова]
-
-#let year = datetime.today().year()
-
-#import "../template/title-pages/explanatory-note.typ": explanatory-note-task-page, explanatory-note-title-page
-#let explanatory-note-title = explanatory-note-title-page(
-  approval-position: approver-status,
-  approval-name: reverse-approver-short,
-  topic: topic-of-work,
-  author: author-full,
+#let main-title = fqw-main-title-sheet(
+  topic-of-work,
+  author: author,
+  supervisor: scientific-supervisor,
+  inspector: inspector,
+  approver: approver,
   document-code: [ВКРБ-09.03.04-10.19-03-26],
-  group: author-group,
-  supervisor: scientific-supervisor-short,
-  norm-controller: compliance-officer-short,
+)
+
+#main-title
+
+#let task-title = fqw-main-task-title-sheet(
+  topic: topic-of-work,
+  author: author,
+  approver: approver,
+  supervisor: scientific-supervisor,
+)
+
+#task-title
+
+#let subtitle-template(document-title, sheets-count:[], document-code:[]) = fqw-template-subtitle-sheet(
+  topic: topic-of-work,
+  sheets-count: sheets-count,
+  author: author,
+  supervisor: scientific-supervisor,
+  approver: approver,
+  inspector: inspector,
+  document-title: document-title,
+  document-code: document-code,
+)
+
+#let explanatory-note-title = subtitle-template(
+  [Пояснительная записка],
+  sheets-count:[XX],
+  document-code:[ВКРБ–09.03.04–10.19–**–**–81],
 )
 
 #explanatory-note-title
 
-// #explanatory-note-title
-
-#let explanatory-note-task = explanatory-note-task-page(
-  topic: topic-of-work,
-  author: author-full,
-  document-code: [ВКРБ-09.03.04-10.19-03-26],
-  group: author-group,
-  supervisor: scientific-supervisor-short,
+#let technical-assignment-title = subtitle-template(
+  [Техническое задание],
+  sheets-count:[XX],
+  document-code:[ВКРБ–09.03.04–10.19–**–**–91],
 )
 
-#explanatory-note-task
+#technical-assignment-title
+
+#let approval-sheet-title = subtitle-template(
+  [Лист утверждения],
+  sheets-count:[1],
+  document-code:[А.В.00001-01 91 01-1-ЛУ],
+)
+
+#approval-sheet-title

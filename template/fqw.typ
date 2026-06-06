@@ -6,6 +6,30 @@
 
 #let fqw-indent-before-text = { v(fqw-fontsize-in-em) }
 
+#let fqw-base(body) = {
+  set page(
+    paper: "a4",
+    margin: (
+      top: 20mm,
+      bottom: 20mm,
+      left: 30mm,
+      right: 15mm,
+    ),
+    header: none,
+    footer: none,
+    numbering: none,
+  )
+  set text(
+    lang: "ru",
+    font: "Times New Roman",
+    size: 14pt,
+    fill: black,
+    weight: "regular",
+    hyphenate: false,
+  )
+  body
+}
+
 #let fqw-text-settings(body) = [
   #set text(
     lang: "ru",
@@ -25,21 +49,14 @@
 ]
 
 #let fqw-document(body, document-code: fqw-default-document-code) = [
+  #show: fqw-base
+  #show: fqw-text-settings
+
   // page settings
   #set page(
-    paper: "a4",
-    margin: (
-      top: 20mm,
-      bottom: 20mm,
-      left: 30mm,
-      right: 15mm,
-    ),
     header: align(center)[#document-code],
     footer: context align(center)[#counter(page).display("1")],
   )
-
-  // main text settings
-  #show: fqw-text-settings
 
   // headers settings
   #show heading: it => block(
@@ -72,8 +89,8 @@
   }
 
   // lists markers
-  #set list(marker: [--], indent:1.25cm)
-  #set enum(numbering: "1.", indent:1.25cm)
+  #set list(marker: [--], indent: 1.25cm)
+  #set enum(numbering: "1.", indent: 1.25cm)
 
   // numbering
   #set heading(numbering: "1.1")
@@ -173,7 +190,7 @@
 
 #let fqw-where(items) = block[
   #set par(first-line-indent: 0pt)
-  #pad(left: 1.25cm,[
+  #pad(left: 1.25cm, [
     #grid(
       columns: (auto, 1fr),
       column-gutter: 0.6em,
