@@ -1,14 +1,19 @@
-#import "../template/title-pages.typ": (
-  fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-template-subtitle-sheet, person,
-)
+#import "../template/title-pages.typ": fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-template-subtitle-sheet
+#import "../template/fqw.typ": create-codes, person
+
+#let codes = create-codes(number: [09])
 
 #let author = person("Коломойцев", "Илья", "Сергеевич", group: [ПрИн-466])
 #let scientific-supervisor = person("Матюшечкин", "Дмитрий", "Сергеевич", degree: [к.т.н.])
-#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой])
+#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой], date: datetime(
+  year: 2026,
+  month: 6,
+  day: 8,
+))
 #let inspector = person("Кузнецова", "Агнесса", "Сергеевна")
 #let topic-of-work = (
-  [Компьютерное моделирование программно-аппаратных],
-  [гидроакустических приёмопередатчиков для их виртуальных испытаний],
+  [Разработка компьютерной модели программно-аппаратного],
+  [гидроакустического приёмопередатчика для его виртуальных испытаний],
 )
 
 #let main-title = fqw-main-title-sheet(
@@ -17,7 +22,7 @@
   supervisor: scientific-supervisor,
   inspector: inspector,
   approver: approver,
-  document-code: [ВКРБ-09.03.04-10.19-03-26],
+  document-code: codes.fqw,
 )
 
 #main-title
@@ -31,7 +36,7 @@
 
 #task-title
 
-#let subtitle-template(document-title, sheets-count:[], document-code:[]) = fqw-template-subtitle-sheet(
+#let subtitle-template(document-title, sheets-count: [], document-code: []) = fqw-template-subtitle-sheet(
   topic: topic-of-work,
   sheets-count: sheets-count,
   author: author,
@@ -44,24 +49,24 @@
 
 #let explanatory-note-title = subtitle-template(
   [Пояснительная записка],
-  sheets-count:[XX],
-  document-code:[ВКРБ–09.03.04–10.19–**–**–81],
+  sheets-count: [XX],
+  document-code: codes.explanatory-note,
 )
 
 #explanatory-note-title
 
 #let technical-assignment-title = subtitle-template(
   [Техническое задание],
-  sheets-count:[XX],
-  document-code:[ВКРБ–09.03.04–10.19–**–**–91],
+  sheets-count: [XX],
+  document-code: codes.technical-asignment,
 )
 
 #technical-assignment-title
 
 #let approval-sheet-title = subtitle-template(
   [Лист утверждения],
-  sheets-count:[1],
-  document-code:[А.В.00001-01 91 01-1-ЛУ],
+  sheets-count: [1],
+  document-code: [А.В.00001-01 91 01-1-ЛУ],
 )
 
 #approval-sheet-title

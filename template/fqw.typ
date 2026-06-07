@@ -1,12 +1,18 @@
-#let fqw-default-document-code = "ВКРБ-09.03.04-10.19-XX-26-81"
-
+= Default values
 #let fqw-fontsize-in-em = 1.25em
 #let fqw-leading = 1.06em
-#let fqw-baseline = fqw-fontsize-in-em + fqw-leading
+#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading / 2)
+#let fqw-first-line-indent = 1.25cm
+#let fqw-default-numbering = state("fqw-default-numbering", 2)
 
-#let fqw-indent-before-text = { v(fqw-fontsize-in-em) }
+= Help function
 
-#let fqw-base(body) = {
+== `#fqw-indent-before-text`
+#let fqw-indent-before-text = { v(fqw-fontsize-in-em + fqw-leading) }
+
+== `default show functions`
+
+#let fqw-default-page(body) = {
   set page(
     paper: "a4",
     margin: (
@@ -19,6 +25,9 @@
     footer: none,
     numbering: none,
   )
+  body
+}
+#let fqw-default-text(body) = {
   set text(
     lang: "ru",
     font: "Times New Roman",
@@ -29,30 +38,210 @@
   )
   body
 }
-
-#let fqw-text-settings(body) = [
-  #set text(
-    lang: "ru",
-    font: "Times New Roman",
-    size: 14pt,
-    fill: black,
-    weight: "regular",
-    hyphenate: false,
-  )
-  #set par(
+#let fqw-default-paragraph(body) = {
+  set par(
     justify: true,
-    first-line-indent: (amount: 1.25cm, all: true),
     leading: fqw-leading,
-    spacing: 1.1em,
+    spacing: fqw-leading,
   )
-  #body
+  body
+}
+#let fqw-default-first-line-indent(body) = {
+  set par(
+    first-line-indent: (amount: fqw-first-line-indent, all: true),
+  )
+  body
+}
+
+#let fqw-default(body) = {
+  show: fqw-default-page
+  show: fqw-default-text
+  show: fqw-default-paragraph
+  show: fqw-default-first-line-indent
+  body
+}
+
+== `#warning`
+
+/// Highlights warning or placeholder content in red.
+///
+/// Parameters:
+/// - body: The content to render as a warning.
+///
+/// Returns:
+/// - A `text` element with red fill containing the provided `body`.
+#let warning(body) = text(fill: red)[#body]
+#warning[Текст предупреждения]
+
+== `#person`
+
+/// Creates a person record with full and abbreviated name representations.
+///
+/// Parameters:
+/// - surname: The person's surname.
+/// - first-name: The person's first name.
+/// - patronymic: The person's patronymic.
+/// - extras: Additional named fields to include in the resulting record.
+///
+/// Returns:
+/// - A dictionary containing the source name parts, initials, formatted names,
+///   and additional named fields.
+#let person(surname, first-name, patronymic, ..extras) = {
+  let first-initial = first-name.at(0)
+  let patronymic-initial = patronymic.at(0)
+  let initials = [#first-initial. #patronymic-initial.]
+  (
+    (
+      surname: surname,
+      first-name: first-name,
+      patronymic: patronymic,
+      initials: initials,
+      full: [#surname #first-name #patronymic],
+      short: [#surname #initials],
+      reverse-short: [#initials #surname],
+    )
+      + extras.named()
+  )
+}
+#person("Иванов", "Иван", "Иванович")
+
+== `#create-codes`
+
+/// Creates document designation codes for a bachelor's final qualification work.
+///
+/// Parameters:
+/// - number: The serial number of the work from the order. Defaults to `XX`.
+/// - direction: The direction code. Defaults to `09.03.04`.
+/// - department: The department code. Defaults to `10.19`.
+/// - year: The completion year. Defaults to the current year.
+///
+/// Returns:
+/// - A dictionary containing the base code in `fqw` and the derived codes in
+///   `explanatory-note`, `technical-asignment`, and `system-programmers-guide`.
+#let create-codes(
+  number: [XX],
+  direction: [09.03.04],
+  department: [10.19],
+  year: [#calc.rem(datetime.today().year(), 100)],
+) = {
+  let prefix = [ВКРБ]
+  let explanatory-note-code = [81]
+  let technical-asignment-code = [91]
+  let system-programmers-guide-code = [32]
+  let base = [#(prefix)--#(direction)--#(department)--#(number)--#(year)]
+  (
+    fqw: base,
+    explanatory-note: [#(base)-#(explanatory-note-code)],
+    technical-asignment: [#(base)-#(technical-asignment-code)],
+    system-programmers-guide: [#(base)-#(system-programmers-guide-code)],
+  )
+}
+
+#let default-codes = create-codes()
+
+#default-codes.fqw \
+#default-codes.explanatory-note \
+#default-codes.technical-asignment \
+#default-codes.system-programmers-guide
+
+== appendix
+
+#let fqw-appendix-letter(number) = {
+  let letters = (
+    "А",
+    "Б",
+    "В",
+    "Г",
+    "Д",
+    "Е",
+    "Ж",
+    "И",
+    "К",
+    "Л",
+    "М",
+    "Н",
+    "П",
+    "Р",
+    "С",
+    "Т",
+    "У",
+    "Ф",
+    "Х",
+    "Ц",
+    "Ш",
+    "Щ",
+    "Э",
+    "Ю",
+    "Я",
+  )
+  letters.at(number - 1)
+}
+#let fqw-appendix-state = state("fqw-appendix-state", false)
+#let fqw-appendix-array(all: false) = {
+  let counts = counter("fqw-appendix").get()
+  let letter = fqw-appendix-letter(counts.at(0))
+  if all {
+    (letter,) + counts.slice(1)
+  } else {
+    (letter,) + counts.slice(1).filter(v => v != 0)
+  }
+}
+
+#let fqw-appendix-title(title) = [
+  #pagebreak()
+  #counter("fqw-appendix").step()
+  #v(1fr)
+  #align(center)[
+    Приложение #context fqw-appendix-letter(counter("fqw-appendix").get().first())
+    #linebreak()
+    #title
+  ]
+  #v(1fr)
 ]
 
-#let fqw-document(body, document-code: fqw-default-document-code) = [
-  #show: fqw-base
-  #show: fqw-text-settings
+#let fqw-subappendix(title, label: none) = [
+  #fqw-appendix-state.update(true)
+  #counter("fqw-appendix").step(level: 2)
+  #pagebreak()
 
-  // page settings
+  #context {
+    let number = fqw-appendix-array().filter(v => v != 0).map(str).join(".")
+    // header for outline without rendering
+    [
+      #show heading: it => []
+      #heading(numbering: none, outlined: true)[Приложение #number -- #title]
+    ]
+    // header for render
+    align(right)[
+      #heading(numbering: none, outlined: false)[Приложение #number]
+      #if label != none { label }
+    ]
+  }
+
+  #align(center)[#title]
+  #fqw-indent-before-text
+]
+
+
+== `#fqw-numbering`
+
+#let fqw-numbering(n, numbering-size: auto) = context {
+  let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
+  if fqw-appendix-state.get() {
+    let arr = fqw-appendix-array(all: true).slice(0, numbering-size - 1)
+    (arr + (n,)).map(str).join(".")
+  } else {
+    let arr = counter(heading).get().slice(0, numbering-size - 1)
+    (arr + (n,)).map(str).join(".")
+  }
+}
+
+== fqw-document
+
+#let fqw-document(body, document-code: warning[#default-codes.fqw]) = [
+  #show: fqw-default
+
+  // header and footer settings
   #set page(
     header: align(center)[#document-code],
     footer: context align(center)[#counter(page).display("1")],
@@ -63,19 +252,25 @@
     spacing: fqw-baseline,
   )[
     #if it.level == 1 {
+      // update counters
       counter(figure.where(kind: image)).update(0)
-      counter("fqw-table").update(0)
+      counter(figure.where(kind: table)).update(0)
+      counter(math.equation).update(0)
     }
-    #show: fqw-text-settings
-    #set par()
+    #show: fqw-default-text
     #par[
-      #if it.numbering != none [
-        #counter(heading).display(it.numbering) #h(0.5em)
-      ]
+      #if it.numbering != none {
+        context if fqw-appendix-state.get() {
+          fqw-appendix-array().filter(v => v != 0).map(str).join(".")
+        } else {
+          counter(heading).display(it.numbering)
+        }
+      }
       #it.body
     ]
   ]
 
+  // equation settings
   #show math.equation: it => {
     if it.block {
       block(
@@ -89,26 +284,15 @@
   }
 
   // lists markers
-  #set list(marker: [--], indent: 1.25cm)
-  #set enum(numbering: "1.", indent: 1.25cm)
+  #set list(marker: [--], indent: fqw-first-line-indent)
+  #set enum(numbering: "1)", indent: fqw-first-line-indent)
 
   // numbering
   #set heading(numbering: "1.1")
-  #set enum(numbering: "1.")
-  #set math.equation(numbering: n => {
-    numbering(
-      "(1.1)",
-      counter(heading).get().first(),
-      n,
-    )
-  })
+  #set math.equation(numbering: n => [(#fqw-numbering(n))])
   #show figure.where(kind: image): set figure(
     supplement: [Рисунок],
-    numbering: n => numbering(
-      "1.1",
-      counter(heading).get().first(),
-      n,
-    ),
+    numbering: n => [#fqw-numbering(n)],
   )
 
   #set figure.caption(
@@ -121,17 +305,18 @@
   #body
 ]
 
+== base titles
+
 #let fqw-header-abstract() = [
   #heading(level: 1, numbering: none, outlined: false)[Аннотация]
   #fqw-indent-before-text
 ]
-
 #let fqw-outline() = [
   #heading(numbering: none, outlined: false)[Содержание]
+  #set outline.entry(fill: none) // Вроде так нужно
   #outline(title: none, depth: 3, indent: 0pt)
   #pagebreak()
 ]
-
 #let fqw-introduction(label: none, heading-counter: none) = [
   #heading(numbering: none)[Введение]
   #fqw-indent-before-text
@@ -142,6 +327,8 @@
     counter(heading).update(heading-counter)
   }
 ]
+
+== equation help functions
 
 #let fqw-equation-list(equations) = {
   show math.equation: it => {
@@ -202,112 +389,27 @@
       ]
     ]
   ])
-
 ]
 
-#let fqw-eq-ref(label) = context numbering(
-  "1.1",
-  counter(heading).at(label).first(),
-  counter(math.equation).at(label).first(),
-)
+== figures
 
-#let fqw-section-ref(label) = context {
-  let counts = counter(heading).at(label)
-  let last-nonzero = 0
-  for (i, v) in counts.enumerate() {
-    if v != 0 { last-nonzero = i }
-  }
-  counts.slice(0, last-nonzero + 1).map(str).join(".")
-}
-
-#let fqw-appendix-letter(number) = {
-  let letters = (
-    "А",
-    "Б",
-    "В",
-    "Г",
-    "Д",
-    "Е",
-    "Ж",
-    "И",
-    "К",
-    "Л",
-    "М",
-    "Н",
-    "П",
-    "Р",
-    "С",
-    "Т",
-    "У",
-    "Ф",
-    "Х",
-    "Ц",
-    "Ш",
-    "Щ",
-    "Э",
-    "Ю",
-    "Я",
-  )
-  letters.at(number - 1)
-}
-
-#let fqw-in-appendix = state("fqw-in-appendix", false)
-
-#let fqw-subappendix-number() = {
-  fqw-appendix-letter(counter("fqw-appendix").get().first()) + "." + str(counter("fqw-subappendix").get().first())
-}
-
-#let fqw-smart-figure-numbering(n) = context {
-  if fqw-in-appendix.get() {
-    fqw-subappendix-number() + "." + str(n)
-  } else {
-    numbering("1.1", counter(heading).get().first(), n)
-  }
-}
-
-#let fqw-figure-ref(label) = context {
-  if fqw-in-appendix.at(label) {
-    let app = counter("fqw-appendix").at(label).first()
-    let sub = counter("fqw-subappendix").at(label).first()
-    let fig = counter(figure.where(kind: image)).at(label).first()
-    fqw-appendix-letter(app) + "." + str(sub) + "." + str(fig)
-  } else {
-    numbering("1.1", counter(heading).at(label).first(), counter(figure.where(kind: image)).at(label).first())
-  }
-}
-
-#let fqw-table-number() = context {
-  if fqw-in-appendix.get() {
-    fqw-subappendix-number() + "." + str(counter("fqw-table").get().first())
-  } else {
-    numbering("1.1", counter(heading).get().first(), counter("fqw-table").get().first())
-  }
-}
-
-#let fqw-table-ref(label) = context {
-  if fqw-in-appendix.at(label) {
-    let app = counter("fqw-appendix").at(label).first()
-    let sub = counter("fqw-subappendix").at(label).first()
-    let tbl = counter("fqw-table").at(label).first()
-    fqw-appendix-letter(app) + "." + str(sub) + "." + str(tbl)
-  } else {
-    numbering("1.1", counter(heading).at(label).first(), counter("fqw-table").at(label).first())
-  }
-}
-
-#let fqw-figure(body, caption, numbering: auto) = {
-  let body = [
-    #align(center)[#body]
-  ]
+#let fqw-figure(body, caption, numbering-size: 2) = {
+  let body = align(center)[#body]
 
   figure(
     kind: image,
     supplement: [Рисунок],
     caption: caption,
-    numbering: if numbering != auto { numbering } else { n => fqw-smart-figure-numbering(n) },
-  )[
-    #body
-  ]
+    numbering: n => context {
+      if fqw-appendix-state.get() {
+        let arr = fqw-appendix-array(all: true).slice(0, numbering-size)
+        (arr + (n,)).map(str).join(".")
+      } else {
+        let arr = counter(heading).get().slice(0, numbering-size - 1)
+        (arr + (n,)).map(str).join(".")
+      }
+    },
+  )[#body]
 }
 
 #let fqw-placeholder-figure(caption) = fqw-figure(
@@ -315,6 +417,58 @@
     #align(center + horizon)[Место для диаграммы]
   ],
   caption,
+)
+
+== ref function
+
+#let fqw-numbering-to-appendix-numbering(numbers) = {
+  (fqw-appendix-letter(numbers.first()),) + numbers.slice(1)
+}
+
+#let fqw-ref(label, counter-name, numbering-size) = context {
+  let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
+  let in-appendix = fqw-appendix-state.at(label)
+  let counter-first = if in-appendix { "fqw-appendix" } else { heading }
+  let numbering = counter(counter-first).at(label)
+  let numbering = if in-appendix {
+    fqw-numbering-to-appendix-numbering(numbering)
+  } else {
+    numbering
+  }
+  let numbering = numbering.slice(0, numbering-size - 1)
+  let numbering = numbering + (counter(counter-name).at(label).first(),)
+  numbering.map(str).join(".")
+}
+
+#let fqw-section-ref(label) = context {
+  let counts = if fqw-appendix-state.at(label) {
+    fqw-numbering-to-appendix-numbering(counter("fqw-appendix").at(label))
+  } else {
+    counter(heading).at(label)
+  }
+  let last-nonzero = 0
+  for (i, v) in counts.enumerate() {
+    if v != 0 { last-nonzero = i }
+  }
+  counts.slice(0, last-nonzero + 1).map(str).join(".")
+}
+
+#let fqw-eq-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  math.equation,
+  numbering-size,
+)
+
+#let fqw-figure-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  figure.where(kind: image),
+  numbering-size,
+)
+
+#let fqw-table-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  figure.where(kind: table),
+  numbering-size,
 )
 
 #let fqw-table(
@@ -327,15 +481,26 @@
   inset: 6pt,
   label: none,
   caption-gap: 0.5em,
+  numbering-size: auto,
 ) = block(spacing: fqw-baseline)[
   #set par(first-line-indent: 0pt)
-  #counter("fqw-table").step()
+  #counter(figure.where(kind: table)).step()
   #set text(hyphenate: true)
 
   #let table-label = if label == none {
-    label("fqw-table-" + str(counter("fqw-table").get().first()))
+    label("fqw-table-" + str(counter(figure.where(kind: table)).get().first()))
   } else {
     label
+  }
+  #let table-number = context {
+    let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
+    let arr = if fqw-appendix-state.get() {
+      fqw-numbering-to-appendix-numbering(counter("fqw-appendix").get())
+    } else {
+      counter(heading).get()
+    }
+    let arr = arr.slice(0, numbering-size - 1) + (counter(figure.where(kind: table)).get().first(),)
+    arr.map(str).join(".")
   }
   #let column-count = if type(columns) == int {
     columns
@@ -351,7 +516,7 @@
       first-line-indent: 0pt,
       leading: 0em,
     )
-    Таблица #fqw-table-number() -- #caption
+    Таблица #table-number -- #caption
     #table-label
   ]
 
@@ -363,7 +528,7 @@
         stroke: none,
       )[
         #context if here().page() != query(table-label).first().location().page() [
-          Продолжение таблицы #fqw-table-number()
+          Продолжение таблицы #table-number
         ]
       ],
     )
@@ -380,112 +545,6 @@
     table.header(..repeated-header),
     ..rows,
   )
-
-]
-
-#let fqw-landscape(body, document-code: none) = page(
-  flipped: true,
-  header: if document-code == none {
-    none
-  } else {
-    grid(
-      columns: (1fr, auto),
-      align: (left, right),
-      [#document-code], context counter(page).display("1"),
-    )
-  },
-)[#body]
-
-#let fqw-appendix(title) = [
-  #pagebreak()
-  #counter("fqw-appendix").step()
-  #counter("fqw-subappendix").update(0)
-  #align(center)[
-    Приложение #context fqw-appendix-letter(counter("fqw-appendix").get().first())
-    #linebreak()
-    #title
-  ]
-]
-
-#let fqw-appendix-group(number: 1) = [
-  #counter("fqw-appendix").update(number)
-  #counter("fqw-subappendix").update(0)
-  #fqw-in-appendix.update(true)
-]
-
-#let fqw-subappendix(title, label: none, title-label: none, outlined: true, next-paragraph: false) = [
-  #pagebreak()
-  #counter("fqw-subappendix").step()
-  #counter("fqw-subappendix-section").update(0)
-  #fqw-in-appendix.update(true)
-  // Override heading spacing: 1 line after "Приложение Б.X", 0pt after title
-  // (the document controls spacing after the title via fqw-indent-before-text)
-  #show heading: it => block(
-    spacing: fqw-baseline,
-  )[
-    #if it.level == 1 {
-      counter(figure.where(kind: image)).update(0)
-      counter("fqw-table").update(0)
-    }
-    #show: fqw-text-settings
-    #set par()
-    #par[#it.body]
-    #if next-paragraph { fqw-indent-before-text }
-  ]
-
-  #align(right)[
-    #context {
-      heading(numbering: none, outlined: outlined)[Приложение #fqw-subappendix-number()]
-    }
-    #if label != none {
-      label
-    }
-  ]
-
-  #align(center)[
-    #heading(level: 2, numbering: none, outlined: outlined)[#title]
-    #if title-label != none {
-      title-label
-    }
-  ]
-
-]
-
-#let fqw-subappendix-section(title, label: none, outlined: true) = [
-  #counter("fqw-subappendix-section").step()
-  #counter("fqw-subappendix-subsection").update(0)
-  #context {
-    let section-number = fqw-subappendix-number() + "." + str(counter("fqw-subappendix-section").get().first())
-    heading(level: 2, numbering: none, outlined: outlined)[
-      #section-number
-      #h(0.5em)
-      #title
-    ]
-  }
-  #if label != none {
-    label
-  }
-]
-
-#let fqw-subappendix-subsection(title, label: none, outlined: false) = [
-  #counter("fqw-subappendix-subsection").step()
-  #context {
-    let subsection-number = (
-      fqw-subappendix-number()
-        + "."
-        + str(counter("fqw-subappendix-section").get().first())
-        + "."
-        + str(counter("fqw-subappendix-subsection").get().first())
-    )
-    heading(level: 3, numbering: none, outlined: outlined)[
-      #subsection-number
-      #h(0.5em)
-      #title
-    ]
-  }
-  #if label != none {
-    label
-  }
 ]
 
 #let document-title(title) = [

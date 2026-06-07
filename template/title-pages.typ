@@ -1,48 +1,5 @@
+#import "fqw.typ": fqw-default-page, fqw-default-paragraph, fqw-default-text, warning
 = Help components for title pages
-
-== `#warning`
-
-/// Highlights warning or placeholder content in red.
-///
-/// Parameters:
-/// - body: The content to render as a warning.
-///
-/// Returns:
-/// - A `text` element with red fill containing the provided `body`.
-#let warning(body) = text(fill: red)[#body]
-#warning[Текст предупреждения]
-
-== `#person`
-
-/// Creates a person record with full and abbreviated name representations.
-///
-/// Parameters:
-/// - surname: The person's surname.
-/// - first-name: The person's first name.
-/// - patronymic: The person's patronymic.
-/// - extras: Additional named fields to include in the resulting record.
-///
-/// Returns:
-/// - A dictionary containing the source name parts, initials, formatted names,
-///   and additional named fields.
-#let person(surname, first-name, patronymic, ..extras) = {
-  let first-initial = first-name.at(0)
-  let patronymic-initial = patronymic.at(0)
-  let initials = [#first-initial. #patronymic-initial.]
-  (
-    (
-      surname: surname,
-      first-name: first-name,
-      patronymic: patronymic,
-      initials: initials,
-      full: [#surname #first-name #patronymic],
-      short: [#surname #initials],
-      reverse-short: [#initials #surname],
-    )
-      + extras.named()
-  )
-}
-#person("Иванов", "Иван", "Иванович")
 
 == `#caption-text`
 /// Creates caption text with a reduced font size.
@@ -90,6 +47,21 @@
 
 == `#print-date`
 
+#let month-names = (
+  "января",
+  "февраля",
+  "марта",
+  "апреля",
+  "мая",
+  "июня",
+  "июля",
+  "августа",
+  "сентября",
+  "октября",
+  "ноября",
+  "декабря",
+)
+
 /// Creates a three-part date layout for title-page approval blocks.
 ///
 /// Parameters:
@@ -109,7 +81,7 @@
   )[
     \"#field(value: [#if d != none { d.day() }])\"
   ][
-    #field(value: [#if d != none { d.month() }])
+    #field(value: [#if d != none { month-names.at(d.month() - 1) }])
   ][
     #if d != none {
       field(value: [#d.year()~~~г.])
@@ -303,7 +275,7 @@
   }
 }
 
-== `#approval-block-1`
+== `#approval-block`
 /// Creates an approval block with a centered title, optional position field,
 /// signature/name fields, and a date line.
 ///
@@ -316,7 +288,7 @@
 ///
 /// Returns:
 /// - A block containing the approval title, optional position field, signature/name fields, and date.
-#let approval-block-1(
+#let approval-block(
   title: [your title],
   position: [],
   name: [],
@@ -348,7 +320,7 @@
     #block(width: 80%)[#print-date(date)]
   ]
 ]
-#approval-block-1(
+#approval-block(
   title: [Утверждаю],
   position: [и. о. заведующего кафедрой],
   name: [Сычёв О. А.],
@@ -356,53 +328,6 @@
   position-caption: [должность],
 )
 
-== `#approval-block-2`
-
-/// Creates an approval block for the task page.
-///
-/// Parameters:
-/// - title: The approval block title displayed at the top. Defaults to "Утверждаю".
-/// - position: The approver position displayed next to the title.
-/// - signature-date: The signature value displayed in the left field. Defaults to empty content.
-/// - name: The initials and surname displayed in the right field. Defaults to empty content.
-/// - date: The date displayed below the signature fields. Defaults to `none`.
-/// - position-caption: Reserved caption content. Defaults to empty content.
-///
-/// Returns:
-/// - A grid containing the approval title, position, signature, name, and date.
-#let approval-block-2(
-  title: [Утверждаю],
-  position: [и. о. зав кафедрой],
-  signature-date: [],
-  name: [],
-  date: none,
-  position-caption: [],
-) = grid(
-  columns: (1fr,),
-  row-gutter: 1em,
-  align: center,
-)[
-  #grid(
-    columns: (1fr, 1fr),
-    row-gutter: 1em,
-    column-gutter: 1em,
-    align: center,
-  )[
-    #title
-  ][
-    #position
-  ][
-    #field(value: signature-date, caption: [(подпись)])
-  ][
-    #field(value: name, caption: [(инициалы, фамилия)])
-  ]
-][
-  #block(width: 80%)[#print-date(date)]
-]
-
-#approval-block-2()
-
-#import "fqw.typ": fqw-base
 == `#fqw-main-title-sheet`
 /// Creates the title page for a bachelor's explanatory note.
 ///
@@ -453,7 +378,8 @@
   city: default-city,
   year: [#datetime.today().year()],
 ) = [
-  #show: fqw-base
+  #show: fqw-default-page
+  #show: fqw-default-text
   // To display all the information on one page, wrap in a grid
   #grid(
     columns: (1fr,),
@@ -480,7 +406,7 @@
       columns: (1fr, 1fr),
       column-gutter: 0.2fr,
     )[
-      #approval-block-1(
+      #approval-block(
         title: [Согласовано],
         position: person-field(reviewer, "status"),
         name: person-field(reviewer, "reverse-short"),
@@ -488,7 +414,7 @@
         position-caption: [должность гл. специалиста предприятия],
       )
     ][
-      #approval-block-1(
+      #approval-block(
         title: [Утверждаю],
         position: person-field(approver, "status"),
         name: person-field(approver, "reverse-short"),
@@ -611,8 +537,9 @@
   department-code: [10.19],
   work-kind: [выпускную квалификационную работу бакалавра],
 ) = [
-  #show: fqw-base
-  #let delimiter = v(2em)
+  #show: fqw-default-page
+  #show: fqw-default-text
+  #let delimiter = v(1.5em)
 
   // University
   #align(center)[
@@ -627,11 +554,26 @@
 
   // Approver
   #pad(left: 50%)[
-    #approval-block-2(
-      name: person-field(approver, "reverse-short"),
-      position: person-field(approver, "status", default: warning([Должность])),
-      date: person-field(approver, "date", default: none),
-    )
+    #grid(
+      columns: (1fr, 1.5fr),
+      row-gutter: default-spacing,
+      column-gutter: 0.2fr,
+      align: center,
+    )[
+      Утверждаю
+    ][
+      #person-field(approver, "status", default: warning([Должность]))
+    ][
+      #field(value: [], caption: [(подпись)])
+    ][
+      #field(
+        value: person-field(approver, "reverse-short"),
+        caption: [(инициалы, фамилия)],
+      )
+    ]
+    #align(center)[#block(width: 80%)[
+      #print-date(person-field(approver, "date", default: none))
+    ]]
   ]
   #delimiter
 
@@ -696,7 +638,7 @@
   #print-field-rows(
     gutter: default-spacing,
     title: [Содержание основной части пояснительной записки],
-    ..makeRows(contents-of-explanatory-note, minRowsCount: 15),
+    ..makeRows(contents-of-explanatory-note, minRowsCount: 10),
   )
   #delimiter
 
@@ -705,7 +647,7 @@
     gutter: default-spacing,
     numberic: true,
     title: align(center)[Перечень графического материала],
-    ..makeRows(graphical-meterials, minRowsCount: 12),
+    ..makeRows(graphical-meterials, minRowsCount: 10),
   )
   #delimiter
 
@@ -768,7 +710,9 @@
   city: default-city,
   year: [#datetime.today().year()],
 ) = [
-  #show: fqw-base
+  #show: fqw-default-page
+  #show: fqw-default-text
+  #show: fqw-default-paragraph
   #let bigGutter = 2em
   #let gutter = 0.8em
 

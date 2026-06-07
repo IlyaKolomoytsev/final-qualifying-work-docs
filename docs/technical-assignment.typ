@@ -1,7 +1,8 @@
 #import "../template/fqw.typ": *
+#import "title-pages.typ": codes
 #import "formulas.typ": *
 
-#show: fqw-document
+#show: fqw-document.with(document-code: codes.technical-asignment)
 
 #fqw-header-abstract()
 
@@ -168,7 +169,6 @@ Ns-3,
 
 - обработку принятого сигнала и извлечение полезной информации
   из принятого сигнала.
-
 
 === Требования к архитектуре модели гидроакустического канала связи
 #fqw-indent-before-text
@@ -658,14 +658,10 @@ network, propagation, mobility, spectrum.
 Результаты тестирования предоставляются на защите дипломного проекта
 членам ГАК.
 
-#fqw-appendix-group(number: 2)
+#counter("fqw-appendix").update(2)
+#fqw-default-numbering.update(3)
 
-#fqw-subappendix(
-  [Диаграмма вариантов использования],
-  label: <sec:appendix_b_1>,
-  title-label: <sec:appendix_b_1_use_case_diagram>,
-  next-paragraph: true,
-)
+#fqw-subappendix([Диаграмма вариантов использования], label: <sec:appendix_b_1_use_case_diagram>)
 
 На рисунке~#fqw-figure-ref(<fig:use-case-diagram>)
 представлена диаграмма вариантов использования.
@@ -675,12 +671,7 @@ network, propagation, mobility, spectrum.
   [Диаграмма вариантов использования «Use Case».],
 ) <fig:use-case-diagram>
 
-#fqw-subappendix(
-  [Сценарии вариантов использования],
-  label: <sec:appendix_b_2>,
-  title-label: <sec:appendix_b_2_use_case_scenarios>,
-  next-paragraph: true,
-)
+#fqw-subappendix([Сценарии вариантов использования], label: <sec:appendix_b_2_use_case_scenarios>)
 
 #block()[
   #set enum(
@@ -802,12 +793,8 @@ network, propagation, mobility, spectrum.
         ближнего узла принимается успешно, а сообщение от дальнего узла не
         принимается успешно.
 ]
-#fqw-subappendix(
-  [Макеты экранных форм],
-  label: <sec:appendix_b_3>,
-  title-label: <sec:appendix_b_3_screen_mockups>,
-  next-paragraph: true,
-)
+
+#fqw-subappendix([Макеты экранных форм], label: <sec:appendix_b_3_screen_mockups>)
 
 Макеты экранных форм работы модуля представлены
 на рисунках #fqw-figure-ref(<fig:wireshark-trace>)~--~#fqw-figure-ref(<fig:three-nodes-output>).
@@ -827,19 +814,12 @@ network, propagation, mobility, spectrum.
   [Отображение результатов работы сценария с тремя узлами],
 ) <fig:three-nodes-output>
 
-#fqw-subappendix(
-  [Структура и формат данных],
-  label: <sec:appendix_b_4>,
-  title-label: <sec:appendix_b_4_data_structure>,
-  next-paragraph: true,
-)
+#fqw-subappendix([Структура и формат данных], label: <sec:appendix_b_4_data_structure>)
 
-#fqw-subappendix-section(
-  [Взаимодействие двух узлов],
-  label: <sec:appendix_b_4_1>,
-)
+=== Взаимодействие двух узлов
+<sec:appendix_b_4_1>
 
-#fqw-subappendix-subsection([Входные данные])
+==== Входные данные
 
 Входные данные представляют собой параметры командной строки и
 представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_1>):
@@ -858,9 +838,21 @@ network, propagation, mobility, spectrum.
     [Значение по умолчанию],
   ),
   rows: (
-    [--sound-speed], [Скорость распространения звука в среде], [вещественное число], [м/с], [1500],
-    [--geometric-coefficient], [Коэффициент геометрического расхождения], [вещественное число], [нет], [2.0],
-    [--absorption-model], [Имя модели поглощения сигнала], [строка], [нет], [ns3::Francois#linebreak()Garrison#linebreak()Propagation#linebreak()LossModel],
+    [--sound-speed],
+    [Скорость распространения звука в среде],
+    [вещественное число],
+    [м/с],
+    [1500],
+    [--geometric-coefficient],
+    [Коэффициент геометрического расхождения],
+    [вещественное число],
+    [нет],
+    [2.0],
+    [--absorption-model],
+    [Имя модели поглощения сигнала],
+    [строка],
+    [нет],
+    [ns3::Francois#linebreak()Garrison#linebreak()Propagation#linebreak()LossModel],
     [--snr-threshold],
     [Минимальное среднее значение ОСШ, необходимое для успешного приёма],
     [вещественное число],
@@ -874,7 +866,7 @@ network, propagation, mobility, spectrum.
   ),
 )
 
-#fqw-subappendix-subsection([Выходные данные])
+==== Выходные данные
 
 Выходные данные формируются в текстовом виде и выводятся в стандартный
 поток вывода \(stdout) и имеют следующий вид:
@@ -910,12 +902,10 @@ _
 
 _Message was not received successfully._
 
-#fqw-subappendix-section(
-  [Взаимодействие трёх узлов],
-  label: <sec:appendix_b_4_2>,
-)
+=== Взаимодействие трёх узлов
+<sec:appendix_b_4_2>
 
-#fqw-subappendix-subsection([Входные данные])
+==== Входные данные
 
 Входные данные представляют собой параметры командной строки и
 представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_2>)
@@ -934,9 +924,21 @@ _Message was not received successfully._
     [Значение по умолчанию],
   ),
   rows: (
-    [--sound-speed], [Скорость распространения звука в среде], [вещественное число], [м/с], [1500],
-    [--geometric-coefficient], [Коэффициент геометрического расхождения], [вещественное число], [нет], [2.0],
-    [--absorption-model], [Имя модели поглощения сигнала], [строка], [нет], [ns3::Francois#linebreak()Garrison#linebreak()Propagation#linebreak()LossModel],
+    [--sound-speed],
+    [Скорость распространения звука в среде],
+    [вещественное число],
+    [м/с],
+    [1500],
+    [--geometric-coefficient],
+    [Коэффициент геометрического расхождения],
+    [вещественное число],
+    [нет],
+    [2.0],
+    [--absorption-model],
+    [Имя модели поглощения сигнала],
+    [строка],
+    [нет],
+    [ns3::Francois#linebreak()Garrison#linebreak()Propagation#linebreak()LossModel],
     [--snr-threshold],
     [Минимальное среднее значение ОСШ, необходимое для успешного приёма],
     [вещественное число],
@@ -955,7 +957,7 @@ _Message was not received successfully._
   ),
 )
 
-#fqw-subappendix-subsection([Выходные данные])
+==== Выходные данные
 
 Выходные данные формируются в текстовом виде и выводятся в стандартный
 поток вывода \(stdout) и имеют следующий вид:
@@ -999,12 +1001,7 @@ _
 _Message was not received successfully.#parbreak()_
 #fqw-indent-before-text
 
-#fqw-subappendix(
-  [Состояния физического уровня модели приёмопередатчика],
-  label: <sec:appendix_b_5>,
-  title-label: <sec:appendix_b_5_phy_state_machine>,
-  next-paragraph: true,
-)
+#fqw-subappendix([Состояния физического уровня модели приёмопередатчика], label: <sec:appendix_b_5_phy_state_machine>)
 
 На рисунке~#fqw-figure-ref(<fig:phy-state-machine>) представлена диаграмма машины состояний.
 

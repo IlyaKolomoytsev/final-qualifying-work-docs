@@ -1,12 +1,14 @@
 #import "../template/fqw.typ": *
 #import "../template/explanatory-note.typ": *
-#import "common.typ": explanatory-note-title
+#import "title-pages.typ": codes, explanatory-note-title, main-title, task-title
 #import "formulas.typ": *
 
+#main-title
+#task-title
 #explanatory-note-title
 
-#show: fqw-document
-
+#show: fqw-document.with(document-code: codes.explanatory-note)
+// ToDo в анотации не должно быть шифра
 #fqw-header-abstract()
 <sec:annotation>
 
@@ -606,7 +608,7 @@ Ns-3 распространяется под свободной лицензие
 Для этого в настоящей работе предложена модифицированная V-образная модель,
 в которую интегрированы этапы компьютерного моделирования
 как обязательный элемент на всех уровнях проектирования.
-Детализированная структура процесса представлен в соответствии с рисунком 2.1.
+Детализированная структура процесса представлен в соответствии с рисунком #fqw-figure-ref(<fig:modified_V-shaped_development_model>).
 
 #fqw-figure(
   image("../assets/images/modified_V-shaped_development_model-gray.png", width: 100%),
@@ -1153,7 +1155,7 @@ V-образную модель разработки программно-апп
 
 Диаграмма вариантов использования гидроакустического модуля для
 моделирования программно-аппаратных гидроакустических приёмопередатчиков
-представлен на рисунке 3.
+представлен на рисунке #fqw-figure-ref(<fig:use_case>).
 
 #fqw-figure(
   image("../assets/images/diagrams/Use case.png", width: 60%),
@@ -1174,7 +1176,7 @@ V-образную модель разработки программно-апп
 Как уже было сказано в пункте #fqw-section-ref(<subsec:theoretical_foundations_of_hydroacoustic_transceivers>),
 приёмопередатчик реализует канальный и физический уровень.
 В общем случае, модель гидроакустического приёмопередатчика описывается
-с помощью следующей диаграммы классов (в соответствии с рисунком 4).
+с помощью следующей диаграммы классов (в соответствии с рисунком #fqw-figure-ref(<fig:overall_transceiver_movel>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/Overall transeiver model.png", height: 90%),
@@ -1218,7 +1220,7 @@ V-образную модель разработки программно-апп
 
 Важной частью любой системы связи являются данные, передаваемые устройствами по сети.
 В разрабатываемой системе моделирования их место в системе отображено
-на следующей диаграмме классов (в соответствии с рисунком 5).
+на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:transceiver_movel>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/Transceiver model.png"),
@@ -1252,7 +1254,7 @@ HaTransmissionParameters.
 Основные функции гидроакустического приёмопередатчика на физическом уровне --
 это преобразование акустических сигналов.
 Для выполнения этих операций в компьютерную модель приёмопередатчика вводятся
-следующие классы, представленные на диаграмме классов (в соответствии с рисунком 6).
+следующие классы, представленные на диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:ppdu_processors>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/Ppdu processors.png"),
@@ -1276,7 +1278,7 @@ HaTransmissionParameters.
   осуществляющий приём акустических сигналов, начинающихся с преамбулы.
 
 Процесс приёма сигнала в модели HaPpduPreamblePayloadProcessor представлен
-на следующей диаграмме последовательности (в соответствии с рисунком 7).
+на следующей диаграмме последовательности (в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_signal_reception>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/04. Receive HaPpduPreamblePayloadProcessor.png"),
@@ -1292,12 +1294,12 @@ HaTransmissionParameters.
 Как уже упоминалось ранее, класс HaPpduProcessor использует модель интерференции.
 Она используется для расчёта характеристик принимаемых сигналов.
 Диаграмма классов, описывающая компоненты модели интерференции
-представлена ниже в соответствии с рисунком 8.
+представлена ниже в соответствии с рисунком #fqw-figure-ref(<fig:interference_model_classes>).
 
 #fqw-figure(
   image("../assets/images/diagrams/Interference (one band).png"),
   [Диаграмма классов модели интерференции],
-)<fig:sequence_diagram_of_signal_reception>
+)<fig:interference_model_classes>
 
 На диаграмме классов модели интерференции представлены следующие классы:
 
@@ -1328,17 +1330,17 @@ HaInterferenceModel и HaInterferenceStatus
 Для разрабатываемой модели приёмопередатчика используется модель интерференции
 HaInterferenceOneBandModel.
 Работа этой модели, представлена на диаграммах последовательностей
-(в соответствии с рисунками 9-11).
+(в соответствии с рисунками #fqw-figure-ref(<fig:sequence_diagram_of_adding_ppdu_to_interference_model>)--#fqw-figure-ref(<fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/08.01. HaInterferenceOneBandModel add ppdu.png"),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
-)<fig:sequence_diagram_of_signal_reception_into_the_interference_model>
+)<fig:sequence_diagram_of_adding_ppdu_to_interference_model>
 
 #fqw-figure(
   image("../assets/images/diagrams/08.02. HaInterferenceOneBandModel add signal.png"),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
-)<fig:sequence_diagram_of_signal_reception_into_the_interference_model>
+)<fig:sequence_diagram_of_adding_signal_to_interference_model>
 
 #fqw-figure(
   image("../assets/images/diagrams/08.03. HaInterferenceOneBandModel Update.png"),
@@ -1351,7 +1353,7 @@ HaInterferenceOneBandModel.
 #fqw-eq-ref(<eq:received_power_spectral_density>) -- #fqw-eq-ref(<eq:interference_power>).
 
 Связь поведения физического уровня с гидроакустическими преобразователями
-представлена на следующей диаграмме классов (в соответствии с рисунком 12).
+представлена на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:phy_behavior>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/Phy Behavior.png"),
@@ -1370,8 +1372,8 @@ HaInterferenceOneBandModel.
   предоставляющий один активный акустический преобразователь.
 
 Работа приёмопередатчика в полудуплексном режиме описывается с помощью
-диаграммы машины состояний (см рисунок 13)
-и диаграммы классов (в соответствии с рисунком 14)
+диаграммы машины состояний (см. рисунок #fqw-figure-ref(<fig:state_machine_diagram_of_the_transceiver_model>))
+и диаграммы классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_the_transceiver_models_state_machine>))
 
 #fqw-figure(
   image("../assets/images/diagrams/Phy states.png"),
@@ -1383,7 +1385,7 @@ HaInterferenceOneBandModel.
 - *Off* -- устройство отключено;
 - *IDLE* -- устройство находится в режиме ожидания входящих и исходящих сигналов;
 - *Tx* -- устройство находится в режиме отправки акустического сигнала;
-- Rx -- устройство находится в режиме приёма акустического сигнала.
+- *Rx* -- устройство находится в режиме приёма акустического сигнала.
 
 #fqw-figure(
   image("../assets/images/diagrams/Transceiver state machine.png", width: 50%),
@@ -1397,7 +1399,7 @@ HaInterferenceOneBandModel.
 - *TransceiverStateMachine* -- базовый класс машины состояний приёмопередатчика.
 
 Конечное поведение модели приёмопередатчика описывается классами,
-представленными на следующей диаграмме классов (в соответствии с рисунком 15).
+представленными на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_hydroacoustic_transceiver_model>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/simple/Simple transmitter.png"),
@@ -1426,7 +1428,8 @@ HaInterferenceOneBandModel.
 
 Процесс отправки пакета на канальном уровне в модели гидроакустического
 приёмопередатчика представлен на следующих диаграммах последовательности
-в соответствии с рисунками 16 и 17.
+в соответствии с рисунками #fqw-figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>)
+и #fqw-figure-ref(<fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>).
 
 #fqw-figure(
   image("../assets/images/diagrams/simple/01. Send packet.png"),
@@ -1440,7 +1443,7 @@ HaInterferenceOneBandModel.
 
 Процесс отправки пакета на физическом уровне модели гидроакустического
 приёмопередатчика представлен на следующей диаграмме последовательности
-(в соответствии с рисунком 18).
+(в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/simple/03. Send mpdu via SimpleHaPhyBehavior.png"),
@@ -1453,7 +1456,7 @@ HaInterferenceOneBandModel.
 позволяет упростить создание альтернативных моделей приёмопередатчиков.
 
 Модель гидроакустического канала связи представлена на следующей
-диаграмме классов(в соответствии с рисунком 19).
+диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_single-band_hydroacoustic_communication_channel_model>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/One ray channel.png"),
@@ -1485,7 +1488,7 @@ HaInterferenceOneBandModel.
 
 Процесс работы однолучевой модели гидроакустического канала связи
 представлен на следующей диаграмме последовательности
-(в соответствии с рисунком 20).
+(в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_signal_transmission_from_the_transceiver_to_single_beam_channel_model>)).
 
 #fqw-figure(
   image("../assets/images/diagrams/seqence one ray.png"),
@@ -1647,27 +1650,28 @@ HaInterferenceOneBandModel.
     radius: 3pt,
     stroke: 0.4pt + luma(70%),
     // Комментариев побольше и
-    align(left,
-      raw(lang: "cpp",
-        "haChannelHelper.AddPropagationLoss(\n" +
-        "    \"ns3::LogDistancePropagationLossModel\",\n" +
-        "    \"Exponent\", DoubleValue(spreadingCoefficient));\n" +
-        "haChannelHelper.AddPropagationLoss(\n" +
-        "    \"ns3::FrancoisGarrisonPropagationLossModel\",\n" +
-        "    \"Frequency\", DoubleValue(centralFrequency));\n" + // упростить
-        "haChannelHelper.SetPropagationDelay(\n" +
-        "    \"ns3::ConstantSpeedPropagationDelayModel\",\n" +
-        "    \"Speed\", DoubleValue(soundSpeed));\n" +
-        "// ...\n" + // Рассказть что такое алокатор
-        "node[0]->SetPosition(Vector(-sender1Distance, 0.0, 0.0)); // Узел 0\n" +
-        "node[1]->SetPosition(Vector( sender2Distance, 0.0, 0.0)); // Узел 1\n" +
-        "node[2]->SetPosition(Vector(0.0, 0.0, 0.0)); // Узел 2 (получатель)\n" +
-        "// ...\n" +
-        "Simulator::Schedule(Seconds(0), sender1Action);\n" +
-        "Simulator::Schedule(Seconds(0), sender2Action);\n" +
-        "Simulator::Run();"
-      )
-    )
+    align(left, raw(
+      lang: "cpp",
+      "haChannelHelper.AddPropagationLoss(\n"
+        + "    \"ns3::LogDistancePropagationLossModel\",\n"
+        + "    \"Exponent\", DoubleValue(spreadingCoefficient));\n"
+        + "haChannelHelper.AddPropagationLoss(\n"
+        + "    \"ns3::FrancoisGarrisonPropagationLossModel\",\n"
+        + "    \"Frequency\", DoubleValue(centralFrequency));\n"
+        + // упростить
+        "haChannelHelper.SetPropagationDelay(\n"
+        + "    \"ns3::ConstantSpeedPropagationDelayModel\",\n"
+        + "    \"Speed\", DoubleValue(soundSpeed));\n"
+        + "// ...\n"
+        + // Рассказть что такое алокатор
+        "node[0]->SetPosition(Vector(-sender1Distance, 0.0, 0.0)); // Узел 0\n"
+        + "node[1]->SetPosition(Vector( sender2Distance, 0.0, 0.0)); // Узел 1\n"
+        + "node[2]->SetPosition(Vector(0.0, 0.0, 0.0)); // Узел 2 (получатель)\n"
+        + "// ...\n"
+        + "Simulator::Schedule(Seconds(0), sender1Action);\n"
+        + "Simulator::Schedule(Seconds(0), sender2Action);\n"
+        + "Simulator::Run();",
+    )),
   ),
   [Фрагмент скрипта сценария «три узла»],
 ) <lst:three_nodes>
@@ -1695,24 +1699,22 @@ SINR каждого из них определяется как отношени
     inset: (x: 10pt, y: 8pt),
     radius: 3pt,
     stroke: 0.4pt + luma(70%),
-    align(left,
-      raw(
-        "Ввод:\n" +
-        "  ha-three-nodes-collision-demo\n" +
-        "      --sender1-distance=1000\n" +
-        "      --sender2-distance=1000\n" +
-        "\n" +
-        "Вывод:\n" +
-        "  Message 1:\n" +
-        "    Send time:      0 ms\n" +
-        "    Receive result: failure\n" +
-        "    Mean SNR:       not available\n" +
-        "  Message 2:\n" +
-        "    Send time:      0 ms\n" +
-        "    Receive result: failure\n" +
-        "    Mean SNR:       not available"
-      )
-    )
+    align(left, raw(
+      "Ввод:\n"
+        + "  ha-three-nodes-collision-demo\n"
+        + "      --sender1-distance=1000\n"
+        + "      --sender2-distance=1000\n"
+        + "\n"
+        + "Вывод:\n"
+        + "  Message 1:\n"
+        + "    Send time:      0 ms\n"
+        + "    Receive result: failure\n"
+        + "    Mean SNR:       not available\n"
+        + "  Message 2:\n"
+        + "    Send time:      0 ms\n"
+        + "    Receive result: failure\n"
+        + "    Mean SNR:       not available",
+    )),
   ),
   [Результат сценария 1: равные расстояния],
 ) <lst:scenario1>
@@ -1748,28 +1750,26 @@ $gamma_"th" = 10$ и успешный приём первого сообщени
     inset: (x: 10pt, y: 8pt),
     radius: 3pt,
     stroke: 0.4pt + luma(70%),
-    align(left,
-      raw(
-        "Ввод:\n" +
-        "  ha-three-nodes-collision-demo\n" +
-        "      --sender1-distance=500\n" +
-        "      --sender2-distance=2000\n" +
-        "\n" +
-        "Вывод:\n" +
-        "  Message 1:\n" +
-        "    Send time:      0 ms\n" +
-        "    Receive result: success\n" +
-        "    Receive time:   10333 ms\n" +
-        "    Sender address:   20-10-00\n" +
-        "    Receiver address: 20-10-20\n" +
-        "    Payload:        Sender 1 message\n" +
-        "    Mean SNR:       243.80\n" +
-        "  Message 2:\n" +
-        "    Send time:      0 ms\n" +
-        "    Receive result: failure\n" +
-        "    Mean SNR:       not available"
-      )
-    )
+    align(left, raw(
+      "Ввод:\n"
+        + "  ha-three-nodes-collision-demo\n"
+        + "      --sender1-distance=500\n"
+        + "      --sender2-distance=2000\n"
+        + "\n"
+        + "Вывод:\n"
+        + "  Message 1:\n"
+        + "    Send time:      0 ms\n"
+        + "    Receive result: success\n"
+        + "    Receive time:   10333 ms\n"
+        + "    Sender address:   20-10-00\n"
+        + "    Receiver address: 20-10-20\n"
+        + "    Payload:        Sender 1 message\n"
+        + "    Mean SNR:       243.80\n"
+        + "  Message 2:\n"
+        + "    Send time:      0 ms\n"
+        + "    Receive result: failure\n"
+        + "    Mean SNR:       not available",
+    )),
   ),
   [Результат сценария 2: разные расстояния],
 ) <lst:scenario2>
@@ -1871,28 +1871,94 @@ $ N = N_0 dot B, $
     [*Максимальная дальность приёма, км*],
   ),
   rows: (
-    [uWave underwater acoustic modem~@DeviceSpecificationUWave], $[10, 30]$, $169$, $1.092$,
-    [uWave max underwater acoustic modem~@DeviceSpecificationUWavea], $[10, 30]$, $175$, $3$,
-    [EvoLogic PRO 48/78~@EvoLogicsPRO48], $[48, 78]$, $186$, $1$,
-    [EvoLogic TINY 48/78~@EvoLogicsTINY48], $[48, 78]$, $183$, $0.7$,
-    [EvoLogic PRO 42/65~@EvoLogicsPRO42], $[42, 65]$, $188$, $1$,
-    [EvoLogic TINY 42/65~@EvoLogicsTINY42], $[42, 65]$, $185$, $0.7$,
-    [EvoLogic PRO 18/34~@EvoLogicsPRO18], $[18, 34]$, $185$, $2$,
-    [EvoLogic TINY 18/34~@EvoLogicsTINY18], $[18, 34]$, $181$, $1.4$,
-    [EvoLogic PRO 15/27~@EvoLogicsPRO15], $[15, 27]$, $192$, $4$,
-    [EvoLogic PRO 12/24~@EvoLogicsPRO12], $[12, 24]$, $193$, $6$,
-    [EvoLogic PRO 7/17~@EvoLogicsPRO7], $[7, 17]$, $184$, $8$,
-    [EvoLogic PRO 7/17 dir~@EvoLogicsPRO7a], $[7, 17]$, $189$, $10$,
-    [EvoLogic TINY 120/180~@EvoLogicsTINY120], $[120, 180]$, $174$, $0.3$,
-    [Modem 6 Mini (subsea) Type 8244-3111~@nutleyModem6Mini], $[20, 34]$, $187$, $3$,
-    [Modem 6 OEM Nano (subsea) Type 8262~@Modem6OEM], $[20, 34]$, $175$, $2$,
-    [Modem 6 standard (subsea) Type 8307-3111~@Modem6Standard], $[20, 34]$, $196$, $5$,
-    [Teledyne UCM-900 Series~@TELEDYNEMARINEWireless], $[20, 30]$, $175$, $1.8$,
-    [Teledyne CM-900 Series (LF)~@TELEDYNEMARINEWireless], $[9, 14]$, $170$, $4$,
-    [Teledyne CM-900 Series (MF)~@TELEDYNEMARINEWireless], $[16, 21]$, $170$, $2$,
-    [Teledyne CM-900 Series (WideBand C)~@TELEDYNEMARINEWireless], $[20, 30]$, $172$, $1$,
-    [Teledyne ATM-910 Series (MF)~@TELEDYNEMARINEWireless], $[16, 21]$, $183$, $4$,
-    [Teledyne ATM-910 Series (WideBand C)~@TELEDYNEMARINEWireless], $[20, 30]$, $178$, $1.8$,
+    [uWave underwater acoustic modem~@DeviceSpecificationUWave],
+    $[10, 30]$,
+    $169$,
+    $1.092$,
+    [uWave max underwater acoustic modem~@DeviceSpecificationUWavea],
+    $[10, 30]$,
+    $175$,
+    $3$,
+    [EvoLogic PRO 48/78~@EvoLogicsPRO48],
+    $[48, 78]$,
+    $186$,
+    $1$,
+    [EvoLogic TINY 48/78~@EvoLogicsTINY48],
+    $[48, 78]$,
+    $183$,
+    $0.7$,
+    [EvoLogic PRO 42/65~@EvoLogicsPRO42],
+    $[42, 65]$,
+    $188$,
+    $1$,
+    [EvoLogic TINY 42/65~@EvoLogicsTINY42],
+    $[42, 65]$,
+    $185$,
+    $0.7$,
+    [EvoLogic PRO 18/34~@EvoLogicsPRO18],
+    $[18, 34]$,
+    $185$,
+    $2$,
+    [EvoLogic TINY 18/34~@EvoLogicsTINY18],
+    $[18, 34]$,
+    $181$,
+    $1.4$,
+    [EvoLogic PRO 15/27~@EvoLogicsPRO15],
+    $[15, 27]$,
+    $192$,
+    $4$,
+    [EvoLogic PRO 12/24~@EvoLogicsPRO12],
+    $[12, 24]$,
+    $193$,
+    $6$,
+    [EvoLogic PRO 7/17~@EvoLogicsPRO7],
+    $[7, 17]$,
+    $184$,
+    $8$,
+    [EvoLogic PRO 7/17 dir~@EvoLogicsPRO7a],
+    $[7, 17]$,
+    $189$,
+    $10$,
+    [EvoLogic TINY 120/180~@EvoLogicsTINY120],
+    $[120, 180]$,
+    $174$,
+    $0.3$,
+    [Modem 6 Mini (subsea) Type 8244-3111~@nutleyModem6Mini],
+    $[20, 34]$,
+    $187$,
+    $3$,
+    [Modem 6 OEM Nano (subsea) Type 8262~@Modem6OEM],
+    $[20, 34]$,
+    $175$,
+    $2$,
+    [Modem 6 standard (subsea) Type 8307-3111~@Modem6Standard],
+    $[20, 34]$,
+    $196$,
+    $5$,
+    [Teledyne UCM-900 Series~@TELEDYNEMARINEWireless],
+    $[20, 30]$,
+    $175$,
+    $1.8$,
+    [Teledyne CM-900 Series (LF)~@TELEDYNEMARINEWireless],
+    $[9, 14]$,
+    $170$,
+    $4$,
+    [Teledyne CM-900 Series (MF)~@TELEDYNEMARINEWireless],
+    $[16, 21]$,
+    $170$,
+    $2$,
+    [Teledyne CM-900 Series (WideBand C)~@TELEDYNEMARINEWireless],
+    $[20, 30]$,
+    $172$,
+    $1$,
+    [Teledyne ATM-910 Series (MF)~@TELEDYNEMARINEWireless],
+    $[16, 21]$,
+    $183$,
+    $4$,
+    [Teledyne ATM-910 Series (WideBand C)~@TELEDYNEMARINEWireless],
+    $[20, 30]$,
+    $178$,
+    $1.8$,
   ),
 )
 
@@ -2104,3 +2170,5 @@ XII~Всероссийского инженерного конкурса ВКР 
 продолжая внедрение MBSE методологии.
 
 #en-bibliography("../assets/FQW.bib")
+
+#fqw-appendix-title([Справка о результатах проверки выпускной квалификационной работы на наличие заимствований])
