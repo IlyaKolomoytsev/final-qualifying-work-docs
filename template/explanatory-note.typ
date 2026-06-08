@@ -1,4 +1,4 @@
-#import "fqw.typ": fqw-indent-before-text
+#import "fqw.typ": *
 
 #let en-introduction() = [
   #heading(numbering: none)[Введение]
@@ -14,8 +14,15 @@
   #fqw-indent-before-text
 ]
 
-#let en-bibliography(source) = bibliography(
-  source,
-  title: [Список использованных источников],
-  style: "gost-r-7-0-100-2018-numeric-appearance.csl",
-)
+#let en-bibliography(source) = [
+  #pagebreak()
+  #heading(numbering: none)[Список использованных источников]
+  #fqw-indent-before-text
+  #pad(left: fqw-first-line-indent, [
+    #bibliography(
+      source,
+      title: none,
+      style: "gost-r-7-0-100-2018-numeric-appearance.csl",
+    )
+  ])
+]

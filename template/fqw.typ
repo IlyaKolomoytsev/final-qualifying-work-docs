@@ -1,65 +1,4 @@
-= Default values
-#let fqw-fontsize-in-em = 1.25em
-#let fqw-leading = 1.06em
-#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading / 2)
-#let fqw-first-line-indent = 1.25cm
-#let fqw-default-numbering = state("fqw-default-numbering", 2)
-
 = Help function
-
-== `#fqw-indent-before-text`
-#let fqw-indent-before-text = { v(fqw-fontsize-in-em + fqw-leading) }
-
-== `default show functions`
-
-#let fqw-default-page(body) = {
-  set page(
-    paper: "a4",
-    margin: (
-      top: 20mm,
-      bottom: 20mm,
-      left: 30mm,
-      right: 15mm,
-    ),
-    header: none,
-    footer: none,
-    numbering: none,
-  )
-  body
-}
-#let fqw-default-text(body) = {
-  set text(
-    lang: "ru",
-    font: "Times New Roman",
-    size: 14pt,
-    fill: black,
-    weight: "regular",
-    hyphenate: false,
-  )
-  body
-}
-#let fqw-default-paragraph(body) = {
-  set par(
-    justify: true,
-    leading: fqw-leading,
-    spacing: fqw-leading,
-  )
-  body
-}
-#let fqw-default-first-line-indent(body) = {
-  set par(
-    first-line-indent: (amount: fqw-first-line-indent, all: true),
-  )
-  body
-}
-
-#let fqw-default(body) = {
-  show: fqw-default-page
-  show: fqw-default-text
-  show: fqw-default-paragraph
-  show: fqw-default-first-line-indent
-  body
-}
 
 == `#warning`
 
@@ -117,7 +56,7 @@
 ///
 /// Returns:
 /// - A dictionary containing the base code in `fqw` and the derived codes in
-///   `explanatory-note`, `technical-asignment`, and `system-programmers-guide`.
+///   `explanatory-note`, `technical-assignment`, and `system-programmers-guide`.
 #let create-codes(
   number: [XX],
   direction: [09.03.04],
@@ -126,13 +65,13 @@
 ) = {
   let prefix = [ВКРБ]
   let explanatory-note-code = [81]
-  let technical-asignment-code = [91]
+  let technical-assignment-code = [91]
   let system-programmers-guide-code = [32]
   let base = [#(prefix)--#(direction)--#(department)--#(number)--#(year)]
   (
     fqw: base,
     explanatory-note: [#(base)-#(explanatory-note-code)],
-    technical-asignment: [#(base)-#(technical-asignment-code)],
+    technical-assignment: [#(base)-#(technical-assignment-code)],
     system-programmers-guide: [#(base)-#(system-programmers-guide-code)],
   )
 }
@@ -141,10 +80,77 @@
 
 #default-codes.fqw \
 #default-codes.explanatory-note \
-#default-codes.technical-asignment \
+#default-codes.technical-assignment \
 #default-codes.system-programmers-guide
 
-== appendix
+= Default values
+
+#let fqw-fontsize-in-em = 1.25em
+#let fqw-leading = 1.06em
+#let fqw-baseline = fqw-fontsize-in-em + fqw-leading
+#let fqw-first-line-indent = 1.25cm
+#let fqw-default-numbering = state("fqw-default-numbering", 2)
+
+= FQW functions
+
+== `#fqw-indent-before-text`
+
+#let fqw-indent-before-text = { v(fqw-fontsize-in-em + fqw-leading) }
+
+== `default show functions`
+
+#let fqw-default-page(body) = {
+  set page(
+    paper: "a4",
+    margin: (
+      top: 20mm,
+      bottom: 20mm,
+      left: 30mm,
+      right: 15mm,
+    ),
+    header: none,
+    footer: none,
+    numbering: none,
+  )
+  body
+}
+#let fqw-default-text(body) = {
+  set text(
+    lang: "ru",
+    font: "Times New Roman",
+    size: 14pt,
+    fill: black,
+    weight: "regular",
+    hyphenate: false,
+  )
+  body
+}
+#let fqw-default-paragraph(body) = {
+  set par(
+    justify: true,
+    leading: fqw-leading,
+    spacing: fqw-leading,
+  )
+  body
+}
+#let fqw-default-first-line-indent(body) = {
+  set par(
+    first-line-indent: (amount: fqw-first-line-indent, all: true),
+  )
+  body
+}
+
+#let fqw-default(body) = {
+  show: fqw-default-page
+  show: fqw-default-text
+  show: fqw-default-paragraph
+  show: fqw-default-first-line-indent
+  body
+}
+
+== numbering functions
+
+#let fqw-appendix-state = state("fqw-appendix-state", false)
 
 #let fqw-appendix-letter(number) = {
   let letters = (
@@ -176,65 +182,59 @@
   )
   letters.at(number - 1)
 }
-#let fqw-appendix-state = state("fqw-appendix-state", false)
-#let fqw-appendix-array(all: false) = {
-  let counts = counter("fqw-appendix").get()
-  let letter = fqw-appendix-letter(counts.at(0))
-  if all {
-    (letter,) + counts.slice(1)
+
+#let fqw-appendix-numbers(counts) = (fqw-appendix-letter(counts.first()),) + counts.slice(1)
+
+#let fqw-appendix-counts() = fqw-appendix-numbers(counter("fqw-appendix").get())
+
+#let fqw-section-counts(loc: auto, numbering-size: auto) = {
+  let read(c) = if loc == auto { c.get() } else { c.at(loc) }
+  let numbering-size = if numbering-size == auto { read(fqw-default-numbering) } else { numbering-size }
+  let arr = if read(fqw-appendix-state) {
+    fqw-appendix-numbers(read(counter("fqw-appendix")))
   } else {
-    (letter,) + counts.slice(1).filter(v => v != 0)
+    read(counter(heading))
   }
+  arr.slice(0, calc.min(numbering-size - 1, arr.len()))
 }
-
-#let fqw-appendix-title(title) = [
-  #pagebreak()
-  #counter("fqw-appendix").step()
-  #v(1fr)
-  #align(center)[
-    Приложение #context fqw-appendix-letter(counter("fqw-appendix").get().first())
-    #linebreak()
-    #title
-  ]
-  #v(1fr)
-]
-
-#let fqw-subappendix(title, label: none) = [
-  #fqw-appendix-state.update(true)
-  #counter("fqw-appendix").step(level: 2)
-  #pagebreak()
-
-  #context {
-    let number = fqw-appendix-array().filter(v => v != 0).map(str).join(".")
-    // header for outline without rendering
-    [
-      #show heading: it => []
-      #heading(numbering: none, outlined: true)[Приложение #number -- #title]
-    ]
-    // header for render
-    align(right)[
-      #heading(numbering: none, outlined: false)[Приложение #number]
-      #if label != none { label }
-    ]
-  }
-
-  #align(center)[#title]
-  #fqw-indent-before-text
-]
-
-
-== `#fqw-numbering`
 
 #let fqw-numbering(n, numbering-size: auto) = context {
-  let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
-  if fqw-appendix-state.get() {
-    let arr = fqw-appendix-array(all: true).slice(0, numbering-size - 1)
-    (arr + (n,)).map(str).join(".")
-  } else {
-    let arr = counter(heading).get().slice(0, numbering-size - 1)
-    (arr + (n,)).map(str).join(".")
-  }
+  (fqw-section-counts(numbering-size: numbering-size) + (n,)).map(str).join(".")
 }
+
+== ref function
+
+#let fqw-ref(label, counter-name, numbering-size) = context {
+  let prefix = fqw-section-counts(loc: label, numbering-size: numbering-size)
+  (prefix + (counter(counter-name).at(label).first(),)).map(str).join(".")
+}
+
+#let fqw-section-ref(label) = context {
+  let counts = fqw-section-counts(loc: label, numbering-size: 10)
+  let last-nonzero = 0
+  for (i, v) in counts.enumerate() {
+    if v != 0 { last-nonzero = i }
+  }
+  counts.slice(0, last-nonzero + 1).map(str).join(".")
+}
+
+#let fqw-eq-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  math.equation,
+  numbering-size,
+)
+
+#let fqw-figure-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  figure.where(kind: image),
+  numbering-size,
+)
+
+#let fqw-table-ref(label, numbering-size: auto) = fqw-ref(
+  label,
+  figure.where(kind: table),
+  numbering-size,
+)
 
 == fqw-document
 
@@ -261,10 +261,14 @@
     #par[
       #if it.numbering != none {
         context if fqw-appendix-state.get() {
-          fqw-appendix-array().filter(v => v != 0).map(str).join(".")
-        } else {
-          counter(heading).display(it.numbering)
+          counter("fqw-appendix").step(level: it.level)
         }
+        fqw-section-counts(numbering-size: 10).map(str).join(".")
+        //         context if fqw-appendix-state.get() {
+        //           fqw-appendix-counts().slice(0, it.level).map(str).join(".")
+        //         } else {
+        //           counter(heading).display(it.numbering)
+        //         }
       }
       #it.body
     ]
@@ -285,7 +289,7 @@
 
   // lists markers
   #set list(marker: [--], indent: fqw-first-line-indent)
-  #set enum(numbering: "1)", indent: fqw-first-line-indent)
+  #set enum(numbering: "1.", indent: fqw-first-line-indent)
 
   // numbering
   #set heading(numbering: "1.1")
@@ -326,6 +330,53 @@
   #if heading-counter != none {
     counter(heading).update(heading-counter)
   }
+]
+
+== appendix titles
+
+#let fqw-appendix-title(title) = [
+  #counter("fqw-appendix").step()
+  #pagebreak()
+  #v(1fr)
+
+  #context {
+    let number = fqw-appendix-letter(counter("fqw-appendix").get().first())
+
+    show heading: it => []
+    heading(numbering: none, outlined: true)[
+      Приложение #number -- #title
+    ]
+
+    align(center)[
+      Приложение #number
+      #linebreak()
+      #title
+    ]
+  }
+
+  #v(1fr)
+]
+#let fqw-subappendix(title, label: none) = [
+  #fqw-appendix-state.update(true)
+  #counter("fqw-appendix").step(level: 2)
+
+  #pagebreak()
+  #context {
+    let number = fqw-appendix-counts().slice(0, 2).map(str).join(".")
+    // header for outline without rendering
+    [
+      #show heading: it => []
+      #heading(numbering: none, outlined: true)[Приложение #number -- #title]
+    ]
+    // header for render
+    align(right)[
+      #heading(numbering: none, outlined: false)[Приложение #number]
+      #if label != none { label }
+    ]
+  }
+
+  #align(center)[#title]
+  #fqw-indent-before-text
 ]
 
 == equation help functions
@@ -377,7 +428,7 @@
 
 #let fqw-where(items) = block[
   #set par(first-line-indent: 0pt)
-  #pad(left: 1.25cm, [
+  #pad(left: fqw-first-line-indent, [
     #grid(
       columns: (auto, 1fr),
       column-gutter: 0.6em,
@@ -393,22 +444,14 @@
 
 == figures
 
-#let fqw-figure(body, caption, numbering-size: 2) = {
+#let fqw-figure(body, caption, numbering-size: auto) = {
   let body = align(center)[#body]
 
   figure(
     kind: image,
     supplement: [Рисунок],
     caption: caption,
-    numbering: n => context {
-      if fqw-appendix-state.get() {
-        let arr = fqw-appendix-array(all: true).slice(0, numbering-size)
-        (arr + (n,)).map(str).join(".")
-      } else {
-        let arr = counter(heading).get().slice(0, numbering-size - 1)
-        (arr + (n,)).map(str).join(".")
-      }
-    },
+    numbering: n => fqw-numbering(n, numbering-size: numbering-size),
   )[#body]
 }
 
@@ -419,57 +462,7 @@
   caption,
 )
 
-== ref function
-
-#let fqw-numbering-to-appendix-numbering(numbers) = {
-  (fqw-appendix-letter(numbers.first()),) + numbers.slice(1)
-}
-
-#let fqw-ref(label, counter-name, numbering-size) = context {
-  let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
-  let in-appendix = fqw-appendix-state.at(label)
-  let counter-first = if in-appendix { "fqw-appendix" } else { heading }
-  let numbering = counter(counter-first).at(label)
-  let numbering = if in-appendix {
-    fqw-numbering-to-appendix-numbering(numbering)
-  } else {
-    numbering
-  }
-  let numbering = numbering.slice(0, numbering-size - 1)
-  let numbering = numbering + (counter(counter-name).at(label).first(),)
-  numbering.map(str).join(".")
-}
-
-#let fqw-section-ref(label) = context {
-  let counts = if fqw-appendix-state.at(label) {
-    fqw-numbering-to-appendix-numbering(counter("fqw-appendix").at(label))
-  } else {
-    counter(heading).at(label)
-  }
-  let last-nonzero = 0
-  for (i, v) in counts.enumerate() {
-    if v != 0 { last-nonzero = i }
-  }
-  counts.slice(0, last-nonzero + 1).map(str).join(".")
-}
-
-#let fqw-eq-ref(label, numbering-size: auto) = fqw-ref(
-  label,
-  math.equation,
-  numbering-size,
-)
-
-#let fqw-figure-ref(label, numbering-size: auto) = fqw-ref(
-  label,
-  figure.where(kind: image),
-  numbering-size,
-)
-
-#let fqw-table-ref(label, numbering-size: auto) = fqw-ref(
-  label,
-  figure.where(kind: table),
-  numbering-size,
-)
+== tables
 
 #let fqw-table(
   caption,
@@ -493,14 +486,8 @@
     label
   }
   #let table-number = context {
-    let numbering-size = if numbering-size == auto { fqw-default-numbering.get() } else { numbering-size }
-    let arr = if fqw-appendix-state.get() {
-      fqw-numbering-to-appendix-numbering(counter("fqw-appendix").get())
-    } else {
-      counter(heading).get()
-    }
-    let arr = arr.slice(0, numbering-size - 1) + (counter(figure.where(kind: table)).get().first(),)
-    arr.map(str).join(".")
+    let n = counter(figure.where(kind: table)).get().first()
+    fqw-numbering(n, numbering-size: numbering-size)
   }
   #let column-count = if type(columns) == int {
     columns
@@ -547,6 +534,7 @@
   )
 ]
 
+// ToDo нужно убрать
 #let document-title(title) = [
   #align(left)[#title]
 ]

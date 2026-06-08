@@ -58,7 +58,7 @@
 #let technical-assignment-title = subtitle-template(
   [Техническое задание],
   sheets-count: [XX],
-  document-code: codes.technical-asignment,
+  document-code: codes.technical-assignment,
 )
 
 #technical-assignment-title
