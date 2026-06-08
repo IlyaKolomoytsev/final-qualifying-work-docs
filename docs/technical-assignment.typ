@@ -1,6 +1,9 @@
 #import "../template/fqw.typ": *
-#import "title-pages.typ": codes
+#import "title-pages.typ": codes, technical-assignment-title, approval-sheet-title
 #import "formulas.typ": *
+
+#technical-assignment-title
+#approval-sheet-title
 
 #show: fqw-document.with(document-code: codes.technical-assignment)
 
@@ -291,7 +294,6 @@ MAC-адрес состоит из 8 бит.
 
 === Требования к модели гидроакустического канала связи
 <sec:channel_model_requirements>
-#fqw-indent-before-text
 
 ==== Расчёт характеристик распространения
 #fqw-indent-before-text
@@ -375,7 +377,6 @@ n~∈~\[1;2\].
 
 == Требования к надёжности
 <sec:reliability_requirements>
-#fqw-indent-before-text
 
 === Требования к обеспечению надёжного функционирования программы
 #fqw-indent-before-text
@@ -408,11 +409,11 @@ n~∈~\[1;2\].
 
 == Требования к условиям эксплуатации
 <sec:operation_conditions_requirements>
-#fqw-indent-before-text
 
 === Климатические условия эксплуатации
 #fqw-indent-before-text
 <sec:climate_conditions>
+
 Требования к климатическим условиям эксплуатации не предъявляются.
 
 === Требования к квалификации и численности персонала
@@ -527,7 +528,6 @@ network, propagation, mobility, spectrum.
 
 = Технико-экономические показатели
 <sec:technical_economic_indicators>
-#fqw-indent-before-text
 
 == Экономические преимущества разработки
 #fqw-indent-before-text
@@ -572,7 +572,6 @@ network, propagation, mobility, spectrum.
 
 = Стадии и этапы разработки
 <sec:development_stages>
-#fqw-indent-before-text
 
 == Стадии разработки
 #fqw-indent-before-text
@@ -641,7 +640,6 @@ network, propagation, mobility, spectrum.
 
 = Порядок контроля и приёмки
 <sec:control_acceptance>
-#fqw-indent-before-text
 
 == Виды испытаний
 #fqw-indent-before-text

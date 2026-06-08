@@ -34,8 +34,12 @@
 также представлены сведения о тестировании и апробации разработанного
 модуля.
 
-Документ включает в себя страниц~--~, рисунков~--~24, таблиц~--~1,
-формул~--~12, приложений~--~0. // ToDo написать автоматические функции в будущем.
+Документ включает в себя
+страниц~--~#context counter(page).final().first(),
+рисунков~--~#context counter("fqw-figure").final().first(),
+таблиц~--~#context counter("fqw-table").final().first(),
+формул~--~#context counter("fqw-equation").final().first(),
+приложений~--~#context counter("fqw-appendix").final().first().
 
 Ключевые слова:
 гидроакустический приёмопередатчик,
@@ -2197,7 +2201,201 @@ XII~Всероссийского инженерного конкурса ВКР 
 без проведения дорогостоящих натурных испытаний на воде,
 продолжая внедрение MBSE методологии.
 
+#pagebreak()
+#heading(numbering: none)[Список использованных источников]
+#fqw-indent-before-text
 #en-bibliography("../assets/FQW.bib")
+
++ Урик, Р. Д. Основы гидроакустики / Р. Д. Урик. – Ленинград : Судостроение, 1978. – 448 с.
+
++ Akyildiz, I. F. Underwater acoustic sensor networks: research challenges / I. F. Akyildiz,
+  D. Pompili, T. Melodia \/\/ Ad Hoc Networks. – 2005. – Vol. 3, No. 3. – P. 257–279. –
+  DOI: 10.1016/j.adhoc.2005.01.004.
+
++ Implementation of a real-time time-varying channel simulator for the verification test of underwater acoustic
+  communication modems and network algorithms / S.-M. Kim, S.-G. Kim, Y. Choi, A.-R. Cho \/\/
+  OCEANS 2023 – Limerick. – 2023. – P. 1–4. – DOI: 10.1109/OCEANSLimerick52467.2023.10244556.
+
++ Mathur, S. Advancements in the V-model / S. Mathur, S. Malik \/\/ International Journal of Computer
+  Applications. – 2010. – Vol. 1, No. 12. – P. 29–34. – DOI: 10.5120/266-425.
+
++ Cline, G. The benefits of simulation-driven design / G. Cline. M. A. Waltham \/\/ Aberdeen Group, 2017. –
+  URL: https:\/\/mesco.com.pl/wp-content/uploads/simulation-driven-design-Aberdeen-Group.pdf (дата обращения: 20.05.2026).
+
++ ISO/IEC 7498-1:1994. Information technology – Open systems interconnection – Basic reference model: the basic model.
+  – Geneva : ISO/IEC, 1994. – URL: https:\/\/www.iso.org/standard/20269.html (дата обращения: 11.05.2026).
+
++ The MathWorks, Inc. MATLAB and Simulink for signal processing / The MathWorks, Inc. \/\/ MathWorks :
+  [официальный сайт]. – URL: https:\/\/www.mathworks.com/solutions/signal-processing.html (дата обращения: 11.05.2026).
+
++ Cadence Design Systems. PCB design software : OrCAD X / Cadence Design Systems \/\/ Cadence :
+  [официальный сайт]. – URL: https:\/\/www.cadence.com/en_US/home/tools/pcb-design-and-analysis/orcad.html
+  (дата обращения: 11.05.2026).
+
++ IEEE Std 1800-2023. IEEE standard for SystemVerilog – unified hardware design, specification, and verification
+  language. – New York : IEEE, 2024. – URL: https:\/\/ieeexplore.ieee.org/document/10458102
+  (дата обращения: 11.05.2026). – DOI: 10.1109/IEEESTD.2024.10458102.
+
++ IEEE Std 1076-2019. IEEE standard VHDL language reference manual. – New York : IEEE, 2019. – URL:
+  https:\/\/ieeexplore.ieee.org/document/8938196 (дата обращения: 11.05.2026). – DOI: 10.1109/IEEESTD.2019.8938196.
+
++ Computational ocean acoustics / F. B. Jensen, W. A. Kuperman, M. B. Porter, H. Schmidt. – 2nd ed.
+  – New York : Springer, 2011. – 794 p. – ISBN 978-1-4419-8677-1. – DOI: 10.1007/978-1-4419-8678-8. – URL:
+  https:\/\/link.springer.com/book/10.1007/978-1-4419-8678-8 (дата обращения: 11.05.2026).
+
++ Porter, M. B. Acoustics Toolbox / M. B. Porter \/\/ Ocean Acoustics Library : [сайт]. –
+  URL: https:\/\/oalib-acoustics.org/website_resources/AcousticsToolbox/ (дата обращения: 11.05.2026).
+
++ Porter, M. B. The BELLHOP manual and user’s guide: preliminary draft / M. B. Porter. – La Jolla,
+  CA : Heat, Light, and Sound Research, Inc., 2011. – 57 p. –
+  URL: https:\/\/oalib.hlsresearch.com/Rays/HLS-2010-1.pdf (дата обращения: 11.05.2026).
+
++ Porter, M. B. The KRAKEN normal mode program / M. B. Porter. – [б. м.] :
+  SACLANT Undersea Research Centre, 1992. – URL:
+  https:\/\/oalib-acoustics.org/website_resources/AcousticsToolbox/manual/kraken.html (дата обращения: 11.05.2026).
+
++ Porter, M. B. The SCOOTER FFP model / M. B. Porter \/\/ Acoustics Toolbox Online Manual : [сайт].
+  – 1997. – URL: https:\/\/oalib-acoustics.org/website_resources/AcousticsToolbox/manual/node63.html
+  (дата обращения: 26.05.2026).
+
++ Porter, M. B. The SPARC pulse model / M. B. Porter \/\/ Acoustics Toolbox Online Manual : [сайт].
+  – 1997. – URL: https:\/\/oalib-acoustics.org/website_resources/AcousticsToolbox/manual/node66.html
+  (дата обращения: 26.05.2026).
+
++ Collins, M. D. A split-step Padé solution for the parabolic equation method / M. D. Collins \/\/
+  The Journal of the Acoustical Society of America. – 1993. – Vol. 93, No. 4. – P. 1736–1742. –
+  DOI: 10.1121/1.406739.
+
++ COMSOL, Inc. Acoustics Module / COMSOL, Inc. \/\/ COMSOL Multiphysics : [официальный сайт]. – URL:
+  https:\/\/www.comsol.com/acoustics-module (дата обращения: 11.05.2026).
+
++ A survey on network simulators, emulators, and testbeds used for research and education /
+  J. Gomez, E. F. Kfoury, J. Crichigno, G. Srivastava \/\/ Computer Networks. – 2023. – Vol. 237. –
+  Art. 110054. – DOI: 10.1016/j.comnet.2023.110054.
+
++ Patel, R. L. Survey on network simulators / R. L. Patel, M. J. Pathak, A. J. Nayak \/\/
+  International Journal of Computer Applications. – 2018. – Vol. 182, No. 21. – P. 23–30. –
+  DOI: 10.5120/ijca2018917974.
+
++ Pan, J. A survey of network simulation tools: current status and future developments / J. Pan. – St. Louis,
+  MO : Washington University in St. Louis, 2008. – URL: https:\/\/www.cse.wustl.edu/~jain/cse567-08/ftp/simtools.pdf
+  (дата обращения: 11.05.2026).
+
++ OPNET network simulator \/\/ OPNET Projects : [сайт]. – URL:
+  https:\/\/opnetprojects.com/opnet-network-simulator/ (дата обращения: 11.05.2026).
+
++ Keysight Technologies. QualNet network simulator / Keysight Technologies \/\/ Keysight Technologies :
+  [официальный сайт]. – URL:
+  https:\/\/www.keysight.com/us/en/assets/3122-1395/technical-overviews/QualNet-Network-Simulator.pdf
+  (дата обращения: 11.05.2026).
+
++ TETCOS LLP. NetSim network simulator / TETCOS LLP \/\/ TETCOS : [официальный сайт]. – URL:
+  https:\/\/www.tetcos.com/ (дата обращения: 11.05.2026).
+
++ Mininet Project Contributors. Mininet overview / Mininet Project Contributors \/\/ Mininet : [официальный сайт]. –
+  URL: https:\/\/mininet.org/overview/ (дата обращения: 11.05.2026).
+
++ GNS3 Project Contributors. GNS3 documentation / GNS3 Project Contributors \/\/ GNS3 Documentation :
+  [официальный сайт]. – URL: https:\/\/docs.gns3.com/ (дата обращения: 11.05.2026).
+
++ Contiki-NG Project Contributors. Running Contiki-NG in Cooja / Contiki-NG Project Contributors \/\/
+  Contiki-NG Documentation : [официальный сайт]. – URL:
+  https:\/\/docs.contiki-ng.org/en/master/doc/tutorials/Running-Contiki-NG-in-Cooja.html (дата обращения: 11.05.2026).
+
++ The ns-3 Consortium. Ns-3 manual / The ns-3 Consortium \/\/ ns-3 Documentation : [официальный сайт]. –
+  URL: https:\/\/www.nsnam.org/docs/manual/html/ (дата обращения: 11.05.2026).
+
++ OpenSim Ltd. OMNeT++ user manual / OpenSim Ltd. \/\/ OMNeT++ Documentation : [официальный сайт]. –
+  URL: https:\/\/doc.omnetpp.org/omnetpp/manual/ (дата обращения: 11.05.2026).
+
++ OpenSim Ltd. OMNeT++ — License / OpenSim Ltd. \/\/ OMNeT++ : [официальный сайт]. –
+  URL: https:\/\/omnetpp.org/intro/license.html (дата обращения: 26.05.2026).
+
++ Boehm, B. W. Verifying and validating software requirements and design specifications / B. W. Boehm \/\/
+  IEEE Software. – 1984. – Vol. 1, No. 1. – P. 75–88. – DOI: 10.1109/MS.1984.233702.
+
++ INCOSE Technical Operations. Systems engineering vision 2020 / INCOSE Technical Operations ; ed. C. Haskins. –
+  San Diego, CA : International Council on Systems Engineering, 2007. – URL:
+  https:\/\/www.incose.org/docs/default-source/default-document-library/se-vision2020_20071003_v2_03.pdf
+  (дата обращения: 26.05.2026).
+
++ Stojanovic, M. Underwater acoustic communication channels: propagation models and statistical characterization /
+  M. Stojanovic, J. Preisig \/\/ IEEE Communications Magazine. – 2009. – Vol. 47, No. 1. – P. 84–89. –
+  DOI: 10.1109/MCOM.2009.4752682.
+
++ Thorp, W. H. Analytic description of the low-frequency attenuation coefficient / W. H. Thorp \/\/
+  The Journal of the Acoustical Society of America. – 1967. – Vol. 42, No. 1. – P. 270. – DOI: 10.1121/1.1910566.
+
++ Francois, R. E. Sound absorption based on ocean measurements. Part II:
+  boric acid contribution and equation for total absorption / R. E. Francois, G. R. Garrison \/\/
+  The Journal of the Acoustical Society of America. – 1982. – Vol. 72, No. 6. – P. 1879–1890. –
+  DOI: 10.1121/1.388673.
+
++ Modem 6 OEM Nano (Subsea) / Sonardyne. – 2025. – URL:
+  https:\/\/www.sonardyne.com/wp-content/uploads/2025/01/Sonardyne_8262_Modem_6_OEM_Nano.pdf (дата обращения: 29.04.2026).
+
++ Xodus Group Ltd. Marine noise inputs: technical note on underwater noise / Xodus Group Ltd. –
+  Southampton : Xodus Group Ltd., 2015. – Doc. No. A-100142-S20-TECH-001. –
+  URL: https:\/\/marine.gov.scot/sites/default/files/underwater_noise_technical_assessment_a-100142-s20-tech-001-a01_0.pdf
+  (дата обращения: 29.04.2026).
+
++ A comparative analysis of predictive channel models for real shallow water environments / F. Busacca,
+  L. Galluccio, S. Palazzo, A. Panebianco \/\/ Computer Networks. – 2024. – Vol. 250. – Art. 110557. –
+  DOI: 10.1016/j.comnet.2024.110557.
+
++ Device specification: uWave \/\/ docs.unavlab.com : [сайт]. –
+  URL: http:\/\/docs.unavlab.com/documentation/EN/uWAVE/uWAVE_Specification_en.html (дата обращения: 29.04.2026).
+
++ Device specification: uWave Max \/\/ docs.unavlab.com : [сайт]. –
+  URL: http:\/\/docs.unavlab.com/documentation/EN/uWAVE/uWAVE_Max_Specification_en.html (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 48/78: high-speed acoustic modem for shallow waters \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-48-78 (дата обращения: 29.04.2026).
+
++ EvoLogics TINY 48/78: ultra-compact high-speed acoustic modem for shallow waters \/\/ EvoLogics :
+  [официальный сайт]. – URL: https:\/\/www.evologics.com/underwater-acoustic-modem/tiny-48-78
+  (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 42/65: high-speed acoustic modem for depth-to-surface links \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-42-65 (дата обращения: 29.04.2026).
+
++ EvoLogics TINY 42/65: ultra-compact high-speed acoustic modem for depth-to-surface links \/\/
+  EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/tiny-42-65 (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 18/34 acoustic modem: fast all-around performer \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-18-34 (дата обращения: 29.04.2026).
+
++ EvoLogics TINY 18/34 acoustic modem: fast and ultra-compact all-around performer \/\/ EvoLogics :
+  [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/tiny-18-34 (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 15/27: long-range depth-rated acoustic modem \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-15-27 (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 12/24: long-range depth-rated acoustic modem \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-12-24 (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 7/17 acoustic modem: long-range depth-rated all-around performer \/\/ EvoLogics :
+  [официальный сайт]. – URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-7-17 (дата обращения: 29.04.2026).
+
++ EvoLogics PRO 7/17 Dir: our longest range depth-rated acoustic modem \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/pro-7-17-dir (дата обращения: 29.04.2026).
+
++ EvoLogics TINY 120/180: our fastest ultra-compact acoustic modem \/\/ EvoLogics : [официальный сайт]. –
+  URL: https:\/\/www.evologics.com/underwater-acoustic-modem/tiny-120-180 (дата обращения: 29.04.2026).
+
++ Nutley, R. J. Modem 6 Mini (Subsea) / R. J. Nutley ; Sonardyne. – 2021. –
+  URL: https:\/\/www.sonardyne.com/wp-content/uploads/2021/06/Sonardyne_8244_Modem_6_Mini_Subsea.pdf
+  (дата обращения: 29.04.2026).
+
++ Modem 6 Standard (Subsea) / Sonardyne. – 2021. – URL:
+  https:\/\/www.sonardyne.com/wp-content/uploads/2021/06/Sonardyne_8307_Modem_6_Standard.pdf (дата обращения: 29.04.2026).
+
++ TELEDYNE MARINE wireless acoustic modems \/\/ TELEDYNE Marine : [официальный сайт]. – 2025. –
+  URL: https:\/\/www.teledynemarine.com/en-us/products/SiteAssets/Benthos/Modems%20Product%20Selection%20Guide_2025.pdf
+  (дата обращения: 29.04.2026).
+
 
 #fqw-appendix-title([Справка о результатах проверки выпускной квалификационной работы на наличие заимствований])
 #fqw-appendix-title([Техническое задание])

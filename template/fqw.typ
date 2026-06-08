@@ -89,7 +89,7 @@
 #let fqw-leading = 1.06em
 #let fqw-baseline = fqw-fontsize-in-em + fqw-leading
 #let fqw-first-line-indent = 1.25cm
-#let fqw-list-body-indent = 2em
+#let fqw-list-body-indent = 1.5em
 #let fqw-default-numbering = state("fqw-default-numbering", 2)
 
 = FQW functions
@@ -278,6 +278,7 @@
   // equation settings
   #show math.equation: it => {
     if it.block {
+      counter("fqw-equation").step()
       block(
         spacing: fqw-baseline,
       )[
@@ -456,6 +457,7 @@
 == figures
 
 #let fqw-figure(body, caption, numbering-size: auto) = {
+  counter("fqw-figure").step()
   let body = align(center)[#body]
 
   figure(
@@ -487,6 +489,7 @@
   caption-gap: 0.5em,
   numbering-size: auto,
 ) = block(spacing: fqw-baseline)[
+  #counter("fqw-table").step()
   #set par(first-line-indent: 0pt)
   #counter(figure.where(kind: table)).step()
   #set text(hyphenate: true)

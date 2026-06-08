@@ -448,7 +448,7 @@
       column-gutter: default-spacing,
       row-gutter: default-spacing,
     )[Обозначение][
-      #block(width: 50%)[#field(
+      #block(width: 60%)[#field(
         value: document-code,
         caption: [код документа],
       )]
@@ -695,7 +695,7 @@
 #let fqw-template-subtitle-sheet(
   // Work
   topic: [],
-  sheets-count: [],
+  sheets-count: [#context counter(page).final().first()],
   // Persons
   author: none,
   supervisor: none,
@@ -725,7 +725,7 @@
   ][
     // Department
     #align(center)[Кафедра «#department»]
-  ][
+
     // Approver
     #align(right)[
       #block(width: 40%)[

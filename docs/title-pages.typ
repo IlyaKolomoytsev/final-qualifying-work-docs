@@ -32,11 +32,24 @@
   author: author,
   approver: approver,
   supervisor: scientific-supervisor,
+  task-from-scientific-supervisor: (
+    [Задание, выданное научным руководителем кафедры «ПОАС»:],
+    [разработать компьютерную модель программно-аппаратного],
+    [гидроакустического приёмопередатчика и гидроакустического],
+    [канала связи, интегрированные в сетевой симулятор Ns-3,],
+    [с учётом физических эффектов гидроакустической среды и провести],
+    [валидацию модели на данных промышленных гидроакустических],
+    [модемов.],
+  ),
 )
 
 #task-title
 
-#let subtitle-template(document-title, sheets-count: [], document-code: []) = fqw-template-subtitle-sheet(
+#let subtitle-template(
+  document-title,
+  document-code: [],
+  sheets-count: [#context counter(page).final().first()],
+) = fqw-template-subtitle-sheet(
   topic: topic-of-work,
   sheets-count: sheets-count,
   author: author,
@@ -49,7 +62,6 @@
 
 #let explanatory-note-title = subtitle-template(
   [Пояснительная записка],
-  sheets-count: [XX],
   document-code: codes.explanatory-note,
 )
 
@@ -57,16 +69,22 @@
 
 #let technical-assignment-title = subtitle-template(
   [Техническое задание],
-  sheets-count: [XX],
   document-code: codes.technical-assignment,
 )
 
 #technical-assignment-title
 
+#let system-programmers-guide-title = subtitle-template(
+  [Руководство системного программиста],
+  document-code: codes.system-programmers-guide,
+)
+
+#system-programmers-guide-title
+
 #let approval-sheet-title = subtitle-template(
   [Лист утверждения],
-  sheets-count: [1],
   document-code: [А.В.00001-01 91 01-1-ЛУ],
+  sheets-count: [1],
 )
 
 #approval-sheet-title
