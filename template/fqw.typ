@@ -89,6 +89,7 @@
 #let fqw-leading = 1.06em
 #let fqw-baseline = fqw-fontsize-in-em + fqw-leading
 #let fqw-first-line-indent = 1.25cm
+#let fqw-list-body-indent = 2em
 #let fqw-default-numbering = state("fqw-default-numbering", 2)
 
 = FQW functions
@@ -287,9 +288,19 @@
     }
   }
 
-  // lists markers
-  #set list(marker: [--], indent: fqw-first-line-indent)
-  #set enum(numbering: "1.", indent: fqw-first-line-indent)
+  // lists
+  #set list(marker: [--], indent: fqw-first-line-indent, body-indent: fqw-list-body-indent)
+  #set enum(numbering: "1.", indent: fqw-first-line-indent, body-indent: fqw-list-body-indent)
+  #show list: it => [
+    #let w = measure([--]).width
+    #set par(hanging-indent: -fqw-first-line-indent - w - fqw-list-body-indent)
+    #it
+  ]
+  #show enum: it => [
+    #let w = measure([--]).width
+    #set par(hanging-indent: -fqw-first-line-indent - w - fqw-list-body-indent)
+    #it
+  ]
 
   // numbering
   #set heading(numbering: "1.1")
