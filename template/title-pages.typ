@@ -1,4 +1,4 @@
-#import "fqw.typ": fqw-default-page, fqw-default-paragraph, fqw-default-text, warning
+#import "fqw.typ": fqw-default-first-line-indent, fqw-default-page, fqw-default-paragraph, fqw-default-text, warning
 = Help components for title pages
 
 == `#caption-text`
@@ -104,14 +104,14 @@
 ///
 /// Returns:
 /// - A grid containing the label and the corresponding underlined field.
-#let labeled-field(label, value: [], caption: [], value-width: 1fr) = grid(
+#let labeled-field(label, value: [], caption: [], value-width: 1fr, ..field-parameters) = grid(
   columns: (auto, value-width),
   column-gutter: 8pt,
   align: (left, horizon),
 )[
   #label
 ][
-  #field(value: value, caption: caption)
+  #field(value: value, caption: caption, ..field-parameters.named())
 ]
 #labeled-field(
   [Группа],
@@ -268,8 +268,11 @@
   высшего образования \
   «Волгоградский государственный технический университет»
 ]
+#let default-university-president = [Профессору д.х.н. Навроцкому А.В.]
 #let default-faculty = [Электроники и вычислительной техники]
 #let default-department = [Программное обеспечение автоматизированных систем]
+#let default-program = (code: [09.03.04], name: [Программная инженерия])
+#let default-type-of-program = [очное]
 #let default-city = [Волгоград]
 
 #let person-field(person, key, default: []) = {
@@ -818,3 +821,108 @@
     #align(center)[#city #year г.]
   ]
 ]
+
+#let fqw-request-to-post-work(
+  topic: [],
+  author: none,
+  supervisor: none,
+  restrictions: none,
+  reson: [которые имеют действительную или потенциальную коммерческую ценность в силу неизвестности их третьим лицам.],
+  university-president: default-university-president,
+  faculty: default-faculty,
+  program: default-program,
+  type-of-program: default-type-of-program,
+) = {
+  show: fqw-default-title-settings
+  set page(
+    paper: "a4",
+    margin: (
+      top: 20mm,
+      bottom: 20mm,
+      left: 20mm,
+      right: 15mm,
+    ),
+    header: none,
+    footer: none,
+    numbering: none,
+  )
+  grid(columns: 1, row-gutter: (4em, 1em, 2em))[
+    #pad(left: 35%)[
+      Ректору ВолгГТУ #parbreak()
+      #university-president
+      #labeled-field(
+        [от студента],
+        value: person-field(author, "full-gen"),
+        caption: [фамилия, имя, отчество полностью],
+        align-value: left,
+        horizontal-inset: 0pt,
+      )
+      #labeled-field([Факультет], value: lower(faculty), align-value: left, horizontal-inset: 0pt)
+      #labeled-field([Направление], value: [#program.code #program.name], align-value: left, horizontal-inset: 0pt)
+      #labeled-field([группа], value: person-field(author, "group"), align-value: left, horizontal-inset: 0pt)
+      #labeled-field(
+        [форма обучения],
+        value: type-of-program,
+        align-value: left,
+        horizontal-inset: 0pt,
+      )
+    ]
+  ][
+    #align(center)[#upper([заявление])]
+  ][
+    #show: fqw-default-first-line-indent
+    #show: fqw-default-paragraph
+    Прошу Вас разместить написанную мною выпускную квалификационную
+    работу бакалавра (далее ВКР) на тему
+    // Topic
+    #align(center)[
+      #for (i, row) in makeRows(topic).enumerate() {
+        let caption = if i == 0 [название работы] else []
+        field(value: row, caption: caption)
+      }
+    ]
+  ][
+    #let degree = if type(supervisor) == dictionary and "degree" in supervisor [
+      ~#person-field(supervisor, "degree")
+    ] else []
+    #labeled-field([Научный руководитель], value: person-field(supervisor, "full") + degree)
+  ][
+    в файловом хранилище ВолгГТУ, расположенном по адресу _http:\/\/dump.vstu.ru_
+  ][
+    #if restrictions == none [
+      в полном объеме.
+    ] else [
+      за исключением разделов (страниц)
+
+      #let rows-of-page-info = makeRows(restrictions.page)
+      #let rows-of-content-info = makeRows(restrictions.content)
+
+      #labeled-field([номера разделов (страниц)], value: rows-of-page-info.at(0, default: []))
+      #for (i, row) in rows-of-page-info.enumerate() { if i != 0 { field(value: row) } }
+
+      #labeled-field(
+        [содержащие],
+        value: rows-of-content-info.at(0, default: []),
+        caption: [
+          указать что именно: производственные; технические: экономические: организационные сведения;
+          результаты интеллектуальной деятельности в научно-технической сфере;
+          сведения о способах осуществления профессиональной деятельности
+        ],
+        align-value: left
+      )
+      #for (i, row) in rows-of-content-info.enumerate() { if i != 0 { field(value: row, align-value: left) } }
+    ]
+  ][
+    #if restrictions != none [#reson]
+  ][
+    #pad(left: 3em)[
+      #grid(columns: (12em, 12em), row-gutter: 1.5em)[
+        Дата
+      ][#field()][
+        Подпись
+      ][#field()][
+        Виза руководителя ВКР
+      ][#field()]
+    ]
+  ]
+}

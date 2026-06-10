@@ -1,12 +1,54 @@
-#import "../template/title-pages.typ": fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-template-subtitle-sheet
+#import "../template/title-pages.typ": (
+  fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-request-to-post-work, fqw-template-subtitle-sheet,
+)
 #import "../template/fqw.typ": create-codes, person
 
 #let codes = create-codes(number: [09])
 
-#let author = person("Коломойцев", "Илья", "Сергеевич", group: [ПрИн-466])
-#let scientific-supervisor = person("Матюшечкин", "Дмитрий", "Сергеевич", degree: [к.т.н.])
-#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой])
-#let inspector = person("Кузнецова", "Агнесса", "Сергеевна")
+#let author = person(
+  (
+    nom: ("Коломойцев", "Илья", "Сергеевич"),
+    gen: ("Коломойцева", "Ильи", "Сергеевича"),
+    dat: ("Коломойцеву", "Илье", "Сергеевичу"),
+    acc: ("Коломойцева", "Илью", "Сергеевича"),
+    ins: ("Коломойцевым", "Ильёй", "Сергеевичем"),
+    prep: ("Коломойцеве", "Илье", "Сергеевиче"),
+  ),
+  group: [ПрИн-466],
+)
+
+#let scientific-supervisor = person(
+  (
+    nom: ("Матюшечкин", "Дмитрий", "Сергеевич"),
+    gen: ("Матюшечкина", "Дмитрия", "Сергеевича"),
+    dat: ("Матюшечкину", "Дмитрию", "Сергеевичу"),
+    acc: ("Матюшечкина", "Дмитрия", "Сергеевича"),
+    ins: ("Матюшечкиным", "Дмитрием", "Сергеевичем"),
+    prep: ("Матюшечкине", "Дмитрии", "Сергеевиче"),
+  ),
+  degree: [к.т.н.],
+)
+
+#let approver = person(
+  (
+    nom: ("Сычёв", "Олег", "Александрович"),
+    gen: ("Сычёва", "Олега", "Александровича"),
+    dat: ("Сычёву", "Олегу", "Александровичу"),
+    acc: ("Сычёва", "Олега", "Александровича"),
+    ins: ("Сычёвым", "Олегом", "Александровичем"),
+    prep: ("Сычёве", "Олеге", "Александровиче"),
+  ),
+  status: [и. о. зав. кафедрой],
+)
+
+#let inspector = person((
+  nom: ("Кузнецова", "Агнесса", "Сергеевна"),
+  gen: ("Кузнецовой", "Агнессы", "Сергеевны"),
+  dat: ("Кузнецовой", "Агнессе", "Сергеевне"),
+  acc: ("Кузнецову", "Агнессу", "Сергеевну"),
+  ins: ("Кузнецовой", "Агнессой", "Сергеевной"),
+  prep: ("Кузнецовой", "Агнессе", "Сергеевне"),
+))
 #let university-directive = (date: datetime(year: 2025, month: 9, day: 5), number: [1203-ст])
 #let submission-date = datetime(year: 2026, month: 6, day: 8)
 #let topic-of-work = (
@@ -86,3 +128,12 @@
 )
 
 #approval-sheet-title
+
+#let request-to-post-work = fqw-request-to-post-work(
+  topic: topic-of-work,
+  author: author,
+  supervisor: scientific-supervisor,
+)
+
+#request-to-post-work
+

@@ -14,6 +14,15 @@
 
 == `#person`
 
+#let word-cases = (
+  [Nom],
+  [Gen],
+  [Dat],
+  [Acc],
+  [Ins],
+  [Prep],
+)
+
 /// Creates a person record with full and abbreviated name representations.
 ///
 /// Parameters:
@@ -25,24 +34,62 @@
 /// Returns:
 /// - A dictionary containing the source name parts, initials, formatted names,
 ///   and additional named fields.
-#let person(surname, first-name, patronymic, ..extras) = {
-  let first-initial = first-name.at(0)
-  let patronymic-initial = patronymic.at(0)
-  let initials = [#first-initial. #patronymic-initial.]
-  (
-    (
-      surname: surname,
-      first-name: first-name,
-      patronymic: patronymic,
-      initials: initials,
-      full: [#surname #first-name #patronymic],
-      short: [#surname #initials],
-      reverse-short: [#initials #surname],
+#let person(full-name, ..extras) = {
+  let make-fields(full-name, postfix: "") = {
+    let surname = full-name.at(0)
+    let first-name = full-name.at(1)
+    let patronymic = full-name.at(2, default: none)
+
+    let first-initial = first-name.at(0)
+    let initials = if patronymic == none {
+      [#first-initial.]
+    } else {
+      [#first-initial. #patronymic.at(0).]
+    }
+
+    let full = if patronymic == none {
+      [#surname #first-name]
+    } else {
+      [#surname #first-name #patronymic]
+    }
+
+    let fields = (
+      "surname" + postfix: surname,
+      "first-name" + postfix: first-name,
+      "patronymic" + postfix: patronymic,
+      "initials" + postfix: initials,
+      "full" + postfix: full,
+      "short" + postfix: [#surname #initials],
+      "reverse-short" + postfix: [#initials #surname],
     )
-      + extras.named()
-  )
+
+    fields
+  }
+
+  let full-name-cases = if type(full-name) == array {
+    make-fields(full-name) + make-fields(full-name, postfix: "-nom")
+  } else if type(full-name) == dictionary {
+    let result = (:)
+
+    for (key, value) in full-name {
+      let postfix = "-" + key
+
+      if key == "nom" {
+        result += make-fields(value)
+      }
+
+      result += make-fields(value, postfix: postfix)
+    }
+
+    result
+  } else {
+    panic("full-name must be array or dictionary")
+  }
+
+  full-name-cases + extras.named()
 }
-#person("Иванов", "Иван", "Иванович")
+
+#person(("Иванов", "Иван", "Иванович"))
 
 == `#create-codes`
 
@@ -87,7 +134,7 @@
 
 #let fqw-fontsize-in-em = 1.25em
 #let fqw-leading = 1.06em
-#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading/2)
+#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading / 2)
 #let fqw-first-line-indent = 1.25cm
 #let fqw-list-body-indent = 1.5em
 #let fqw-default-numbering = state("fqw-default-numbering", 2)

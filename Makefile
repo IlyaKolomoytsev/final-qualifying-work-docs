@@ -27,8 +27,8 @@ watch-technical-assignment:
 watch-system-programmers-guide:
 	$(TYPST) watch --root . docs/system-programmers-guide.typ "build/$(call output_name,system-programmers-guide)"
 
-watch-common:
-	$(TYPST) watch --root . docs/common.typ build/common.pdf
+watch-titles:
+	$(TYPST) watch --root . docs/title-pages.typ build/titles.pdf
 
 clean:
 	rm -f build/*.pdf
