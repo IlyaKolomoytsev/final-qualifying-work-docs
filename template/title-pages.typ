@@ -997,13 +997,66 @@
     положением о порядке проверки ВКР на объем заимствования.
   ][
     #labeled-field([_подпись студента_], value: [(#person-field(author, "short"))], align-value: right)
-
     #pad(left: 25em)[#labeled-field([_дата_], value: date, value-width: 6em)]
     Работа представлена для проверки уникальности текста в системе «#plagiarism-detection-system».
   ][
     #labeled-field([_дата предоставления ВКР_], value: date, value-width: 6em)
-
     #labeled-field([_подпись руководителя ВКР_], value: [(#person-field(supervisor, "short"))], align-value: right)
+  ]
+}
 
+#let fqw-opinion-of-scientific-supervisor(
+  topic: [],
+  about-work: [],
+  successes: [],
+  author: none,
+  supervisor: none,
+  department-chair: none,
+  date: [],
+  university-president: default-university-president,
+  university: default-university,
+  faculty: default-faculty,
+  program: default-program,
+  type-of-program: default-type-of-program,
+  plagiarism-detection-system: default-plagiarism-detection-system,
+) = {
+  show: fqw-default-title-settings
+  set par(justify: true)
+  grid(columns: 1, row-gutter: 1em)[
+    #pad(left: 45%)[
+      Отзыв \
+      на выпускную квалификационную работу бакалавра
+      кафедры «Программное обеспечение автоматизированных систем»
+      #field(value: person-field(author, "full"))
+      #field()
+
+      на тему: #underline(topic.join(" "))
+    ]
+  ][
+    Содержание работы:
+  ][
+    #underline(about-work)
+  ][
+    #labeled-field([Заключение:], value: [работа завершена, поставленная цель достигнута.], align-value: left)
+  ][
+    Положительные результаты выпускной работы:
+
+    #for row in makeRows(successes, minRowsCount: 3) { field(value: row, align-value: left) }
+  ][
+    #labeled-field([Рекомендуемая оценка], value: [Отлично (100 баллов)], align-value: left)
+  ][
+    #labeled-field(
+      [Особо следует отметить:],
+      value: [Планируется продолжение работы над этой темой.],
+      align-value: left,
+      horizontal-inset: 0pt,
+    )
+  ][
+    #grid(columns: 2, column-gutter: 1em)[
+    #labeled-field([Руководитель], value-width: 10em)
+    ][
+        #if supervisor != none and "degree" in supervisor [#supervisor.degree ]
+        #person-field(supervisor, "short")
+    ]
   ]
 }
