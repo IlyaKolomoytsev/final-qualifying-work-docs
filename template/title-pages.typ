@@ -817,6 +817,7 @@
   author: none,
   supervisor: none,
   restrictions: none,
+  date: [],
   reson: [которые имеют действительную или потенциальную коммерческую ценность в силу неизвестности их третьим лицам.],
   university: default-university,
   university-president: default-university-president,
@@ -911,7 +912,7 @@
     #pad(left: 3em)[
       #grid(columns: (12em, 12em), row-gutter: 1.5em)[
         Дата
-      ][#field()][
+      ][#field(value: date)][
         Подпись
       ][#field()][
         Виза руководителя ВКР

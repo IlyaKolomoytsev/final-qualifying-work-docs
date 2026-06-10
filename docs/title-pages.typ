@@ -96,7 +96,7 @@
   sheets-count: sheets-count,
   author: author + (date: submission-date),
   supervisor: scientific-supervisor + (date: submission-date),
-  approver: approver,
+  approver: approver + (date: submission-date),
   inspector: inspector + (date: submission-date),
   document-title: document-title,
   document-code: document-code,
@@ -134,6 +134,7 @@
   topic: topic-of-work,
   author: author,
   supervisor: scientific-supervisor,
+  date: submission-date.display("[day].[month].[year]"),
 )
 
 #request-to-post-work
@@ -143,6 +144,7 @@
   author: author,
   supervisor: scientific-supervisor,
   department-chair: approver,
+  date: submission-date.display("[day].[month].[year]"),
 )
 
 #declaration-of-professional-ethics
