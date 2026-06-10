@@ -7,8 +7,9 @@
 #task-title
 #explanatory-note-title
 
-#show: fqw-document.with(document-code: codes.explanatory-note)
-// ToDo в анотации не должно быть шифра
+#show: fqw-document.with()
+#set page(header: none, footer: none)
+
 #fqw-header-abstract()
 <sec:annotation>
 
@@ -48,10 +49,10 @@
 виртуальные испытания,
 мультиагентная система,
 сетевой симулятор,
-потери при распространении,
-SINR.
+Ns3.
 #pagebreak()
 
+#show: fqw-document.with(document-code: codes.explanatory-note)
 #fqw-outline()
 
 #fqw-introduction(label: <sec:introduction>)
@@ -1360,12 +1361,12 @@ HaInterferenceOneBandModel.
 (в соответствии с рисунками #fqw-figure-ref(<fig:sequence_diagram_of_adding_ppdu_to_interference_model>)--#fqw-figure-ref(<fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>)).
 
 #fqw-figure(
-  image("../assets/images/diagrams/08.01. HaInterferenceOneBandModel add ppdu.png"),
+  image("../assets/images/diagrams/08.01. HaInterferenceOneBandModel add ppdu.png", width: 92.5%),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
 )<fig:sequence_diagram_of_adding_ppdu_to_interference_model>
 
 #fqw-figure(
-  image("../assets/images/diagrams/08.02. HaInterferenceOneBandModel add signal.png"),
+  image("../assets/images/diagrams/08.02. HaInterferenceOneBandModel add signal.png", width: 85%),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
 )<fig:sequence_diagram_of_adding_signal_to_interference_model>
 
@@ -1473,7 +1474,7 @@ HaInterferenceOneBandModel.
 (в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>)).
 
 #fqw-figure(
-  image("../assets/images/diagrams/simple/03. Send mpdu via SimpleHaPhyBehavior.png"),
+  image("../assets/images/diagrams/simple/03. Send mpdu via SimpleHaPhyBehavior.png", width: 95%),
   [Диаграмма последовательности отправки нового пакета на физическом уровне],
 )<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>
 

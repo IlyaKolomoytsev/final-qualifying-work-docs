@@ -87,7 +87,7 @@
 
 #let fqw-fontsize-in-em = 1.25em
 #let fqw-leading = 1.06em
-#let fqw-baseline = fqw-fontsize-in-em + fqw-leading
+#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading/2)
 #let fqw-first-line-indent = 1.25cm
 #let fqw-list-body-indent = 1.5em
 #let fqw-default-numbering = state("fqw-default-numbering", 2)

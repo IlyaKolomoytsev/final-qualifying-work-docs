@@ -24,6 +24,9 @@ watch-explanatory-note:
 watch-technical-assignment:
 	$(TYPST) watch --root . docs/technical-assignment.typ "build/$(call output_name,technical-assignment)"
 
+watch-system-programmers-guide:
+	$(TYPST) watch --root . docs/system-programmers-guide.typ "build/$(call output_name,system-programmers-guide)"
+
 watch-common:
 	$(TYPST) watch --root . docs/common.typ build/common.pdf
 

@@ -5,12 +5,10 @@
 
 #let author = person("Коломойцев", "Илья", "Сергеевич", group: [ПрИн-466])
 #let scientific-supervisor = person("Матюшечкин", "Дмитрий", "Сергеевич", degree: [к.т.н.])
-#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой], date: datetime(
-  year: 2026,
-  month: 6,
-  day: 8,
-))
+#let approver = person("Сычёв", "Олег", "Александрович", status: [и. о. зав. кафедрой])
 #let inspector = person("Кузнецова", "Агнесса", "Сергеевна")
+#let university-directive = (date: datetime(year: 2025, month: 9, day: 5), number: [1203-ст])
+#let submission-date = datetime(year: 2026, month: 6, day: 8)
 #let topic-of-work = (
   [Разработка компьютерной модели программно-аппаратного],
   [гидроакустического приёмопередатчика для его виртуальных испытаний],
@@ -21,7 +19,7 @@
   author: author,
   supervisor: scientific-supervisor,
   inspector: inspector,
-  approver: approver,
+  approver: approver + (date: submission-date),
   document-code: codes.fqw,
 )
 
@@ -30,7 +28,7 @@
 #let task-title = fqw-main-task-title-sheet(
   topic: topic-of-work,
   author: author,
-  approver: approver,
+  approver: approver + (date: university-directive.date),
   supervisor: scientific-supervisor,
   task-from-scientific-supervisor: (
     [Задание, выданное научным руководителем кафедры «ПОАС»:],
@@ -41,6 +39,7 @@
     [валидацию модели на данных промышленных гидроакустических],
     [модемов.],
   ),
+  university-directive: university-directive,
 )
 
 #task-title
@@ -52,10 +51,10 @@
 ) = fqw-template-subtitle-sheet(
   topic: topic-of-work,
   sheets-count: sheets-count,
-  author: author,
-  supervisor: scientific-supervisor,
+  author: author + (date: submission-date),
+  supervisor: scientific-supervisor + (date: submission-date),
   approver: approver,
-  inspector: inspector,
+  inspector: inspector + (date: submission-date),
   document-title: document-title,
   document-code: document-code,
 )
@@ -84,7 +83,6 @@
 #let approval-sheet-title = subtitle-template(
   [Лист утверждения],
   document-code: [А.В.00001-01 91 01-1-ЛУ],
-  sheets-count: [1],
 )
 
 #approval-sheet-title

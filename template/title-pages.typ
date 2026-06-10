@@ -9,7 +9,7 @@
 ///
 /// Returns:
 /// - A `text` element with a font size of 7.5pt containing the provided `body`.
-#let caption-text(body) = text(size: 7.5pt)[#body]
+#let caption-text(body) = text(size: 7.5pt)[#if body != [] [(#body)]]
 #caption-text[Пример подписи]
 
 == `#field`
@@ -28,14 +28,14 @@
 ///
 /// Returns:
 /// - A full-width `box` containing the underlined value area and its caption.
-#let field(value: [], caption: [], align-value: center) = box(width: 100%)[
+#let field(value: [], caption: [], align-value: center, horizontal-inset: 1em) = box(width: 100%)[
   #set par(
     spacing: 0pt,
   )
   #box(
     width: 100%,
     height: if value == [] { 10pt } else { auto },
-    inset: (bottom: 2pt, left: 1em, right: 1em),
+    inset: (bottom: 2pt, left: horizontal-inset, right: horizontal-inset),
     stroke: (bottom: 0.5pt),
   )[
     #align(align-value + horizon)[#value]
@@ -84,7 +84,7 @@
     #field(value: [#if d != none { month-names.at(d.month() - 1) }])
   ][
     #if d != none {
-      field(value: [#d.year()~~~г.])
+      field(value: [#d.year()~г.])
     } else {
       [20 #box(width: 1fr)[#field()] г.]
     }
@@ -237,14 +237,19 @@
   title: none,
   ..rows,
 ) = {
+  set par(
+    leading: 0.45em,
+    spacing: 0.543em,
+  )
   title
   for (i, row) in rows.pos().enumerate() {
     if numberic {
-      grid(columns: (1fr, 10fr))[
+      grid(columns: (2.5em, 1fr))[
         #(i + 1))
       ][
         #field(value: row, align-value: field-align)
       ]
+      field(value: [], align-value: field-align)
     } else {
       field(value: row, align-value: field-align)
     }
@@ -328,6 +333,16 @@
   position-caption: [должность],
 )
 
+#let fqw-default-title-settings(body) = {
+  show: fqw-default-page
+  show: fqw-default-text
+  set par(
+    leading: 0.53em,
+    spacing: 0.53em * 1.2,
+  )
+  body
+}
+
 == `#fqw-main-title-sheet`
 /// Creates the title page for a bachelor's explanatory note.
 ///
@@ -378,16 +393,15 @@
   city: default-city,
   year: [#datetime.today().year()],
 ) = [
-  #show: fqw-default-page
-  #show: fqw-default-text
+  #show: fqw-default-title-settings
   // To display all the information on one page, wrap in a grid
   #grid(
     columns: (1fr,),
-    row-gutter: 1fr,
+    row-gutter: (1em, 1.5em, 2em, 1.5em, 1.5em, 3em),
   )[
     // University
     #align(center)[
-      #ministry \
+      #ministry
       #university
     ]
   ][
@@ -428,7 +442,7 @@
     #grid(
       columns: 3,
       column-gutter: 6pt,
-    )[ к ][ #field(value: work-kind, caption: [(наименование вида работы)]) ][ на тему ]
+    )[ к ][ #field(value: work-kind, caption: [наименование вида работы]) ][ на тему ]
 
     // Topic
     #print-field-rows(
@@ -533,12 +547,12 @@
   // Page title parameters
   ministry: default-ministry,
   university: default-university,
-  faculty: default-faculty,
+  department: default-department,
+  university-directive: (date: none, number: []),
   department-code: [10.19],
   work-kind: [выпускную квалификационную работу бакалавра],
 ) = [
-  #show: fqw-default-page
-  #show: fqw-default-text
+  #show: fqw-default-title-settings
   #let delimiter = v(1.5em)
 
   // University
@@ -549,7 +563,7 @@
   #delimiter
 
   // Faculty
-  #labeled-field([Факультет], value: faculty)
+  #labeled-field([Кафедра], value: department)
   #delimiter
 
   // Approver
@@ -587,7 +601,7 @@
     #grid(
       columns: 3,
       column-gutter: 6pt,
-    )[к][#field(value: work-kind, caption: [(наименование вида работы)])][на тему]
+    )[к][#field(value: work-kind, caption: [наименование вида работы])][на тему]
   ][
     // Author
     #labeled-field(
@@ -617,14 +631,21 @@
   ][
     // Work approved
     #grid(
-      columns: (auto, 3fr, 1.5fr),
-      column-gutter: 0.25fr,
-    )[Утверждена приказом по университету][#print-date(none)][#labeled-field([№])]
+      columns: (auto, 3fr, auto, 1.1fr),
+      column-gutter: (1.8em, 0.8em, 0pt),
+    )[
+      Утверждена приказом по университету
+    ][
+      #print-date(university-directive.date)
+    ][
+      №
+    ][
+      #field(value: university-directive.number, horizontal-inset: 0pt)
+    ]
   ][
     // Date of submission of work
-    #labeled-field([Срок представления готовой работы (проекта)], caption: [(дата, подпись студента)])
+    #labeled-field([Срок представления готовой работы (проекта)], caption: [дата, подпись студента])
   ]
-  #delimiter
 
   // Task from the supervisor
   #print-field-rows(
@@ -632,7 +653,6 @@
     title: [Исходные данные для выполнения работы (проекта)],
     ..makeRows(task-from-scientific-supervisor, minRowsCount: 2),
   )
-  #delimiter
 
   // Contents of the explanatory note
   #print-field-rows(
@@ -647,7 +667,7 @@
     gutter: default-spacing,
     numberic: true,
     title: align(center)[Перечень графического материала],
-    ..makeRows(graphical-meterials, minRowsCount: 10),
+    ..makeRows(graphical-meterials, minRowsCount: 12),
   )
   #delimiter
 
@@ -716,7 +736,7 @@
   #let bigGutter = 2em
   #let gutter = 0.8em
 
-  #grid(columns: 1, row-gutter: 1fr)[
+  #grid(columns: 1, row-gutter: (3em, 1.5em, 2.5em, 1.5em, 2.5em, 1.5em, 1.5em, 3em))[
     // University
     #align(center)[
       #ministry \
@@ -725,7 +745,7 @@
   ][
     // Department
     #align(center)[Кафедра «#department»]
-
+  ][
     // Approver
     #align(right)[
       #block(width: 40%)[
@@ -749,13 +769,22 @@
   ][
     // Title
     #align(center)[#upper(document-title)]
-    #v(default-spacing)
+  ][
     // Document code
     #align(center)[#document-code]
-    // Sheets count
-    #align(center)[Листов #sheets-count]
   ][
-    #grid(columns: (1fr, 1fr), column-gutter: 0.2fr, row-gutter: default-spacing * 2.5)[
+    // Sheets count
+    #align(center)[
+      #context {
+        let w = measure([Листов\_]).width + measure(sheets-count).width
+        let minW = measure([Листов XX]).width
+        block(width: calc.max(w, minW))[
+          #labeled-field([Листов], value: sheets-count)
+        ]
+      }
+    ]
+  ][
+    #grid(columns: (1fr, 1fr), column-gutter: 0.3fr, row-gutter: 1.5em)[
     ][
       // Supervisor
       Руководитель работы
@@ -764,7 +793,7 @@
         field()
         field()
       } else {
-        field(value: person-field(supervisor, "short"))
+        field(value: person-field(supervisor, "short"), align-value: left, horizontal-inset: 0pt)
         field()
       }
 
@@ -773,15 +802,15 @@
       // Inspector
       Нормоконтролер
 
-      #grid(columns: 2)[#field()][#person-field(inspector, "short")]
-      #field()
+      #hide[#field()]
+      #field(value: person-field(inspector, "short"), align-value: right, horizontal-inset: 0pt)
       #print-date(person-field(inspector, "date", default: none))
     ][
       // Author
       Исполнитель
 
       #grid(columns: 2)[студент группы][#field(value: person-field(author, "group"))]
-      #field(value: person-field(author, "full"))
+      #field(value: person-field(author, "short"), align-value: left, horizontal-inset: 0pt)
       #print-date(person-field(author, "date", default: none))
     ]
   ][
