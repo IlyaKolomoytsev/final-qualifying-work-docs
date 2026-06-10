@@ -1,5 +1,6 @@
 #import "../template/title-pages.typ": (
-  fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-request-to-post-work, fqw-template-subtitle-sheet,
+  fqw-declaration-of-professional-ethics, fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-request-to-post-work,
+  fqw-template-subtitle-sheet,
 )
 #import "../template/fqw.typ": create-codes, person
 
@@ -136,4 +137,13 @@
 )
 
 #request-to-post-work
+
+#let declaration-of-professional-ethics = fqw-declaration-of-professional-ethics(
+  topic: topic-of-work,
+  author: author,
+  supervisor: scientific-supervisor,
+  department-chair: approver,
+)
+
+#declaration-of-professional-ethics
 

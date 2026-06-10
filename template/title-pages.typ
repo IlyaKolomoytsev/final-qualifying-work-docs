@@ -1,4 +1,6 @@
 #import "fqw.typ": fqw-default-first-line-indent, fqw-default-page, fqw-default-paragraph, fqw-default-text, warning
+#import "default-values.typ": *
+
 = Help components for title pages
 
 == `#caption-text`
@@ -262,18 +264,6 @@
 
 = Explanatory note title pages
 #let default-spacing = 0.8em
-#let default-ministry = [Министерство науки и высшего образования Российской Федерации]
-#let default-university = [
-  Федеральное государственное бюджетное образовательное учреждение \
-  высшего образования \
-  «Волгоградский государственный технический университет»
-]
-#let default-university-president = [Профессору д.х.н. Навроцкому А.В.]
-#let default-faculty = [Электроники и вычислительной техники]
-#let default-department = [Программное обеспечение автоматизированных систем]
-#let default-program = (code: [09.03.04], name: [Программная инженерия])
-#let default-type-of-program = [очное]
-#let default-city = [Волгоград]
 
 #let person-field(person, key, default: []) = {
   if person == none {
@@ -405,7 +395,7 @@
     // University
     #align(center)[
       #ministry
-      #university
+      #university.rows.join("\n")
     ]
   ][
     // Faculty, Department
@@ -413,7 +403,7 @@
       columns: (1fr,),
       row-gutter: default-spacing,
     )[
-      #labeled-field([Факультет], value: faculty)
+      #labeled-field([Факультет], value: faculty.full)
     ][
       #labeled-field([Кафедра], value: department)
     ]
@@ -561,11 +551,11 @@
   // University
   #align(center)[
     #ministry \
-    #university
+    #university.rows.join("\n")
   ]
   #delimiter
 
-  // Faculty
+  // Department
   #labeled-field([Кафедра], value: department)
   #delimiter
 
@@ -743,7 +733,7 @@
     // University
     #align(center)[
       #ministry \
-      #university
+      #university.rows.join("\n")
     ]
   ][
     // Department
@@ -828,6 +818,7 @@
   supervisor: none,
   restrictions: none,
   reson: [которые имеют действительную или потенциальную коммерческую ценность в силу неизвестности их третьим лицам.],
+  university: default-university,
   university-president: default-university-president,
   faculty: default-faculty,
   program: default-program,
@@ -848,8 +839,10 @@
   )
   grid(columns: 1, row-gutter: (4em, 1em, 2em))[
     #pad(left: 35%)[
-      Ректору ВолгГТУ #parbreak()
+      Ректору #university.short
+
       #university-president
+
       #labeled-field(
         [от студента],
         value: person-field(author, "full-gen"),
@@ -857,7 +850,7 @@
         align-value: left,
         horizontal-inset: 0pt,
       )
-      #labeled-field([Факультет], value: lower(faculty), align-value: left, horizontal-inset: 0pt)
+      #labeled-field([Факультет], value: lower(faculty.full), align-value: left, horizontal-inset: 0pt)
       #labeled-field([Направление], value: [#program.code #program.name], align-value: left, horizontal-inset: 0pt)
       #labeled-field([группа], value: person-field(author, "group"), align-value: left, horizontal-inset: 0pt)
       #labeled-field(
@@ -908,7 +901,7 @@
           результаты интеллектуальной деятельности в научно-технической сфере;
           сведения о способах осуществления профессиональной деятельности
         ],
-        align-value: left
+        align-value: left,
       )
       #for (i, row) in rows-of-content-info.enumerate() { if i != 0 { field(value: row, align-value: left) } }
     ]
@@ -924,5 +917,92 @@
         Виза руководителя ВКР
       ][#field()]
     ]
+  ]
+}
+
+#let fqw-declaration-of-professional-ethics(
+  topic: [],
+  author: none,
+  supervisor: none,
+  department-chair: none,
+  date: [],
+  university-president: default-university-president,
+  university: default-university,
+  faculty: default-faculty,
+  program: default-program,
+  type-of-program: default-type-of-program,
+  plagiarism-detection-system: default-plagiarism-detection-system,
+) = {
+  show: fqw-default-title-settings
+  set page(
+    paper: "a4",
+    margin: (
+      top: 20mm,
+      bottom: 20mm,
+      left: 17.5mm,
+      right: 15mm,
+    ),
+    header: none,
+    footer: none,
+    numbering: none,
+  )
+  grid(columns: 1, row-gutter: (4em, 1em, 2em))[
+    #pad(left: 50%)[
+      #person-field(department-chair, "status", default: [Зав. кафедрой]) ПОАС
+
+      #person-field(department-chair, "short-dat", default: warning([Фамилия инициалы]))
+
+      #labeled-field(
+        [от студента группы],
+        value: person-field(author, "group"),
+        align-value: left,
+        horizontal-inset: 0pt,
+      )
+      #field(value: person-field(author, "full-gen"))
+      #field()
+      #field()
+    ]
+  ][
+    #align(center)[#upper([заявление])]
+  ][
+    #align(center)[#upper([
+      о соблюдении профессиональной этики \
+      при написании выпускной \
+      квалификационной работы
+    ])]
+  ][
+    #labeled-field([Я], value: person-field(author, "full"))
+    #labeled-field([студент группы], value: person-field(author, "group"), value-width: 10em)
+    обучающийся по направлению #program.code «#program.name», #faculty.short
+    в #university.short, заявляю, что в моей ВКР на тему:
+
+    // Topic
+    #align(center)[
+      #for row in makeRows(topic) {
+        field(value: row)
+      }
+    ]
+    #set par(justify: true)
+    представленной в Государственную экзаменационную комиссию для публичной защиты,
+    соблюдены правила профессиональной этики, не допускающие наличия плагиата,
+    фальсификации данных и ложного цитирования при написании выпускных квалификационных работ.
+
+    #show: fqw-default-first-line-indent
+    Все прямые заимствования из печатных и электронных источников,
+    а также ранее защищенных письменных работ, кандидатских и докторских диссертаций
+    имеют соответствующие ссылки.
+
+    Я ознакомлен с действующим в ВолгГТУ порядком проведения государственной итоговой аттестации,
+    положением о порядке проверки ВКР на объем заимствования.
+  ][
+    #labeled-field([_подпись студента_], value: [(#person-field(author, "short"))], align-value: right)
+
+    #pad(left: 25em)[#labeled-field([_дата_], value: date, value-width: 6em)]
+    Работа представлена для проверки уникальности текста в системе «#plagiarism-detection-system».
+  ][
+    #labeled-field([_дата предоставления ВКР_], value: date, value-width: 6em)
+
+    #labeled-field([_подпись руководителя ВКР_], value: [(#person-field(supervisor, "short"))], align-value: right)
+
   ]
 }
