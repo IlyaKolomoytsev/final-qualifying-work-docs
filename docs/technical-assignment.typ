@@ -1,11 +1,12 @@
 #import "../template/fqw.typ": *
-#import "title-pages.typ": codes, technical-assignment-title, approval-sheet-title
+#import "title-pages.typ": approval-sheet-title, codes, technical-assignment-title
 #import "formulas.typ": *
 
 #technical-assignment-title
 #approval-sheet-title
 
-#show: fqw-document.with(document-code: codes.technical-assignment)
+#show: fqw-document
+#set page(header: none, footer: none)
 
 #fqw-header-abstract()
 
@@ -32,20 +33,26 @@ Ns-3,
 
 #pagebreak()
 
+#show: fqw-document.with(document-code: codes.technical-assignment)
 #fqw-outline()
 
-#fqw-introduction(label: <sec:introduction>, heading-counter: 1)
+#fqw-title()[
+  #counter(heading).update(1)
 
-== Наименование программы
-#fqw-indent-before-text
-<sec:program_name>
+  #heading(numbering: none)[Введение]
+  <sec:introduction>
+
+  == Наименование программы
+  <sec:program_name>
+]
 
 Наименование программы: «Программный модуль модели гидроакустического
 приёмопередатчика для Ns-3».
 
-== Область применения
-#fqw-indent-before-text
-<sec:application_area>
+#fqw-title()[
+  == Область применения
+  <sec:application_area>
+]
 
 Модель применяется для:
 
@@ -69,9 +76,10 @@ Ns-3,
 Модуль ориентирован на применение инженерами и исследователями организации,
 занимающейся гидроакустикой, на рабочих станциях специалистов.
 
-= Основание для разработки
-#fqw-indent-before-text
-<sec:development_basis>
+#fqw-title()[
+  = Основание для разработки
+  <sec:development_basis>
+]
 
 Разработка программы ведётся на основании задания на выпускную работу
 бакалавра, полученного в соответствии с приказом №1203-ст от 05 сентября
@@ -81,9 +89,10 @@ Ns-3,
 виртуальных испытаний» и согласовано с ФГУП ВНИИА им. Духова НПЦ
 «Гидросвязь».
 
-= Назначение разработки
-#fqw-indent-before-text
-<sec:development_purpose>
+#fqw-title()[
+  = Назначение разработки
+  <sec:development_purpose>
+]
 
 Цель разработки:
 разработка компьютерной модели гидроакустического приёмопередатчика,
@@ -94,15 +103,16 @@ Ns-3,
 Программный модуль предназначен для эксплуатации инженерами и
 программистами в ФГУП ВНИИА им. Духова НПЦ «Гидросвязь».
 
-= Требования к программе
-<sec:program_requirements>
+#fqw-title()[
+  = Требования к программе
+  <sec:program_requirements>
 
-== Требования к функциональным характеристикам
-<sec:functional_requirements>
+  == Требования к функциональным характеристикам
+  <sec:functional_requirements>
 
-=== Состав программного модуля
-#fqw-indent-before-text
-<sec:module_composition>
+  === Состав программного модуля
+  <sec:module_composition>
+]
 
 Программный модуль должен включать:
 
@@ -121,12 +131,13 @@ Ns-3,
 но и предлагать компоненты и архитектурные подходы,
 необходимыедля реализации других моделей.
 
-=== Требования к архитектуре модели программно-аппаратного приёмопередатчика
-<sec:transceiver_architecture_requirements>
+#fqw-title()[
+  === Требования к архитектуре модели программно-аппаратного приёмопередатчика
+  <sec:transceiver_architecture_requirements>
 
-==== Общие требования
-#fqw-indent-before-text
-<sec:general_requirements>
+  ==== Общие требования
+  <sec:general_requirements>
+]
 
 Архитектура модели приёмопередатчика должна обеспечивать реализацию
 физического и канального уровней устройства связи по модели OSI.
@@ -142,9 +153,10 @@ Ns-3,
 реализации конкретных моделей приёмопередатчиков без необходимости
 изменения интерфейсов базовых классов.
 
-==== Требования к реализации физического уровня
-#fqw-indent-before-text
-<sec:physical_layer_functions>
+#fqw-title()[
+  ==== Требования к реализации физического уровня
+  <sec:physical_layer_functions>
+]
 
 Архитектура приёмопередатчика должна поддерживать работу с
 различными моделями интерференции.
@@ -173,9 +185,10 @@ Ns-3,
 - обработку принятого сигнала и извлечение полезной информации
   из принятого сигнала.
 
-=== Требования к архитектуре модели гидроакустического канала связи
-#fqw-indent-before-text
-<sec:channel_architecture_requirements>
+#fqw-title()[
+  === Требования к архитектуре модели гидроакустического канала связи
+  <sec:channel_architecture_requirements>
+]
 
 Архитектура модели гидроакустического канала связи должна обеспечивать
 взаимодействие с физическим уровнем модели приёмопередатчика, включая
@@ -190,12 +203,13 @@ Ns-3,
 Модели каналов связи для расчёта свойств распространения сигналов должны
 использовать эти интерфейсы.
 
-=== Требования к реализации модели приёмопередатчика
-<sec:transceiver_implementation_requirements>
+#fqw-title()[
+  === Требования к реализации модели приёмопередатчика
+  <sec:transceiver_implementation_requirements>
 
-==== Общие положения
-#fqw-indent-before-text
-<sec:general_provisions>
+  ==== Общие положения
+  <sec:general_provisions>
+]
 
 Модель приёмопередатчика должна быть основана на архитектуре
 программно-аппаратного гидроакустического приёмопередатчика,
@@ -208,9 +222,10 @@ Ns-3,
 передаваемого и принимаемого сигнала.
 Сигналы другого типа приёмопередатчик принимать не должен.
 
-==== Состояния физического уровня
-#fqw-indent-before-text
-<sec:physical_layer_states>
+#fqw-title()[
+  ==== Состояния физического уровня
+  <sec:physical_layer_states>
+]
 
 Физический уровень модели приёмопередатчика должен реализовывать
 конечный автомат со следующими состояниями:
@@ -234,9 +249,10 @@ half-duplex: одновременные передача и приём не до
 Подробное описание поведения конечного автомата физического уровня
 приведено на диаграмме состояний, представленной на рисунке~#fqw-figure-ref(<fig:phy-state-machine>).
 
-==== Функции канального уровня
-#fqw-indent-before-text
-<sec:data_link_layer_functions>
+#fqw-title()[
+  ==== Функции канального уровня
+  <sec:data_link_layer_functions>
+]
 
 Канальный уровень модели приёмопередатчика должен
 обеспечивать буферизацию данных на передачу в виде очереди пакетов.
@@ -257,9 +273,10 @@ MAC-адрес состоит из 8 бит.
 
 - MAC-адрес получателя.
 
-==== Используемая модель интерференции
-#fqw-indent-before-text
-<sec:interference_model_implementation>
+#fqw-title()[
+  ==== Используемая модель интерференции
+  <sec:interference_model_implementation>
+]
 
 Модель интерференции должна вычислять отношение сигнал к шуму по
 следующим формулам
@@ -271,9 +288,10 @@ MAC-адрес состоит из 8 бит.
 
 #eq-sinr()
 
-==== Решение об успешном приёме и декодировании сигнала
-#fqw-indent-before-text
-<sec:successful_reception_decision>
+#fqw-title()[
+  ==== Решение об успешном приёме и декодировании сигнала
+  <sec:successful_reception_decision>
+]
 
 Модель приёмопередатчика считает сигнал успешно принятым и декодированным,
 если тип сигнала соответствует типу,
@@ -284,20 +302,22 @@ MAC-адрес состоит из 8 бит.
 
 #eq-successful-reception-threshold()
 
-==== Трассировка
-#fqw-indent-before-text
-<sec:tracing>
+#fqw-title()[
+  ==== Трассировка
+  <sec:tracing>
+]
 
 Модель приёмопередатчика должна поддерживать вывод результатов
 трассировки в формате pcap.
 Файл должен содержать информацию о принятых и отправленных пакетах.
 
-=== Требования к модели гидроакустического канала связи
-<sec:channel_model_requirements>
+#fqw-title()[
+  === Требования к модели гидроакустического канала связи
+  <sec:channel_model_requirements>
 
-==== Расчёт характеристик распространения
-#fqw-indent-before-text
-<sec:propagation_characteristics_calculation>
+  ==== Расчёт характеристик распространения
+  <sec:propagation_characteristics_calculation>
+]
 
 Базовая модель канала связи должна обеспечивать:
 
@@ -307,9 +327,10 @@ MAC-адрес состоит из 8 бит.
 - расчёт затухания (потерь) сигнала при прохождении
   из точки излучения в точку приёма.
 
-==== Расчёт времени распространения
-#fqw-indent-before-text
-<sec:propagation_delay_calculation>
+#fqw-title()[
+  ==== Расчёт времени распространения
+  <sec:propagation_delay_calculation>
+]
 
 Базовая модель канала должна осуществлять расчёт
 времени распространения сигнала на основании 2 заданных параметров:
@@ -334,9 +355,10 @@ MAC-адрес состоит из 8 бит.
 
 #eq-propagation-delay()
 
-==== Расчёт затухания \(потерь) сигнала
-#fqw-indent-before-text
-<sec:signal_attenuation_calculation>
+#fqw-title()[
+  ==== Расчёт затухания \(потерь) сигнала
+  <sec:signal_attenuation_calculation>
+]
 
 Базовая модель канала должна осуществлять расчёт затухания сигнала
 на основании 3 заданных параметров:
@@ -375,29 +397,32 @@ n~∈~\[1;2\].
 
 Выбор формулы осуществляется пользователем.
 
-== Требования к надёжности
-<sec:reliability_requirements>
+#fqw-title()[
+  == Требования к надёжности
+  <sec:reliability_requirements>
 
-=== Требования к обеспечению надёжного функционирования программы
-#fqw-indent-before-text
-<sec:reliable_operation_requirements>
+  === Требования к обеспечению надёжного функционирования программы
+  <sec:reliable_operation_requirements>
+]
 
 Некорректные критические параметры конфигурации модуля должны
 выявляться с выдачей диагностических сообщений
 такими средствами ns-3 как механизмы assert, abort и fatal diagnostics.
 
-=== Время восстановления после отказа
-#fqw-indent-before-text
-<sec:recovery_time>
+#fqw-title()[
+  === Время восстановления после отказа
+  <sec:recovery_time>
+]
 
 Требования к времени восстановления после отказа не предъявляются,
 так как модуль является симуляционной библиотекой и
 не выполняет автоматическое восстановление состояния
 после критических ошибок конфигурации.
 
-=== Отказы из-за некорректных действий пользователя
-#fqw-indent-before-text
-<sec:user_error_failures>
+#fqw-title()[
+  === Отказы из-за некорректных действий пользователя
+  <sec:user_error_failures>
+]
 
 Для предотвращения отказов из-за некорректных действий пользователя в
 документации должны быть описаны допустимые значения ключевых параметров.
@@ -407,18 +432,20 @@ n~∈~\[1;2\].
 выдать диагностическое сообщение и
 корректно завершить работу.
 
-== Требования к условиям эксплуатации
-<sec:operation_conditions_requirements>
+#fqw-title()[
+  == Требования к условиям эксплуатации
+  <sec:operation_conditions_requirements>
 
-=== Климатические условия эксплуатации
-#fqw-indent-before-text
-<sec:climate_conditions>
+  === Климатические условия эксплуатации
+  <sec:climate_conditions>
+]
 
 Требования к климатическим условиям эксплуатации не предъявляются.
 
-=== Требования к квалификации и численности персонала
-#fqw-indent-before-text
-<sec:personnel_requirements>
+#fqw-title()[
+  === Требования к квалификации и численности персонала
+  <sec:personnel_requirements>
+]
 
 Для эксплуатации программного модуля достаточно 1 пользователя,
 обладающего квалификацией инженера-программиста и владеющего следующими
@@ -428,9 +455,10 @@ n~∈~\[1;2\].
 
 - Базовые навыки работы с библиотекой Ns-3.
 
-== Требования к составу и параметрам технических средств
-#fqw-indent-before-text
-<sec:technical_means_requirements>
+#fqw-title()[
+  == Требования к составу и параметрам технических средств
+  <sec:technical_means_requirements>
+]
 
 Для работы с программным модулем и библиотекой Ns-3 требуется
 ПК со следующими характеристиками:
@@ -444,12 +472,13 @@ n~∈~\[1;2\].
 - Свободное место на диске - не менее 5 ГБ \(исходный код программы,
   сборка, результаты).
 
-== Требования к информационной и программной совместимости
-<sec:compatibility_requirements>
+#fqw-title()[
+  == Требования к информационной и программной совместимости
+  <sec:compatibility_requirements>
 
-=== Требования к информационным структурам и методам решения
-#fqw-indent-before-text
-<sec:information_structure_requirements>
+  === Требования к информационным структурам и методам решения
+  <sec:information_structure_requirements>
+]
 
 Модуль должен поддерживать:
 
@@ -458,18 +487,20 @@ n~∈~\[1;2\].
 - Исходный код модуля должен быть оформлен в стиле, принятом в
   Ns-3-модулях \(структура каталогов, нейминг, документирование).
 
-=== Требования к исходным кодам и языкам программирования
-#fqw-indent-before-text
-<sec:source_code_requirements>
+#fqw-title()[
+  === Требования к исходным кодам и языкам программирования
+  <sec:source_code_requirements>
+]
 
 Исходный код должен представлять собой форк репозитория Ns-3 с
 разработанным программным модулем.
 
 Компилятор C++ \(gcc/clang) с поддержкой стандарта C++20.
 
-=== Требования к программным средствам, используемым программой
-#fqw-indent-before-text
-<sec:software_tools_requirements>
+#fqw-title()[
+  === Требования к программным средствам, используемым программой
+  <sec:software_tools_requirements>
+]
 
 Для работы модуля используется ns-3 с модулями
 core, network, mobility, spectrum, propagation.
@@ -477,40 +508,46 @@ core, network, mobility, spectrum, propagation.
 Для сборки используется CMake/ns3 build system,
 компилятор gcc или clang с поддержкой C++20.
 
-=== Требования к защите информации
-#fqw-indent-before-text
-<sec:information_security_requirements>
+#fqw-title()[
+  === Требования к защите информации
+  <sec:information_security_requirements>
+]
 
 Требования к защите информации не предъявляются
 (модуль не реализует механизмы аутентификации/авторизации и
 не обрабатывает персональные данные).
 
-== Требования к маркировке и упаковке
-#fqw-indent-before-text
-<sec:labeling_packaging_requirements>
+#fqw-title()[
+  == Требования к маркировке и упаковке
+  <sec:labeling_packaging_requirements>
+]
 
 Требования к маркировке и упаковке не предъявляются.
 Поставка программного модуля осуществляется в виде форка библиотеки Ns-3
 с разработанным программным модулем.
 
-== Требования к транспортированию и хранению
-#fqw-indent-before-text
-<sec:transportation_storage_requirements>
+#fqw-title()[
+  == Требования к транспортированию и хранению
+  <sec:transportation_storage_requirements>
+]
 
 Хранение исходного кода программы должно быть выполнено с помощью
 системы контроля версий Git.
 
-== Специальные требования
-#fqw-indent-before-text
-<sec:special_requirements>
+#fqw-title()[
+  == Специальные требования
+  <sec:special_requirements>
+]
+
 При разработке программного модуля необходимо
 использовать стандартные интерфейсы, используемые в Ns-3
 для повышения совместимости с такими модулями, как
 network, propagation, mobility, spectrum.
 
-= Требования к программной документации
-#fqw-indent-before-text
-<sec:documentation_requirements>
+#fqw-title()[
+  = Требования к программной документации
+  <sec:documentation_requirements>
+]
 
 Состав разрабатываемой программной документации должен включать в себя:
 
@@ -526,12 +563,13 @@ network, propagation, mobility, spectrum.
   учебно-методическим пособием «Подготовка, оформление выпускной
   квалификационной работы и преддипломной практики».
 
-= Технико-экономические показатели
-<sec:technical_economic_indicators>
+#fqw-title()[
+  = Технико-экономические показатели
+  <sec:technical_economic_indicators>
 
-== Экономические преимущества разработки
-#fqw-indent-before-text
-<sec:economic_advantages>
+  == Экономические преимущества разработки
+  <sec:economic_advantages>
+]
 
 Разработка программного модуля модели
 программно-аппаратного гидроакустического приёмопередатчика для
@@ -570,12 +608,13 @@ network, propagation, mobility, spectrum.
 уменьшение сроков создания опытных образцов и
 повышение эффективности проведения испытаний.
 
-= Стадии и этапы разработки
-<sec:development_stages>
+#fqw-title()[
+  = Стадии и этапы разработки
+  <sec:development_stages>
 
-== Стадии разработки
-#fqw-indent-before-text
-<sec:development_stages_list>
+  == Стадии разработки
+  <sec:development_stages_list>
+]
 
 Разработка проходит в шесть этапов в соответствии с таблицей
 #fqw-table-ref(<tab:development_stages>).
@@ -612,9 +651,10 @@ network, propagation, mobility, spectrum.
   ),
 )
 
-== Содержание работ по этапам
-#fqw-indent-before-text
-<sec:stage_content>
+#fqw-title()[
+  == Содержание работ по этапам
+  <sec:stage_content>
+]
 
 На стадии анализа требований и предметной области должны быть выполнены
 следующие виды работ:
@@ -638,12 +678,13 @@ network, propagation, mobility, spectrum.
 На стадии документирования должна быть выполнена
 разработка пояснительной записки.
 
-= Порядок контроля и приёмки
-<sec:control_acceptance>
+#fqw-title()[
+  = Порядок контроля и приёмки
+  <sec:control_acceptance>
 
-== Виды испытаний
-#fqw-indent-before-text
-<sec:testing_types>
+  == Виды испытаний
+  <sec:testing_types>
+]
 
 Программа сдаётся на проверку заказчику 05.06.2026.
 При обнаружении в программе ошибок или недостатков
@@ -667,7 +708,8 @@ network, propagation, mobility, spectrum.
 #fqw-figure(
   image("../assets/images/technical-assignment/use-case-diagram.png"),
   [Диаграмма вариантов использования «Use Case».],
-) <fig:use-case-diagram>
+  label: <fig:use-case-diagram>,
+)
 
 #fqw-subappendix([Сценарии вариантов использования], label: <sec:appendix_b_2_use_case_scenarios>)
 
@@ -713,24 +755,29 @@ network, propagation, mobility, spectrum.
 #fqw-figure(
   image("../assets/images/technical-assignment/wireshark-trace.png", width: 140mm),
   [Отображение результатов трассировки в программе Wireshark],
-) <fig:wireshark-trace>
+  label: <fig:wireshark-trace>,
+)
 
 #fqw-figure(
   image("../assets/images/technical-assignment/two-nodes-output.png", width: 140mm),
   [Отображение результатов работы сценария с двумя узлами],
-) <fig:two-nodes-output>
+  label: <fig:two-nodes-output>,
+)
 
 #fqw-figure(
   image("../assets/images/technical-assignment/three-nodes-output.png", width: 140mm),
   [Отображение результатов работы сценария с тремя узлами],
-) <fig:three-nodes-output>
+  label: <fig:three-nodes-output>,
+)
 
 #fqw-subappendix([Структура и формат данных], label: <sec:appendix_b_4_data_structure>)
 
-=== Взаимодействие двух узлов
-<sec:appendix_b_4_1>
+#fqw-title()[
+  === Взаимодействие двух узлов
+  <sec:appendix_b_4_1>
 
-==== Входные данные
+  ==== Входные данные
+]
 
 Входные данные представляют собой параметры командной строки и
 представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_1>):
@@ -777,46 +824,49 @@ network, propagation, mobility, spectrum.
   ),
 )
 
-==== Выходные данные
+#fqw-title()[
+  ==== Выходные данные
+]
 
 Выходные данные формируются в текстовом виде и выводятся в стандартный
 поток вывода \(stdout) и имеют следующий вид:
-
-_
-Simulation with 2 nodes.                            #parbreak()
-Parameters:                                         #parbreak()
-Inter-node distance: \<значение\> m                 #parbreak()
-Sound speed: \<значение\> m/s                       #parbreak()
-Geometric spreading loss coefficient: \<значение\>  #parbreak()
-Absorption loss model: \<значение\>                 #parbreak()
-SNR threshold: \<значение\>                         #parbreak()
-Carrier frequency: \<значение\> Hz                  #parbreak()
-Bandwidth: \<значение\> Hz                          #parbreak()
-Power: \<значение\> uPa^2                           #parbreak()
-PSD: \<значение\> uPa^2/Hz                          #parbreak()
-Send time: \<значение\> ms                          #parbreak()
+`
+Simulation with 2 nodes.
+Parameters:
+Inter-node distance: <значение> m
+Sound speed: <значение> m/s
+Geometric spreading loss coefficient: <значение>
+Absorption loss model: <значение>
+SNR threshold: <значение>
+Carrier frequency: <значение> Hz
+Bandwidth: <значение> Hz
+Power: <значение> uPa^2
+PSD: <значение> uPa^2/Hz
+Send time: <значение> ms
 Receive result: success|failure
-_
+`
 
 При успешном приёме дополнительно выводятся:
-
-_
-Receive time: \<значение\> ms   #parbreak()
-Sender address: \<значение\>    #parbreak()
-Receiver address: \<значение\>  #parbreak()
-Payload: \<значение\>           #parbreak()
-Mean SNR: \<значение\>
-_
+`
+Receive time: <значение> ms
+Sender address: <значение>
+Receiver address: <значение>
+Payload: <значение>
+Mean SNR: <значение>
+`
 #fqw-indent-before-text
 
 При неуспешном приёме дополнительно выводится:
+`
+Message was not received successfully.
+`
 
-_Message was not received successfully._
+#fqw-title()[
+  === Взаимодействие трёх узлов
+  <sec:appendix_b_4_2>
 
-=== Взаимодействие трёх узлов
-<sec:appendix_b_4_2>
-
-==== Входные данные
+  ==== Входные данные
+]
 
 Входные данные представляют собой параметры командной строки и
 представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_2>)
@@ -868,48 +918,49 @@ _Message was not received successfully._
   ),
 )
 
-==== Выходные данные
+#fqw-title()[
+  ==== Выходные данные
+]
 
 Выходные данные формируются в текстовом виде и выводятся в стандартный
 поток вывода \(stdout) и имеют следующий вид:
-
-_
-Simulation with 3 nodes.                            #parbreak()
-Parameters:                                         #parbreak()
-Sender 1 distance: \<значение\> m                   #parbreak()
-Sender 2 distance: \<значение\> m                   #parbreak()
-Sound speed: \<значение\> m/s                       #parbreak()
-Geometric spreading loss coefficient: \<значение\>  #parbreak()
-Absorption loss model: \<значение\>                 #parbreak()
-SNR threshold: \<значение\>                         #parbreak()
-Carrier frequency: \<значение\> Hz                  #parbreak()
-Bandwidth: \<значение\> Hz                          #parbreak()
-Power: \<значение\> uPa^2                           #parbreak()
-PSD: \<значение\> uPa^2/Hz                          #parbreak()
-Message 1:                                          #parbreak()
-Send time: \<значение\> ms                          #parbreak()
-Receive result: success|failure                     #parbreak()
-Mean SNR: \<значение\>|not available                #parbreak()
-Message 2:                                          #parbreak()
-Send time: \<значение\> ms                          #parbreak()
-Receive result: success|failure                     #parbreak()
-Mean SNR: \<значение\>|not available                #parbreak()
-_
+`
+Simulation with 3 nodes.
+Parameters:
+Sender 1 distance: <значение> m
+Sender 2 distance: <значение> m
+Sound speed: <значение> m/s
+Geometric spreading loss coefficient: <значение>
+Absorption loss model: <значение>
+SNR threshold: <значение>
+Carrier frequency: <значение> Hz
+Bandwidth: <значение> Hz
+Power: <значение> uPa^2
+PSD: <значение> uPa^2/Hz
+Message 1:
+Send time: <значение> ms
+Receive result: success|failure
+Mean SNR: <значение>|not available
+Message 2:
+Send time: <значение> ms
+Receive result: success|failure
+Mean SNR: <значение>|not available
+`
 #fqw-indent-before-text
 
 При успешном приёме для каждого сообщения дополнительно выводятся:
-
-_
-Receive time: \<значение\> ms   #parbreak()
-Sender address: \<значение\>    #parbreak()
-Receiver address: \<значение\>  #parbreak()
-Payload: \<значение\>           #parbreak()
-_
+`
+Receive time: <значение> ms
+Sender address: <значение>
+Receiver address: <значение>
+Payload: <значение>
+`
 #fqw-indent-before-text
 
 При неуспешном приёме дополнительно выводится:
-
-_Message was not received successfully.#parbreak()_
+`
+Message was not received successfully.
+`
 #fqw-indent-before-text
 
 #fqw-subappendix([Состояния физического уровня модели приёмопередатчика], label: <sec:appendix_b_5_phy_state_machine>)
@@ -919,4 +970,5 @@ _Message was not received successfully.#parbreak()_
 #fqw-figure(
   image("../assets/images/technical-assignment/phy-state-machine.png", width: 140mm),
   [Диаграмма состояний физического уровня модели приёмопередатчика],
-) <fig:phy-state-machine>
+  label: <fig:phy-state-machine>,
+)

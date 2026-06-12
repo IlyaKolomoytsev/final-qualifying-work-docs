@@ -440,6 +440,7 @@
     // Topic
     #print-field-rows(
       ..makeRows(topic),
+      field-align: center,
     )
   ][
     // Author

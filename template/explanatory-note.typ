@@ -1,13 +1,10 @@
-#import "fqw.typ": fqw-first-line-indent, fqw-indent-before-text
-
-#let en-introduction() = [
-  #heading(numbering: none)[Введение]
-]
+#import "fqw.typ": fqw-first-line-indent, fqw-indent-before-text, fqw-title
 
 #let en-header-conclusions(label: none) = [
-  #heading(level: 2, numbering: none)[Выводы]
-  #label
-  #fqw-indent-before-text
+  #fqw-title()[
+    #heading(level: 2, numbering: none)[Выводы]
+    #label
+  ]
 ]
 
 #let en-bibliography(source) = [

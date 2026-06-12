@@ -176,12 +176,13 @@ Ns3.
 В результате снижается
 общая стоимость и время разработки и внедрения гидроакустических систем.
 
-= Анализ современного состояния вопроса
-<sec:analysis_of_current_state_of_issue>
+#fqw-title(new-chapter: true)[
+  = Анализ современного состояния вопроса
+  <sec:analysis_of_current_state_of_issue>
 
-== Анализ текущих бизнес-процессов
-#fqw-indent-before-text
-<subsec:business_process_analysis>
+  == Анализ текущих бизнес-процессов
+  <subsec:business_process_analysis>
+]
 
 Разработка систем гидроакустической связи, в частности приёмопередатчиков,
 представляет собой сложный, многоплановый и ресурсоёмкий процесс,
@@ -222,9 +223,10 @@ V-образной модели.
 что в конечном итоге приводит к значительному сокращению сроков и затрат
 на создание систем гидроакустической связи~@clineBenefitsSimulationDrivenDesign2017.
 
-== Теоретические основы гидроакустических приёмопередатчиков
-<subsec:theoretical_foundations_of_hydroacoustic_transceivers>
-#fqw-indent-before-text
+#fqw-title()[
+  == Теоретические основы гидроакустических приёмопередатчиков
+  <subsec:theoretical_foundations_of_hydroacoustic_transceivers>
+]
 
 Для описания структуры основных компонентов
 программно-аппаратного гидроакустического приёмопередатчика
@@ -252,7 +254,8 @@ V-образной модели.
     [1.], [Физический уровень],
   ),
   [Сетевая модель OSI],
-) <fig:osi_model>
+  label: <fig:osi_model>,
+)
 
 Программно-аппаратный гидроакустический приёмопередатчик работает на
 физическом (уровень 1) и канальном (уровень 2) уровнях модели OSI.
@@ -328,9 +331,10 @@ V-образной модели.
 требуя комплексного подхода, объединяющего знания в области
 гидроакустики, телекоммуникаций и обработки сигналов.
 
-== Обзор текущих решений для моделирования гидроакустических приёмопередатчиков
-<subsec:review_of_current_solutions_for_modeling_hydroacoustic_transceivers>
-#fqw-indent-before-text
+#fqw-title()[
+  == Обзор текущих решений для моделирования гидроакустических приёмопередатчиков
+  <subsec:review_of_current_solutions_for_modeling_hydroacoustic_transceivers>
+]
 
 Для решения задач моделирования программно-аппаратных приёмопередатчиков,
 в том числе и гидроакустических, используются различные инструменты и подходы.
@@ -381,9 +385,10 @@ OrCAD позволяет на этапе проектирования выяви
 требуются модели гидроакустического канала и сетевые симуляторы,
 рассматриваемые в следующих пунктах.
 
-== Обзор текущих решений для моделирования гидроакустических каналов связи
-<subsec:review_of_current_solutions_for_modeling_hydroacoustic_communication_channels>
-#fqw-indent-before-text
+#fqw-title()[
+  == Обзор текущих решений для моделирования гидроакустических каналов связи
+  <subsec:review_of_current_solutions_for_modeling_hydroacoustic_communication_channels>
+]
 
 Современные подходы к моделированию распространения акустических волн в водной среде
 охватывают широкий спектр математических моделей и программных инструментов,
@@ -499,9 +504,10 @@ OrCAD позволяет на этапе проектирования выяви
 диапазоном частот, протяжённостью трассы и сложностью среды,
 необходимой точностью и доступными вычислительными ресурсами.
 
-== Обзор текущих решений для моделирования мультиагентных систем
-<subsec:review_of_current_solutions_for_modeling_multi-agent_systems>
-#fqw-indent-before-text
+#fqw-title()[
+  == Обзор текущих решений для моделирования мультиагентных систем
+  <subsec:review_of_current_solutions_for_modeling_multi-agent_systems>
+]
 
 Системы, состоящие из агентов разных типов --
 от надводных буёв и подводных аппаратов
@@ -610,12 +616,13 @@ Ns-3 распространяется под свободной лицензие
 Поэтому для реализации компьютерной модели программно-аппаратного
 приёмопередатчика следует использовать именно Ns-3.
 
-= Предлагаемое решение
-<sec:suggested_solution>
+#fqw-title(new-chapter: true)[
+  = Предлагаемое решение
+  <sec:suggested_solution>
 
-== Интеграция компьютерного моделирования в V-образную модель разработки
-<subsec:integrating_computer_simulation_into_v_shaped_development_model>
-#fqw-indent-before-text
+  == Интеграция компьютерного моделирования в V-образную модель разработки
+  <subsec:integrating_computer_simulation_into_v_shaped_development_model>
+]
 
 Традиционная V-образная модель разработки,
 несмотря на свою системность и широкое применение в инженерных проектах,
@@ -633,7 +640,8 @@ Ns-3 распространяется под свободной лицензие
 #fqw-figure(
   image("../assets/images/modified_V-shaped_development_model-gray.png", width: 100%),
   [Модифицированная V-образная модель разработки],
-) <fig:modified_V-shaped_development_model>
+  label: <fig:modified_V-shaped_development_model>,
+)
 
 Предложенная модель соответствует принципам верификации и валидации (V&V),
 где верификация отвечает на вопрос «система построена правильно?» и
@@ -751,9 +759,10 @@ Ns-3 распространяется под свободной лицензие
 Моделирование становится ключевым элементом устойчивой и эффективной разработки
 сложных программно-аппаратных систем.
 
-== Постановка задачи моделирования на физическом уровне
-<subsec:statement_of_modeling_problem_at_physical_level>
-#fqw-indent-before-text
+#fqw-title()[
+  == Постановка задачи моделирования на физическом уровне
+  <subsec:statement_of_modeling_problem_at_physical_level>
+]
 
 В рамках настоящей работы моделирование на физическом уровне понимается как
 построение вычислительно эффективной модели,
@@ -832,9 +841,10 @@ Ns-3 распространяется под свободной лицензие
 формальная модель гидроакустического приёмопередатчика,
 непосредственно используемые при реализации компьютерной модели.
 
-== Формальная модель гидроакустического канала связи
-<subsec:Formal_model_of_hydroacoustic_communication_channel>
-#fqw-indent-before-text
+#fqw-title()[
+  == Формальная модель гидроакустического канала связи
+  <subsec:Formal_model_of_hydroacoustic_communication_channel>
+]
 
 В рамках настоящей работы гидроакустический канал связи рассматривается как среда,
 которая преобразует излучаемый сигнал в принимаемый за счёт
@@ -922,9 +932,10 @@ Ns-3 распространяется под свободной лицензие
 задержку распространения τ и
 спектральную плотность мощности принятого сигнала S#sub[rx];(f).
 
-== Формальная модель гидроакустического приёмопередатчика
-<subsec:formal_model_of_hydroacoustic_transceiver>
-#fqw-indent-before-text
+#fqw-title()[
+  == Формальная модель гидроакустического приёмопередатчика
+  <subsec:formal_model_of_hydroacoustic_transceiver>
+]
 
 В рамках настоящей работы гидроакустический приёмопередатчик рассматривается
 как узел сети, функционирующий на физическом уровне
@@ -996,9 +1007,7 @@ Ns-3 распространяется под свободной лицензие
 В сочетании с моделью канала связи, рассмотренной в пункте 2.3,
 это образует завершённую математическую основу реализуемой модели физического уровня.
 
-#heading(level: 2, numbering: none)[Выводы]
-<subsec:conclusions_of_chapter_2>
-#fqw-indent-before-text
+#en-header-conclusions(label: <subsec:conclusions_of_chapter_2>)
 
 Во втором разделе была рассмотрена интеграция компьютерного моделирования в
 V-образную модель разработки программно-аппаратных гидроакустических систем.
@@ -1042,12 +1051,13 @@ V-образную модель разработки программно-апп
 более сложные механизмы обработки сигналов и
 правил принятия решения о приёме.
 
-= Проектирование и разработка модуля гидроакустической связи
-<sec:module_design>
+#fqw-title(new-chapter: true)[
+  = Проектирование и разработка модуля гидроакустической связи
+  <sec:module_design>
 
-== Требования к компьютерным моделям
-<subsec:requirements_for_models>
-#fqw-indent-before-text
+  == Требования к компьютерным моделям
+  <subsec:requirements_for_models>
+]
 
 На основе проведённого анализа предметной области,
 существующих решений и формальных моделей,
@@ -1177,9 +1187,10 @@ V-образную модель разработки программно-апп
 + разработка компьютерных моделей, должна быть выполнена
   в формате гидроакустического модуля в Ns-3.
 
-== Варианты использования компьютерных моделей
-<subsec:use_cases_of_computer_models>
-#fqw-indent-before-text
+#fqw-title()[
+  == Варианты использования компьютерных моделей
+  <subsec:use_cases_of_computer_models>
+]
 
 Диаграмма вариантов использования гидроакустического модуля для
 моделирования программно-аппаратных гидроакустических приёмопередатчиков
@@ -1195,9 +1206,10 @@ V-образную модель разработки программно-апп
 Варианты использования включают
 настройку параметров, запуск симуляции, получение и анализ результатов.
 
-== Структура компонентов компьютерных моделей
-<subsec:structure_of_model_components>
-#fqw-indent-before-text
+#fqw-title()[
+  == Структура компонентов компьютерных моделей
+  <subsec:structure_of_model_components>
+]
 
 Модель гидроакустического приёмопередатчика должна быть
 спроектирована в соответствии с сетевой моделью OSI.
@@ -1373,7 +1385,8 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/08.03. HaInterferenceOneBandModel Update.png"),
   [Диаграмма последовательности обновления статусов сигналов в модели интерференции HaInterferenceOneBandModel],
-) <fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>
+  label: <fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>,
+)
 
 Расчёт характеристик в модели интерференции HaInterferenceOneBandModel
 осуществляется на основании мощности сигнала в одной полосе частот.
@@ -1386,7 +1399,8 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/Phy Behavior.png"),
   [Диаграмма классов поведений физического уровня с акустическими преобразователями],
-) <fig:phy_behavior>
+  label: <fig:phy_behavior>,
+)
 
 На диаграмме классов поведений физического уровня с их акустическими преобразователями
 представлены следующие классы:
@@ -1406,7 +1420,8 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/Phy states.png"),
   [Диаграмма машины состояний модели приёмопередатчика в полудуплексном режиме],
-) <fig:state_machine_diagram_of_the_transceiver_model>
+  label: <fig:state_machine_diagram_of_the_transceiver_model>,
+)
 
 На диаграмме машины состояний модели приёмопередатчика в полудуплексном режиме
 представлены следующие состояния:
@@ -1418,7 +1433,8 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/Transceiver state machine.png", width: 50%),
   [Диаграмма классов машины состояний модели приёмопередатчика],
-) <fig:class_diagram_of_the_transceiver_models_state_machine>
+  label: <fig:class_diagram_of_the_transceiver_models_state_machine>,
+)
 
 На диаграмме классов поведений физического уровня с их акустическими преобразователями
 представлены следующие классы:
@@ -1432,7 +1448,8 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/simple/Simple transmitter.png"),
   [Диаграмма классов машины состояний модели приёмопередатчика],
-) <fig:class_diagram_of_hydroacoustic_transceiver_model>
+  label: <fig:class_diagram_of_hydroacoustic_transceiver_model>,
+)
 
 На диаграмме классов модели гидроакустического приёмопередатчика
 представлены следующие классы:
@@ -1462,12 +1479,14 @@ HaInterferenceOneBandModel.
 #fqw-figure(
   image("../assets/images/diagrams/simple/01. Send packet.png"),
   [Диаграмма последовательности отправки нового пакета на канальном уровне],
-) <fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>
+  label: <fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>,
+)
 
 #fqw-figure(
   image("../assets/images/diagrams/simple/02. Move mpdu to queue.png", height: 90%),
   [Диаграмма последовательности взаимодействия очереди с поведением физического уровня],
-) <fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>
+  label: <fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>,
+)
 
 Процесс отправки пакета на физическом уровне модели гидроакустического
 приёмопередатчика представлен на следующей диаграмме последовательности
@@ -1560,9 +1579,10 @@ HaInterferenceOneBandModel.
 образует основу для программной реализации модуля и
 его последующей апробации.
 
-= Результаты разработки и апробация
-<sec:development_results_and_validation>
-#fqw-indent-before-text
+#fqw-title(new-chapter: true)[
+  = Результаты разработки и апробация
+  <sec:development_results_and_validation>
+]
 
 В данной главе представлены результаты
 разработки и апробации компьютерных моделей
@@ -1574,9 +1594,10 @@ HaInterferenceOneBandModel.
 изложены результаты валидации по техническим характеристикам
 промышленных модемов.
 
-== Результаты реализации модуля
-<subsec:implementation_results>
-#fqw-indent-before-text
+#fqw-title()[
+  == Результаты реализации модуля
+  <subsec:implementation_results>
+]
 
 На основе формальных моделей, сформулированных во второй главе,
 разработан программный модуль гидроакустической связи (ha-модуль)
@@ -1643,9 +1664,10 @@ HaInterferenceOneBandModel.
 минимальное, максимальное и усреднённое по времени SINR,
 используемые при оценке качества приёма.
 
-== Тестовый пример
-<subsec:test_example>
-#fqw-indent-before-text
+#fqw-title()[
+  == Тестовый пример
+  <subsec:test_example>
+]
 
 Для демонстрации работы разработанного модуля рассмотрим сценарий
 «три узла» с одновременной передачей от двух отправителей.
@@ -1711,9 +1733,10 @@ HaInterferenceOneBandModel.
 
 Рассмотрим два случая запуска: коллизия при равных расстояниях и успешный приём при разных расстояниях.
 
-=== Сценарий 1: равные расстояния (коллизия)
-<subsec:test_scenario_1>
-#fqw-indent-before-text
+#fqw-title()[
+  === Сценарий 1: равные расстояния (коллизия)
+  <subsec:test_scenario_1>
+]
 
 Оба отправителя расположены на одинаковом расстоянии $D_1 = D_2 = 1000$ м от получателя.
 Сигналы прибывают одновременно с задержкой $tau = 1000 slash 1500 approx 0.67$ с.
@@ -1756,9 +1779,11 @@ SINR каждого из них определяется как отношени
 эффект коллизии в гидроакустической сети при отсутствии
 протокола разрешения доступа к среде.
 
-=== Сценарий 2: разные расстояния (успешный приём)
-<subsec:test_scenario_2>
-#fqw-indent-before-text
+#fqw-title()[
+  === Сценарий 2: разные расстояния (успешный приём)
+  <subsec:test_scenario_2>
+  #fqw-indent-before-text
+]
 
 Отправитель 1 расположен ближе ($D_1 = 500$ м),
 отправитель 2 -- дальше ($D_2 = 2000$ м).
@@ -1821,13 +1846,13 @@ SINR = 243.80 ($approx 23.9$ дБ), что многократно превыша
 реальных гидроакустических систем
 в отсутствие протокола разрешения коллизий.
 
-== Валидация разработанных моделей
-<sec:validation>
-#fqw-indent-before-text
+#fqw-title()[
+  == Валидация разработанных моделей
+  <sec:validation>
 
-=== Методика валидации
-<subsec:validation_methodology>
-#fqw-indent-before-text
+  === Методика валидации
+  <subsec:validation_methodology>
+]
 
 Для оценки достоверности разработанных компьютерных моделей
 проведена сравнительная проверка на основе технических спецификаций
@@ -1881,9 +1906,10 @@ $ N = N_0 dot B, $
 Для каждого из 22 модемов выполнялась ровно одна итерация бинарного поиска
 (симуляция детерминированная).
 
-=== Данные для валидации
-<subsec:validation_data>
-#fqw-indent-before-text
+#fqw-title()[
+  === Данные для валидации
+  <subsec:validation_data>
+]
 
 Характеристики модемов, использованных для валидации,
 приведены в таблице #fqw-table-ref(<tab:hydroacoustic-modems>).
@@ -1995,9 +2021,10 @@ $ N = N_0 dot B, $
   ),
 )
 
-=== Результаты и интерпретация
-<subsec:validation_results>
-#fqw-indent-before-text
+#fqw-title()[
+  === Результаты и интерпретация
+  <subsec:validation_results>
+]
 
 Для количественной оценки точности использованы следующие метрики:
 
@@ -2031,7 +2058,8 @@ $ N = N_0 dot B, $
 #fqw-figure(
   image("../assets/images/validation_scatter.png", width: 80%),
   [Соотношение паспортной и предсказанной дальности для 22 модемов (постоянный уровень шума)],
-) <fig:validation_scatter>
+  label: <fig:validation_scatter>,
+)
 
 Из рисунка #fqw-figure-ref(<fig:validation_scatter>) видно,
 что предсказанные значения в целом группируются вдоль
@@ -2063,9 +2091,10 @@ $ N = N_0 dot B, $
 и свидетельствует о применимости модели
 для виртуальных испытаний приёмопередатчиков на ранних этапах проектирования.
 
-== Апробация
-<subsec:approbation>
-#fqw-indent-before-text
+#fqw-title()[
+  == Апробация
+  <subsec:approbation>
+]
 
 Работа прошла апробацию в двух формах.
 
@@ -2084,9 +2113,10 @@ $ N = N_0 dot B, $
 Разрешение на публикацию материалов по теме данной работы приведено в приложении
 #fqw-section-ref(<appendix:permission_to_publish>).
 
-== Постпроектный анализ
-<subsec:post_project_analysis>
-#fqw-indent-before-text
+#fqw-title()[
+  == Постпроектный анализ
+  <subsec:post_project_analysis>
+]
 
 *Ограничения реализации.*
 Во второй главе гидроакустический канал описан как среда с частотно-зависимым
@@ -2160,9 +2190,10 @@ XII~Всероссийского инженерного конкурса ВКР 
 задачи разработки компьютерной модели и её валидации можно считать
 выполненными.
 
-#heading(numbering: none)[Заключение]
-<sec:global_conclusions>
-#fqw-indent-before-text
+#fqw-title(new-chapter: true)[
+  #heading(numbering: none)[Заключение]
+  <sec:global_conclusions>
+]
 
 В первом разделе проведён анализ предметной области гидроакустических систем связи:
 рассмотрены физические основы распространения звука под водой,
@@ -2403,9 +2434,9 @@ XII~Всероссийского инженерного конкурса ВКР 
 #fqw-appendix-title([Техническое задание])
 #fqw-appendix-title([Руководство системного программиста])
 #fqw-appendix-title([
-Свидетельство о прохождении в полуфинал в
-XII~Всероссийском инженерном конкурсе
-выпускных квалификационных работ (ВИК-2025/26)
+  Свидетельство о прохождении в полуфинал в
+  XII~Всероссийском инженерном конкурсе
+  выпускных квалификационных работ (ВИК-2025/26)
 ])
 <appendix:all_russian_engineering_competition>
 #fqw-appendix-title([Разрешение на публикацию от ФГУП «ВНИИА им. Н.~Л.~Духова»])

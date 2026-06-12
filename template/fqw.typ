@@ -134,7 +134,7 @@
 
 #let fqw-fontsize-in-em = 1.25em
 #let fqw-leading = 1.06em
-#let fqw-baseline = fqw-fontsize-in-em + (fqw-leading / 2)
+#let fqw-baseline = fqw-fontsize-in-em + fqw-leading
 #let fqw-first-line-indent = 1.25cm
 #let fqw-list-body-indent = 1.5em
 #let fqw-default-numbering = state("fqw-default-numbering", 2)
@@ -144,6 +144,11 @@
 == `#fqw-indent-before-text`
 
 #let fqw-indent-before-text = { v(fqw-fontsize-in-em + fqw-leading) }
+
+#let fqw-title(body, new-chapter: false) = {
+  if new-chapter { pagebreak() }
+  block(spacing: fqw-baseline * 2, sticky: true)[#body]
+}
 
 == `default show functions`
 
@@ -312,11 +317,6 @@
           counter("fqw-appendix").step(level: it.level)
         }
         fqw-section-counts(numbering-size: 10).map(str).join(".")
-        //         context if fqw-appendix-state.get() {
-        //           fqw-appendix-counts().slice(0, it.level).map(str).join(".")
-        //         } else {
-        //           counter(heading).display(it.numbering)
-        //         }
       }
       #it.body
     ]
@@ -371,18 +371,22 @@
 == base titles
 
 #let fqw-header-abstract() = [
-  #heading(level: 1, numbering: none, outlined: false)[Аннотация]
-  #fqw-indent-before-text
+  #fqw-title(
+    heading(level: 1, numbering: none, outlined: false)[Аннотация],
+  )
 ]
 #let fqw-outline() = [
-  #heading(numbering: none, outlined: false)[Содержание]
-  #set outline.entry(fill: none) // Вроде так нужно
+  #fqw-title(
+    heading(numbering: none, outlined: false)[Содержание],
+  )
   #outline(title: none, depth: 3, indent: 0pt)
   #pagebreak()
 ]
+// ToDo проверить и возможно удалить heading-counter
 #let fqw-introduction(label: none, heading-counter: none) = [
-  #heading(numbering: none)[Введение]
-  #fqw-indent-before-text
+  #fqw-title(
+    heading(numbering: none)[Введение],
+  )
   #if label != none {
     label
   }
@@ -503,17 +507,17 @@
 
 == figures
 
-#let fqw-figure(body, caption, numbering-size: auto) = {
-  counter("fqw-figure").step()
-  let body = align(center)[#body]
+#let fqw-figure(body, caption, label: none, numbering-size: auto) = block(spacing: fqw-baseline, width: 100%)[
+  #counter("fqw-figure").step()
 
-  figure(
+  #figure(
     kind: image,
     supplement: [Рисунок],
     caption: caption,
     numbering: n => fqw-numbering(n, numbering-size: numbering-size),
   )[#body]
-}
+  #label
+]
 
 #let fqw-placeholder-figure(caption) = fqw-figure(
   rect(width: 120mm, height: 45mm, stroke: 0.8pt)[
