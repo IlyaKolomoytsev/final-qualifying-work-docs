@@ -379,6 +379,7 @@
   #fqw-title(
     heading(numbering: none, outlined: false)[Содержание],
   )
+  #set outline.entry(fill: none) // Вроде так нужно
   #outline(title: none, depth: 3, indent: 0pt)
   #pagebreak()
 ]
