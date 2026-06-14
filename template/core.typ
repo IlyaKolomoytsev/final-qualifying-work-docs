@@ -19,7 +19,7 @@
   block(spacing: baseline * 2, width: 100%, sticky: true)[#body]
 }
 
-== `default show functions`
+== default show functions
 
 #let default-page(body) = {
   set page(
