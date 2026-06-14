@@ -1,6 +1,6 @@
 #import "core.typ": default-first-line-indent, default-page, default-paragraph, default-text
 #import "utils.typ": warning
-#import "defaults.typ": *
+#import "defaults.typ"
 
 = Help components for title pages
 
@@ -375,16 +375,16 @@
   ),
   // Page title parameters
   document-code: [],
-  ministry: default-ministry,
-  university: default-university,
-  faculty: default-faculty,
-  department: default-department,
+  ministry: defaults.ministry,
+  university: defaults.university,
+  faculty: defaults.faculty,
+  department: defaults.department,
   work-kind: [выпускной квалификационной работе бакалавра],
   direction: [
     09.03.04 -- Программная инженерия, \
     Разработка программно-информационных систем
   ],
-  city: default-city,
+  city: defaults.city,
   year: [#datetime.today().year()],
 ) = [
   #show: default-title-settings
@@ -540,9 +540,9 @@
     (section: [], person: none),
   ),
   // Page title parameters
-  ministry: default-ministry,
-  university: default-university,
-  department: default-department,
+  ministry: defaults.ministry,
+  university: defaults.university,
+  department: defaults.department,
   university-directive: (date: none, number: []),
   department-code: [10.19],
   work-kind: [выпускную квалификационную работу бакалавра],
@@ -719,10 +719,10 @@
   // Page title parameters
   document-title: warning([Зависит от типа документа]),
   document-code: warning([Код зависит от документа]),
-  ministry: default-ministry,
-  university: default-university,
-  department: default-department,
-  city: default-city,
+  ministry: defaults.ministry,
+  university: defaults.university,
+  department: defaults.department,
+  city: defaults.city,
   year: [#datetime.today().year()],
 ) = [
   #show: default-page
@@ -821,11 +821,11 @@
   restrictions: none,
   date: [],
   reson: [которые имеют действительную или потенциальную коммерческую ценность в силу неизвестности их третьим лицам.],
-  university: default-university,
-  university-president: default-university-president,
-  faculty: default-faculty,
-  program: default-program,
-  type-of-program: default-type-of-program,
+  university: defaults.university,
+  university-president: defaults.university-president,
+  faculty: defaults.faculty,
+  program: defaults.program,
+  type-of-program: defaults.type-of-program,
 ) = {
   show: default-title-settings
   set page(
@@ -929,12 +929,12 @@
   supervisor: none,
   department-chair: none,
   date: [],
-  university-president: default-university-president,
-  university: default-university,
-  faculty: default-faculty,
-  program: default-program,
-  type-of-program: default-type-of-program,
-  plagiarism-detection-system: default-plagiarism-detection-system,
+  university-president: defaults.university-president,
+  university: defaults.university,
+  faculty: defaults.faculty,
+  program: defaults.program,
+  type-of-program: defaults.type-of-program,
+  plagiarism-detection-system: defaults.plagiarism-detection-system,
 ) = {
   show: default-title-settings
   set page(
@@ -1015,12 +1015,12 @@
   supervisor: none,
   department-chair: none,
   date: [],
-  university-president: default-university-president,
-  university: default-university,
-  faculty: default-faculty,
-  program: default-program,
-  type-of-program: default-type-of-program,
-  plagiarism-detection-system: default-plagiarism-detection-system,
+  university-president: defaults.university-president,
+  university: defaults.university,
+  faculty: defaults.faculty,
+  program: defaults.program,
+  type-of-program: defaults.type-of-program,
+  plagiarism-detection-system: defaults.plagiarism-detection-system,
 ) = {
   show: default-title-settings
   set par(justify: true)

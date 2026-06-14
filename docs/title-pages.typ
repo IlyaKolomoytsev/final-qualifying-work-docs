@@ -2,7 +2,8 @@
   declaration-of-professional-ethics, main-task-title-sheet, main-title-sheet, request-to-post-work,
   template-subtitle-sheet, opinion-of-scientific-supervisor,
 )
-#import "../template/fqw.typ": create-codes, person
+#import "../template/codes.typ": create-codes
+#import "../template/persons.typ": person
 
 #let codes = create-codes(number: [09])
 

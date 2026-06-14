@@ -1,157 +1,264 @@
+/// Core
+///
+/// Базовые константы ГОСТ, вспомогательные функции стилизации,
+/// нумерации разделов/приложений и перекрёстных ссылок для документов ВКР.
+
 #import "utils.typ": warning
-#import "persons.typ": default-codes
+#import "codes.typ": default-codes
+#import "appendix.typ": *
 
 = Default values
 
+/// Размер шрифта в em для расчёта интервалов.
+///
+/// _P.S. Я так понял что 1.25em это фактический размер строки в высоту. Но это не точно. Я так числа *подогнал*._
+///
+/// -> relative
 #let fontsize-in-em = 1.25em
+
+/// Межстрочный интервал (одинарный по ГОСТ).
+///
+/// _P.S. Тут должен быть полуторный отсутп, но у меня подгоном получилось 1.06em. почему? не знаю. *Подогнал.*..._
+///
+/// -> relative
 #let leading = 1.06em
+
+/// Суммарный базовый интервал: размер шрифта плюс межстрочный интервал.
+///
+/// Используется как единица отступов вокруг заголовков и блоков.
+///
+/// -> relative
 #let baseline = fontsize-in-em + leading
+
+/// Отступ первой строки абзаца по ГОСТ — 1,25 см.
+///
+/// -> length
 #let first-line-indent = 1.25cm
-#let list-body-indent = 1.5em
+/// Отступ тела элемента списка от маркера.
+///
+/// -> relative
+#let list-body-indent = 1.5em // На глаз понравилось такое значение)
+
+/// Базовые параметры страницы A4 без колонтитулов и нумерации.
+///
+/// -> dictionary
+#let page-a4 = (
+  paper: "a4",
+  header: none,
+  footer: none,
+  numbering: none,
+)
+
+/// Параметры страницы A4 с полями ГОСТ: левое 30 мм, правое 15 мм, верх/низ 20 мм.
+///
+/// -> dictionary
+#let gost-page = (
+  ..page-a4,
+  margin: (top: 20mm, right: 15mm, bottom: 20mm, left: 30mm),
+)
+
+/// Параметры шрифта по ГОСТ: Times New Roman 14 пт, чёрный, без переносов.
+/// -> dictionary
+#let gost-text = (
+  lang: "ru",
+  font: "Times New Roman",
+  size: 14pt,
+  fill: black,
+  weight: "regular",
+  hyphenate: false,
+)
+
+/// Параметры абзаца по ГОСТ: выравнивание по ширине, одинарный интервал.
+/// -> dictionary
+#let gost-paragraph = (
+  justify: true,
+  leading: leading,
+  spacing: leading,
+)
+
+/// Количество уровней нумерации в номере раздела по умолчанию (2 → «1.1»).
+/// -> state
 #let default-numbering = state("default-numbering", 2)
 
 = FQW functions
 
-/// Wraps a heading in a block with correct GOST spacing.
-/// Pass `new-chapter: true` to insert a page break before the block.
-#let title(body, new-chapter: false) = {
-  if new-chapter { pagebreak() }
+/// Оборачивает содержимое в блок с двойным базовым отступом (ГОСТ-интервал вокруг заголовков).
+///
+/// ```typst
+/// #title[= Введение]
+/// #title(new-page: true)[= 1 Теоретические основы]
+/// ```
+///
+/// - body (content): Содержимое блока.
+/// - new-page (bool): Вставить разрыв страницы перед блоком.
+/// -> content
+#let title(body, new-page: false) = {
+  if new-page { pagebreak() }
   block(spacing: baseline * 2, width: 100%, sticky: true)[#body]
 }
 
 == default show functions
 
+/// Применяет параметры страницы ГОСТ ко всему содержимому.
+///
+/// - body (content): Содержимое документа.
+/// -> content
 #let default-page(body) = {
-  set page(
-    paper: "a4",
-    margin: (
-      top: 20mm,
-      bottom: 20mm,
-      left: 30mm,
-      right: 15mm,
-    ),
-    header: none,
-    footer: none,
-    numbering: none,
-  )
-  body
-}
-#let default-text(body) = {
-  set text(
-    lang: "ru",
-    font: "Times New Roman",
-    size: 14pt,
-    fill: black,
-    weight: "regular",
-    hyphenate: false,
-  )
-  body
-}
-#let default-paragraph(body) = {
-  set par(
-    justify: true,
-    leading: leading,
-    spacing: leading,
-  )
-  body
-}
-#let default-first-line-indent(body) = {
-  set par(
-    first-line-indent: (amount: first-line-indent, all: true),
-  )
+  set page(..gost-page)
   body
 }
 
+/// Применяет параметры шрифта ГОСТ ко всему содержимому.
+///
+/// - body (content): Содержимое документа.
+/// -> content
+#let default-text(body) = {
+  set text(..gost-text)
+  body
+}
+
+/// Применяет параметры абзаца ГОСТ ко всему содержимому.
+///
+/// - body (content): Содержимое документа.
+/// -> content
+#let default-paragraph(body) = {
+  set par(..gost-paragraph)
+  body
+}
+
+/// Применяет отступ первой строки ко всем абзацам, включая первый.
+///
+/// - body (content): Содержимое документа.
+/// -> content
+#let default-first-line-indent(body) = {
+  set par(first-line-indent: (amount: first-line-indent, all: true))
+  body
+}
+
+/// Применяет все параметры ГОСТ одновременно: страница, шрифт, абзац, отступ первой строки.
+///
+/// - body (content): Содержимое документа.
+/// -> content
 #let default(body) = {
-  show: default-page
-  show: default-text
-  show: default-paragraph
-  show: default-first-line-indent
+  set page(..gost-page)
+  set text(..gost-text)
+  set par(..gost-paragraph)
+  set par(first-line-indent: (amount: first-line-indent, all: true))
   body
 }
 
 == numbering functions
 
-#let appendix-state = state("appendix-state", false)
-
-#let appendix-letter(number) = {
-  let letters = (
-    "А",
-    "Б",
-    "В",
-    "Г",
-    "Д",
-    "Е",
-    "Ж",
-    "И",
-    "К",
-    "Л",
-    "М",
-    "Н",
-    "П",
-    "Р",
-    "С",
-    "Т",
-    "У",
-    "Ф",
-    "Х",
-    "Ц",
-    "Ш",
-    "Щ",
-    "Э",
-    "Ю",
-    "Я",
-  )
-  letters.at(number - 1)
-}
-
-#let appendix-numbers(counts) = (appendix-letter(counts.first()),) + counts.slice(1)
-
-#let appendix-counts() = appendix-numbers(counter("appendix").get())
-
+/// Возвращает массив компонентов текущего номера раздела.
+///
+/// В режиме *приложений* использует счётчик `"appendix"`,
+/// в *обычном* режиме — счётчик `heading`.
+///
+/// - loc (location, label, auto): Позиция в документе для чтения счётчиков.
+///   `auto` читает текущее значение через `.get()`.
+/// - numbering-size (int, auto): Число уровней в возвращаемом массиве.
+///   `auto` — возвращает все уровни до последнего ненулевого включительно,
+///   замыкающие нули отбрасываются.
+/// -> array
 #let section-counts(loc: auto, numbering-size: auto) = {
   let read(c) = if loc == auto { c.get() } else { c.at(loc) }
-  let numbering-size = if numbering-size == auto { read(default-numbering) } else { numbering-size }
   let arr = if read(appendix-state) {
     appendix-numbers(read(counter("appendix")))
   } else {
     read(counter(heading))
   }
-  arr.slice(0, calc.min(numbering-size - 1, arr.len()))
+  if numbering-size == auto {
+    // Возвращаем все уровни до последнего ненулевого, замыкающие нули отбрасываем.
+    let last-nonzero = -1
+    for (i, v) in arr.enumerate() {
+      if v != 0 { last-nonzero = i }
+    }
+    if last-nonzero == -1 { () } else { arr.slice(0, last-nonzero + 1) }
+  } else {
+    // Возвращаем массив и numbering-size элементов
+    arr.slice(0, calc.min(numbering-size, arr.len()))
+  }
 }
 
+/// Форматирует полный номер элемента раздела, добавляя `n` к текущему префиксу.
+///
+/// Например, при `section-counts(1) == (1, 2)` и `n = 3` вернёт `"1.2.3"`.
+///
+/// - n (int): Порядковый номер элемента внутри текущего раздела.
+/// - numbering-size (int, auto): Общее число уровней итогового номера.
+///   `auto` — из `default-numbering`.
+/// -> content
 #let section-numbering(n, numbering-size: auto) = context {
-  (section-counts(numbering-size: numbering-size) + (n,)).map(str).join(".")
+  let prefix-size = if numbering-size == auto {
+    default-numbering.get() - 1
+  } else {
+    numbering-size - 1
+  }
+  (section-counts(numbering-size: prefix-size) + (n,)).map(str).join(".")
 }
 
 == ref function
 
+/// Формирует строку перекрёстной ссылки для произвольного счётчика.
+///
+/// Берёт префикс номера раздела в позиции `label`, добавляет значение
+/// счётчика `counter-name` в той же позиции и возвращает строку вида `«1.2»`
+/// или `«А.1»` (в режиме приложений).
+///
+/// - label (label): Метка целевого элемента.
+/// - counter-name (selector): Селектор счётчика (например, `math.equation`).
+/// - numbering-size (int, auto): Общее число уровней итогового номера.
+///   `auto` — из `default-numbering`.
+/// -> content
 #let cross-ref(label, counter-name, numbering-size) = context {
-  let prefix = section-counts(loc: label, numbering-size: numbering-size)
+  let prefix-size = if numbering-size == auto {
+    default-numbering.get() - 1
+  } else if type(numbering-size) == int {
+    numbering-size - 1
+  } else {
+    panic("invalid numbering-size type: " + repr(type(numbering-size)))
+  }
+  let prefix = section-counts(loc: label, numbering-size: prefix-size)
   (prefix + (counter(counter-name).at(label).first(),)).map(str).join(".")
 }
 
+/// Формирует номер раздела в позиции метки, отбрасывая замыкающие нули.
+///
+/// Используется для ссылок вида «раздел 1.2», когда глубина раздела заранее неизвестна.
+///
+/// - label (label): Метка целевого заголовка.
+/// -> content
 #let section-ref(label) = context {
-  let counts = section-counts(loc: label, numbering-size: 10)
-  let last-nonzero = 0
-  for (i, v) in counts.enumerate() {
-    if v != 0 { last-nonzero = i }
-  }
-  counts.slice(0, last-nonzero + 1).map(str).join(".")
+  section-counts(loc: label, numbering-size: auto).map(str).join(".")
 }
 
+/// Перекрёстная ссылка на уравнение по метке.
+///
+/// - label (label): Метка уравнения.
+/// - numbering-size (int, auto): Число уровней нумерации.
+/// -> content
 #let eq-ref(label, numbering-size: auto) = cross-ref(
   label,
   math.equation,
   numbering-size,
 )
 
+/// Перекрёстная ссылка на рисунок по метке.
+///
+/// - label (label): Метка рисунка.
+/// - numbering-size (int, auto): Число уровней нумерации.
+/// -> content
 #let figure-ref(label, numbering-size: auto) = cross-ref(
   label,
   figure.where(kind: image),
   numbering-size,
 )
 
+/// Перекрёстная ссылка на таблицу по метке.
+///
+/// - label (label): Метка таблицы.
+/// - numbering-size (int, auto): Число уровней нумерации.
+/// -> content
 #let table-ref(label, numbering-size: auto) = cross-ref(
   label,
   figure.where(kind: table),
@@ -160,6 +267,20 @@
 
 == document-setup
 
+/// Полная настройка документа ВКР: колонтитулы, нумерация заголовков,
+/// уравнений, рисунков, таблиц, стиль списков и ссылок.
+///
+/// Применяется через `#show: document-setup` или
+/// `#show: document-setup.with(document-code: [...])`.
+///
+/// ```typst
+/// #show: document-setup.with(document-code: codes.explanatory-note)
+/// ```
+///
+/// - body (content): Содержимое документа.
+/// - document-code (content): Код документа для верхнего колонтитула.
+///   По умолчанию — `default-codes.fqw` с предупреждением об использовании заглушки.
+/// -> content
 #let document-setup(body, document-code: warning[#default-codes.fqw]) = [
   #show: default
 
@@ -185,7 +306,7 @@
         context if appendix-state.get() {
           counter("appendix").step(level: it.level)
         }
-        section-counts(numbering-size: 10).map(str).join(".")
+        section-counts().map(str).join(".")
       }
       #it.body
     ]
