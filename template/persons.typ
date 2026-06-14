@@ -1,62 +1,99 @@
-= Persons and document codes
-
-== `#person`
-
-/// Creates a person record with full and abbreviated name representations.
+/// Создаёт словарь полей имени для одного падежа.
 ///
-/// Parameters:
-/// - full-name: An array [surname, first-name, patronymic] for a single case,
-///   or a dictionary keyed by grammatical case names (e.g. nom, gen, dat).
-/// - extras: Additional named fields to include in the resulting record.
+/// Принимает массив `[фамилия, имя, отчество?]` и возвращает словарь
+/// с ключами:
+/// - `surname`,
+/// - `first-name`,
+/// - `patronymic`,
+/// - `initials`,
+/// - `full`,
+/// - `short`,
+/// - `reverse-short`.
+/// К каждому ключу добавляется `postfix`.
 ///
-/// Returns:
-/// - A dictionary containing the source name parts, initials, formatted names,
-///   and additional named fields.
-#let person(full-name, ..extras) = {
-  let make-fields(full-name, postfix: "") = {
-    let surname = full-name.at(0)
-    let first-name = full-name.at(1)
-    let patronymic = full-name.at(2, default: none)
+/// - full-name (array): Массив вида `("Иванов", "Иван", "Иванович")`.
+///   Отчество опционально; без него `initials` содержит только первую букву имени.
+/// - postfix (str): Суффикс, добавляемый к каждому ключу словаря.
+///   Пустая строка оставляет ключи без изменений.
+/// -> dictionary
+#let _make-fields(full-name, postfix: "") = {
+  let surname = full-name.at(0)
+  let first-name = full-name.at(1)
+  let patronymic = full-name.at(2, default: none)
 
-    let first-initial = first-name.at(0)
-    let initials = if patronymic == none {
-      [#first-initial.]
-    } else {
-      [#first-initial. #patronymic.at(0).]
-    }
-
-    let full = if patronymic == none {
-      [#surname #first-name]
-    } else {
-      [#surname #first-name #patronymic]
-    }
-
-    let fields = (
-      "surname" + postfix: surname,
-      "first-name" + postfix: first-name,
-      "patronymic" + postfix: patronymic,
-      "initials" + postfix: initials,
-      "full" + postfix: full,
-      "short" + postfix: [#surname #initials],
-      "reverse-short" + postfix: [#initials #surname],
-    )
-
-    fields
+  // Инициалы: «И.» без отчества или «И. О.» при наличии отчества.
+  let first-initial = first-name.at(0)
+  let initials = if patronymic == none {
+    [#first-initial.]
+  } else {
+    [#first-initial. #patronymic.at(0).]
   }
 
+  let full = if patronymic == none {
+    [#surname #first-name]
+  } else {
+    [#surname #first-name #patronymic]
+  }
+
+  let fields = (
+    "surname" + postfix: surname,
+    "first-name" + postfix: first-name,
+    "patronymic" + postfix: patronymic,
+    "initials" + postfix: initials,
+    "full" + postfix: full,
+    "short" + postfix: [#surname #initials],
+    "reverse-short" + postfix: [#initials #surname],
+  )
+
+  fields
+}
+
+/// Создаёт запись о персоне с полями имени и дополнительными атрибутами.
+///
+/// Аргумент `full-name` может быть:
+/// - _массивом_ `("Фамилия", "Имя", "Отчество")` — тогда поля генерируются
+///   один раз и дублируются с постфиксом `-nom` (для единообразия при смешанном использовании);
+/// - _словарём_ `(nom: (...), gen: (...), ...)` — тогда поля генерируются
+///   для каждого падежа с постфиксом `-<падеж>`; поля именительного падежа (`nom`)
+///   доступны также без постфикса.
+///
+/// Дополнительные именованные аргументы (`..extras`) добавляются в итоговый словарь без изменений.
+///
+/// ```typst
+/// #let supervisor = person(
+///   (
+///     nom: ("Иванов", "Иван", "Иванович"),
+///     gen: ("Иванова", "Ивана", "Ивановича")
+///   ),
+///   role: "научный руководитель",
+/// )
+/// #supervisor.short        // «Иванов И. И.»
+/// #supervisor.short-gen    // «Иванова И. И.»
+/// #supervisor.role         // «научный руководитель»
+/// ```
+///
+/// - full-name (array, dictionary): Имя персоны — массив для одного падежа
+///   или словарь падежей.
+/// - ..extras (arguments): Произвольные именованные поля (например, `role`, `degree`),
+///   добавляемые в результирующий словарь.
+/// -> dictionary
+#let person(full-name, ..extras) = {
+  // Для массива: поля без постфикса + копия с постфиксом -nom.
+  // Для словаря: итерация по падежам; именительный дублируется без постфикса.
   let full-name-cases = if type(full-name) == array {
-    make-fields(full-name) + make-fields(full-name, postfix: "-nom")
+    _make-fields(full-name) + _make-fields(full-name, postfix: "-nom")
   } else if type(full-name) == dictionary {
     let result = (:)
 
     for (key, value) in full-name {
       let postfix = "-" + key
 
+      // Поля именительного падежа доступны также без постфикса.
       if key == "nom" {
-        result += make-fields(value)
+        result += _make-fields(value)
       }
 
-      result += make-fields(value, postfix: postfix)
+      result += _make-fields(value, postfix: postfix)
     }
 
     result
@@ -66,44 +103,3 @@
 
   full-name-cases + extras.named()
 }
-
-#person(("Иванов", "Иван", "Иванович"))
-
-== `#create-codes`
-
-/// Creates document designation codes for a bachelor's final qualification work.
-///
-/// Parameters:
-/// - number: The serial number of the work from the order. Defaults to `XX`.
-/// - direction: The direction code. Defaults to `09.03.04`.
-/// - department: The department code. Defaults to `10.19`.
-/// - year: The completion year. Defaults to the current year.
-///
-/// Returns:
-/// - A dictionary containing the base code in `fqw` and the derived codes in
-///   `explanatory-note`, `technical-assignment`, and `system-programmers-guide`.
-#let create-codes(
-  number: [XX],
-  direction: [09.03.04],
-  department: [10.19],
-  year: [#calc.rem(datetime.today().year(), 100)],
-) = {
-  let prefix = [ВКРБ]
-  let explanatory-note-code = [81]
-  let technical-assignment-code = [91]
-  let system-programmers-guide-code = [32]
-  let base = [#(prefix)--#(direction)--#(department)--#(number)--#(year)]
-  (
-    fqw: base,
-    explanatory-note: [#(base)-#(explanatory-note-code)],
-    technical-assignment: [#(base)-#(technical-assignment-code)],
-    system-programmers-guide: [#(base)-#(system-programmers-guide-code)],
-  )
-}
-
-#let default-codes = create-codes()
-
-#default-codes.fqw \
-#default-codes.explanatory-note \
-#default-codes.technical-assignment \
-#default-codes.system-programmers-guide
