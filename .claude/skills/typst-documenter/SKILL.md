@@ -49,6 +49,10 @@ All parameter descriptions and the return type go in the `///` block **directly 
 /// Optional longer explanation. Supports full Typst markup:
 /// *bold*, _italic_, equations like $f(x) = x^2$, lists, etc.
 ///
+/// ```typst
+/// #my-func(42, b: "world")
+/// ```
+///
 /// - a (int, float): Description of positional parameter `a`.
 /// - b (str): Description of named parameter `b`. Defaults to `"hello"`.
 /// -> return-type
@@ -61,6 +65,34 @@ All parameter descriptions and the return type go in the `///` block **directly 
 - Return type on its own `/// ->` line, last in the block
 - Leave a blank `///` line to separate summary from extended description
 - Common types: `int`, `float`, `str`, `bool`, `content`, `color`, `length`, `array`, `dictionary`, `none`, `auto`, `function`
+
+**Usage example — when to include:**
+
+Place a ` ```typst ``` ` code block at the **end of the extended description**, before the parameter list. Separate it from surrounding text with blank `///` lines.
+
+Include an example when any of the following apply:
+- The function has multiple named parameters and the typical call pattern isn't obvious
+- The return value needs context to understand (e.g. content that depends on argument combinations)
+- The function has optional parameters with non-trivial defaults worth illustrating
+- A concrete call would save the reader from having to mentally assemble the signature
+
+Skip the example when:
+- The function has 0–1 simple positional parameters and does exactly what the name says
+- The one-line summary already makes the call pattern self-evident
+
+If only a short summary is needed (no extended explanation), the example follows the summary directly:
+
+```typst
+/// Short one-line description.
+///
+/// ```typst
+/// #my-func(42)
+/// ```
+///
+/// - a (int): Description.
+/// -> content
+#let my-func(a) = { ... }
+```
 
 ### Variable
 
@@ -119,9 +151,10 @@ Read the provided Typst code and identify:
 
 For each **function**:
 1. Write a one-line summary above the `#let` line
-2. List each parameter as `/// - name (type): description`
-3. Add `/// -> return-type` as the last line of the block
-4. Add `//` step comments inside complex function bodies
+2. If the call pattern is non-obvious (see usage example rules above), add a ` ```typst ``` ` example at the end of the description block
+3. List each parameter as `/// - name (type): description`
+4. Add `/// -> return-type` as the last line of the block
+5. Add `//` step comments inside complex function bodies
 
 For each **variable**:
 1. Write a description and `/// -> type` above the `#let` line
@@ -145,6 +178,7 @@ Before finalizing, verify:
 - [ ] Every `#let` definition has at least one `///` comment
 - [ ] Every function parameter has a `/// - name (type): description` entry
 - [ ] Every documented definition ends with `/// -> return-type`
+- [ ] Non-trivial functions include a ` ```typst ``` ` usage example placed before the parameter list
 - [ ] The `///` block is placed directly above `#let` — no blank lines between them
 - [ ] No `///` comment appears after a `//` comment on an adjacent line
 - [ ] Descriptions are direct — not "the X parameter" but "Maximum number of items"
