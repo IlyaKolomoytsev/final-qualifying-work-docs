@@ -1,3 +1,5 @@
+#import "defaults.typ"
+
 /// Формирует словарь кодов обозначений документов бакалаврской ВКР.
 ///
 /// Базовый код строится по шаблону: \
@@ -23,8 +25,8 @@
 #let create-codes(
   prefix: [ВКРБ],
   number: [XX],
-  direction: [09.03.04],
-  department: [10.19],
+  direction: defaults.program.code,
+  department: defaults.department.code,
   year: [#calc.rem(datetime.today().year(), 100)],
 ) = {
   let explanatory-note-code = [81]
