@@ -1,7 +1,7 @@
-#import "fqw.typ": fqw-first-line-indent, fqw-indent-before-text, fqw-title
+#import "core.typ": title
 
 #let en-header-conclusions(label: none) = [
-  #fqw-title()[
+  #title()[
     #heading(level: 2, numbering: none)[Выводы]
     #label
   ]
@@ -14,5 +14,4 @@
     title: none,
     style: "gost-r-7-0-100-2018-numeric-appearance.csl",
   )
-
 ]

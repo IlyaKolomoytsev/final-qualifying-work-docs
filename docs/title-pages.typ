@@ -1,6 +1,6 @@
 #import "../template/title-pages.typ": (
-  fqw-declaration-of-professional-ethics, fqw-main-task-title-sheet, fqw-main-title-sheet, fqw-request-to-post-work,
-  fqw-template-subtitle-sheet, fqw-opinion-of-scientific-supervisor,
+  declaration-of-professional-ethics, main-task-title-sheet, main-title-sheet, request-to-post-work,
+  template-subtitle-sheet, opinion-of-scientific-supervisor,
 )
 #import "../template/fqw.typ": create-codes, person
 
@@ -58,7 +58,7 @@
   [приёмопередатчика для его виртуальных испытаний],
 )
 
-#let main-title = fqw-main-title-sheet(
+#let main-title = main-title-sheet(
   topic-of-work,
   author: author,
   supervisor: scientific-supervisor,
@@ -69,7 +69,7 @@
 
 #main-title
 
-#let task-title = fqw-main-task-title-sheet(
+#let task-title = main-task-title-sheet(
   topic: topic-of-work,
   author: author,
   approver: approver + (date: university-directive.date),
@@ -102,7 +102,7 @@
   document-title,
   document-code: [],
   sheets-count: [#context counter(page).final().first()],
-) = fqw-template-subtitle-sheet(
+) = template-subtitle-sheet(
   topic: topic-of-work,
   sheets-count: sheets-count,
   author: author + (date: submission-date),
@@ -141,7 +141,7 @@
 
 #approval-sheet-title
 
-#let request-to-post-work = fqw-request-to-post-work(
+#let request-to-post-work = request-to-post-work(
   topic: topic-of-work,
   author: author,
   supervisor: scientific-supervisor,
@@ -150,7 +150,7 @@
 
 #request-to-post-work
 
-#let declaration-of-professional-ethics = fqw-declaration-of-professional-ethics(
+#let declaration-of-professional-ethics = declaration-of-professional-ethics(
   topic: topic-of-work,
   author: author,
   supervisor: scientific-supervisor,
@@ -160,7 +160,7 @@
 
 #declaration-of-professional-ethics
 
-#let opinion-of-scientific-supervisor = fqw-opinion-of-scientific-supervisor(
+#let opinion-of-scientific-supervisor = opinion-of-scientific-supervisor(
   topic: topic-of-work,
   author: author,
   supervisor: scientific-supervisor,

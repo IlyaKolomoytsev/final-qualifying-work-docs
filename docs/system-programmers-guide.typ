@@ -3,10 +3,10 @@
 
 #system-programmers-guide-title
 
-#show: fqw-document
+#show: document-setup
 #set page(header: none, footer: none)
 
-#fqw-header-abstract()
+#header-abstract()
 <sec:annotation>
 
 Документ представляет собой руководство системного программиста к
@@ -21,9 +21,9 @@
 
 Документ включает в себя
 страниц~--~#context counter(page).final().first(),
-рисунков~--~#context counter("fqw-figure").final().first(),
-таблиц~--~#context counter("fqw-table").final().first(),
-формул~--~#context counter("fqw-equation").final().first().
+рисунков~--~#context counter("gost-figure").final().first(),
+таблиц~--~#context counter("gost-table").final().first(),
+формул~--~#context counter("equation").final().first().
 
 Ключевые слова:
 гидроакустический приёмопередатчик,
@@ -35,11 +35,11 @@ Ns-3,
 виртуальные испытания.
 #pagebreak()
 
-#show: fqw-document.with(document-code: codes.system-programmers-guide)
+#show: document-setup.with(document-code: codes.system-programmers-guide)
 
-#fqw-outline()
+#contents()
 
-#fqw-title()[
+#title()[
   = Общие сведения о программе
   <sec:general_information>
 ]
@@ -123,16 +123,16 @@ Ns-3,
 Модуль распространяется в виде форка репозитория Ns-3 с исходными
 текстами в каталоге `src/ha`.
 
-#fqw-title()[
+#title()[
   = Структура программы
   <sec:program_structure>
 ]
 
 Программный модуль реализован в виде модуля Ns-3 с именем `ha`
 в каталоге `src/ha`. Состав каталогов приведён в
-таблице~#fqw-table-ref(<tab:module_layout>).
+таблице~#table-ref(<tab:module_layout>).
 
-#fqw-table(
+#gost-table(
   [Состав каталогов программного модуля],
   columns: (1fr, 3fr),
   label: <tab:module_layout>,
@@ -174,9 +174,9 @@ Ns-3,
 модульные тесты.
 
 Канальный уровень реализован классами, перечисленными в
-таблице~#fqw-table-ref(<tab:link_layer_components>).
+таблице~#table-ref(<tab:link_layer_components>).
 
-#fqw-table(
+#gost-table(
   [Компоненты канального уровня],
   columns: (1.4fr, 2.6fr),
   label: <tab:link_layer_components>,
@@ -217,9 +217,9 @@ Ns-3,
 Физический уровень реализован двумя группами классов: классами
 поведения физического уровня и классами собственно физического уровня.
 Состав компонентов приведён в
-таблице~#fqw-table-ref(<tab:physical_layer_components>).
+таблице~#table-ref(<tab:physical_layer_components>).
 
-#fqw-table(
+#gost-table(
   [Компоненты физического уровня],
   columns: (1.7fr, 2.3fr),
   label: <tab:physical_layer_components>,
@@ -258,18 +258,18 @@ Ns-3,
 взаимодействует с ней через `HaPhy`. Конечный автомат
 `HalfDuplexStateMachine` реализует четыре состояния (OFF, IDLE, RX, TX);
 одновременное нахождение в RX и TX не допускается. Диаграмма
-состояний представлена на рисунке~#fqw-figure-ref(<fig:phy_state_machine>).
+состояний представлена на рисунке~#figure-ref(<fig:phy_state_machine>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Phy states.png"),
   [Диаграмма состояний физического уровня],
   label: <fig:phy_state_machine>,
 )
 
 Модель канала связи реализована классами из
-таблицы~#fqw-table-ref(<tab:channel_components>).
+таблицы~#table-ref(<tab:channel_components>).
 
-#fqw-table(
+#gost-table(
   [Компоненты модели канала связи],
   columns: (1.4fr, 2.6fr),
   label: <tab:channel_components>,
@@ -307,9 +307,9 @@ Ns-3,
 
 Расчёт качества приёма выполняется моделью интерференции и
 обработчиками PPDU. Состав соответствующих компонентов приведён в
-таблице~#fqw-table-ref(<tab:interference_components>).
+таблице~#table-ref(<tab:interference_components>).
 
-#fqw-table(
+#gost-table(
   [Компоненты модели интерференции и обработчиков сигналов],
   columns: (1.7fr, 2.3fr),
   label: <tab:interference_components>,
@@ -349,21 +349,21 @@ Ns-3,
 
 `HaInterferenceOneBandModel` вычисляет интегральную мощность сигнала,
 шума и помех в рабочей полосе по
-формулам~#fqw-eq-ref(<eq:signal_power>)~--~#fqw-eq-ref(<eq:sinr>):
+формулам~#eq-ref(<eq:signal_power>)~--~#eq-ref(<eq:sinr>):
 
 $ P_s = integral_(f_1)^(f_2) S_"rx"(f) d f $ <eq:signal_power>
-#fqw-where((
+#where-defs((
   ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
   ($f_1$, [нижняя граница рабочей полосы, Гц]),
   ($f_2$, [верхняя граница рабочей полосы, Гц]),
   ($S_"rx"$, [спектральная плотность мощности сигнала на входе приёмника, Па²/Гц]),
 ))
 
-#fqw-equation-list((
+#equation-list((
   ([$ P_n = integral_(f_1)^(f_2) S_n(f) d f $], <eq:noise_power>),
   ([$ P_i = integral_(f_1)^(f_2) S_i(f) d f $], <eq:interference_power>),
 ))
-#fqw-where((
+#where-defs((
   ($P_n$, [мощность шума в рабочей полосе, Па²]),
   ($S_n$, [спектральная плотность мощности шума, Па²/Гц]),
   ($P_i$, [мощность помехи в рабочей полосе, Па²]),
@@ -371,7 +371,7 @@ $ P_s = integral_(f_1)^(f_2) S_"rx"(f) d f $ <eq:signal_power>
 ))
 
 $ S I N R = P_s / (sum_(k = 1)^(N_i) P_(i,k) + P_n) $ <eq:sinr>
-#fqw-where((
+#where-defs((
   ($S I N R$, [отношение мощности сигнала к суммарной мощности шума и помех]),
   ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
   ($P_n$, [мощность шума в рабочей полосе, Па²]),
@@ -387,17 +387,17 @@ $ S I N R = P_s / (sum_(k = 1)^(N_i) P_(i,k) + P_n) $ <eq:sinr>
 - отклонение несущей частоты не превышает допустимого значения;
 
 - среднее ОСШ за время приёма превышает порог
-  (формула~#fqw-eq-ref(<eq:successful_reception_threshold>)).
+  (формула~#eq-ref(<eq:successful_reception_threshold>)).
 
 $ S I N R >= gamma_"th" $ <eq:successful_reception_threshold>
-#fqw-where((
+#where-defs((
   ($S I N R$, [отношение мощности сигнала к суммарной мощности шума и помех]),
   ($gamma_"th"$, [порог успешного приёма]),
 ))
 
-Helper-классы модуля приведены в таблице~#fqw-table-ref(<tab:helpers>).
+Helper-классы модуля приведены в таблице~#table-ref(<tab:helpers>).
 
-#fqw-table(
+#gost-table(
   [Helper-классы модуля],
   columns: (1.3fr, 2.7fr),
   label: <tab:helpers>,
@@ -427,9 +427,9 @@ Helper-классы скрывают типовые операции созда�
 средства Ns-3.
 
 Перечень используемых подсистем Ns-3 приведён в
-таблице~#fqw-table-ref(<tab:external_modules>).
+таблице~#table-ref(<tab:external_modules>).
 
-#fqw-table(
+#gost-table(
   [Используемые подсистемы Ns-3],
   columns: (1fr, 3fr),
   label: <tab:external_modules>,
@@ -460,7 +460,7 @@ Helper-классы скрывают типовые операции созда�
 трассировки pcap, читаемые любым инструментом, поддерживающим этот
 формат (например, Wireshark).
 
-#fqw-title()[
+#title()[
 = Настройка программы
 <sec:program_setup>
 ]
@@ -493,9 +493,9 @@ Helper-классы скрывают типовые операции созда�
 тестовых примеров и библиотека модуля.
 
 Параметры настройки модели приёмопередатчика приведены в
-таблице~#fqw-table-ref(<tab:transceiver_parameters>).
+таблице~#table-ref(<tab:transceiver_parameters>).
 
-#fqw-table(
+#gost-table(
   [Параметры настройки модели приёмопередатчика],
   columns: (1.8fr, 2.2fr),
   label: <tab:transceiver_parameters>,
@@ -534,9 +534,9 @@ Helper-классы скрывают типовые операции созда�
 или через прямой вызов методов объектов модели.
 
 Параметры настройки канала связи приведены в
-таблице~#fqw-table-ref(<tab:channel_parameters>).
+таблице~#table-ref(<tab:channel_parameters>).
 
-#fqw-table(
+#gost-table(
   [Параметры настройки модели канала связи],
   columns: (1.6fr, 2.4fr),
   label: <tab:channel_parameters>,
@@ -566,9 +566,9 @@ Helper-классы скрывают типовые операции созда�
 )
 
 Параметры настройки модели интерференции приведены в
-таблице~#fqw-table-ref(<tab:interference_parameters>).
+таблице~#table-ref(<tab:interference_parameters>).
 
-#fqw-table(
+#gost-table(
   [Параметры настройки модели интерференции],
   columns: (1.6fr, 2.4fr),
   label: <tab:interference_parameters>,
@@ -630,9 +630,9 @@ Helper-классы скрывают типовые операции созда�
 
 Полные тексты тестовых примеров размещаются в `src/ha/examples`.
 Описание тестовых примеров приведено в
-разделе~#fqw-section-ref(<sec:program_verification>).
+разделе~#section-ref(<sec:program_verification>).
 
-#fqw-title()[
+#title()[
 = Проверка программы
 <sec:program_verification>
 ]
@@ -644,9 +644,9 @@ Helper-классы скрывают типовые операции созда�
 - контрольные тестовые примеры для типовых сценариев работы.
 
 Состав модульных тестов приведён в
-таблице~#fqw-table-ref(<tab:test_suites>).
+таблице~#table-ref(<tab:test_suites>).
 
-#fqw-table(
+#gost-table(
   [Состав модульных тестов],
   columns: (1.6fr, 2.4fr),
   label: <tab:test_suites>,
@@ -682,9 +682,9 @@ Helper-классы скрывают типовые операции созда�
 
 Контрольные тестовые примеры размещаются в `src/ha/examples`.
 Состав тестовых примеров приведён в
-таблице~#fqw-table-ref(<tab:examples>).
+таблице~#table-ref(<tab:examples>).
 
-#fqw-table(
+#gost-table(
   [Контрольные тестовые примеры],
   columns: (2.2fr, 1.5fr, 1.5fr),
   label: <tab:examples>,
@@ -710,9 +710,9 @@ Helper-классы скрывают типовые операции созда�
 *Тестовый пример 1.* Два узла с приёмопередатчиками на заданном
 расстоянии; отправитель передаёт сообщение «Hello HA module!»
 получателю. Параметры командной строки приведены в
-таблице~#fqw-table-ref(<tab:example_two_nodes_params>).
+таблице~#table-ref(<tab:example_two_nodes_params>).
 
-#fqw-table(
+#gost-table(
   [Параметры командной строки тестового примера 1],
   columns: (1.6fr, 2.4fr),
   label: <tab:example_two_nodes_params>,
@@ -750,9 +750,9 @@ Helper-классы скрывают типовые операции созда�
 *Тестовый пример 2.* Два узла-отправителя одновременно передают
 одному получателю; проверяется работа модели интерференции при
 наложении сигналов. Параметры приведены в
-таблице~#fqw-table-ref(<tab:example_three_nodes_params>).
+таблице~#table-ref(<tab:example_three_nodes_params>).
 
-#fqw-table(
+#gost-table(
   [Параметры командной строки тестового примера 2],
   columns: (1.6fr, 2.4fr),
   label: <tab:example_three_nodes_params>,
@@ -792,9 +792,9 @@ Helper-классы скрывают типовые операции созда�
 *Тестовый пример 3.* Автоматический подбор максимальной дальности
 уверенного приёма методом двоичного поиска с настраиваемой точностью.
 Параметры приведены в
-таблице~#fqw-table-ref(<tab:example_max_range_params>).
+таблице~#table-ref(<tab:example_max_range_params>).
 
-#fqw-table(
+#gost-table(
   [Параметры командной строки тестового примера 3],
   columns: (1.6fr, 2.4fr),
   label: <tab:example_max_range_params>,
@@ -834,7 +834,7 @@ Helper-классы скрывают типовые операции созда�
 отдельный pcap-файл с записями о всех принятых и переданных сигналах.
 Просмотр файлов выполняется внешними программами (например, Wireshark).
 
-#fqw-title()[
+#title()[
 = Дополнительные возможности
 <sec:additional_features>
 ]
@@ -868,7 +868,7 @@ Helper-классы скрывают типовые операции созда�
 Для разработки собственной модели интерференции необходимо реализовать
 наследника абстрактного класса `HaInterferenceModel`.
 
-#fqw-title()[
+#title()[
 = Сообщения системному программисту
 <sec:messages>
 ]
@@ -879,9 +879,9 @@ Helper-классы скрывают типовые операции созда�
 указанием компонента-источника.
 
 Основные диагностические сообщения и действия по ним приведены в
-таблице~#fqw-table-ref(<tab:diagnostic_messages>).
+таблице~#table-ref(<tab:diagnostic_messages>).
 
-#fqw-table(
+#gost-table(
   [Диагностические сообщения и действия по ним],
   columns: (1fr, 1.5fr, 2fr),
   label: <tab:diagnostic_messages>,

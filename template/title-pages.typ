@@ -1,5 +1,6 @@
-#import "fqw.typ": fqw-default-first-line-indent, fqw-default-page, fqw-default-paragraph, fqw-default-text, warning
-#import "default-values.typ": *
+#import "core.typ": default-first-line-indent, default-page, default-paragraph, default-text
+#import "utils.typ": warning
+#import "defaults.typ": *
 
 = Help components for title pages
 
@@ -326,9 +327,9 @@
   position-caption: [должность],
 )
 
-#let fqw-default-title-settings(body) = {
-  show: fqw-default-page
-  show: fqw-default-text
+#let default-title-settings(body) = {
+  show: default-page
+  show: default-text
   set par(
     leading: 0.53em,
     spacing: 0.53em * 1.2,
@@ -336,7 +337,7 @@
   body
 }
 
-== `#fqw-main-title-sheet`
+== `#main-title-sheet`
 /// Creates the title page for a bachelor's explanatory note.
 ///
 /// Parameters:
@@ -359,7 +360,7 @@
 ///
 /// Returns:
 /// - A configured `page` containing the full title-page layout.
-#let fqw-main-title-sheet(
+#let main-title-sheet(
   // Work
   topic,
   // Persons
@@ -386,7 +387,7 @@
   city: default-city,
   year: [#datetime.today().year()],
 ) = [
-  #show: fqw-default-title-settings
+  #show: default-title-settings
   // To display all the information on one page, wrap in a grid
   #grid(
     columns: (1fr,),
@@ -502,9 +503,9 @@
     #align(center)[#city #year г.]
   ]
 ]
-#fqw-main-title-sheet
+#main-title-sheet
 
-== `#fqw-main-task-title-sheet`
+== `#main-task-title-sheet`
 /// Creates the task page for a bachelor's explanatory note.
 ///
 /// Parameters:
@@ -524,7 +525,7 @@
 ///
 /// Returns:
 /// - A configured `page` containing the explanatory note task layout.
-#let fqw-main-task-title-sheet(
+#let main-task-title-sheet(
   // Work
   topic: none,
   task-from-scientific-supervisor: warning[Задание, выданное научным руководителем кафедры «ПОАС»],
@@ -546,7 +547,7 @@
   department-code: [10.19],
   work-kind: [выпускную квалификационную работу бакалавра],
 ) = [
-  #show: fqw-default-title-settings
+  #show: default-title-settings
   #let delimiter = v(1.5em)
 
   // University
@@ -686,7 +687,7 @@
   ]
 ]
 
-== `#fqw-template-subtitle-sheet`
+== `#template-subtitle-sheet`
 /// Creates the internal title page for the explanatory note document.
 ///
 /// Parameters:
@@ -706,7 +707,7 @@
 ///
 /// Returns:
 /// - A configured `page` containing the explanatory note title-page layout.
-#let fqw-template-subtitle-sheet(
+#let template-subtitle-sheet(
   // Work
   topic: [],
   sheets-count: [#context counter(page).final().first()],
@@ -724,9 +725,9 @@
   city: default-city,
   year: [#datetime.today().year()],
 ) = [
-  #show: fqw-default-page
-  #show: fqw-default-text
-  #show: fqw-default-paragraph
+  #show: default-page
+  #show: default-text
+  #show: default-paragraph
   #let bigGutter = 2em
   #let gutter = 0.8em
 
@@ -813,7 +814,7 @@
   ]
 ]
 
-#let fqw-request-to-post-work(
+#let request-to-post-work(
   topic: [],
   author: none,
   supervisor: none,
@@ -826,7 +827,7 @@
   program: default-program,
   type-of-program: default-type-of-program,
 ) = {
-  show: fqw-default-title-settings
+  show: default-title-settings
   set page(
     paper: "a4",
     margin: (
@@ -865,8 +866,8 @@
   ][
     #align(center)[#upper([заявление])]
   ][
-    #show: fqw-default-first-line-indent
-    #show: fqw-default-paragraph
+    #show: default-first-line-indent
+    #show: default-paragraph
     Прошу Вас разместить написанную мною выпускную квалификационную
     работу бакалавра (далее ВКР) на тему
     // Topic
@@ -922,7 +923,7 @@
   ]
 }
 
-#let fqw-declaration-of-professional-ethics(
+#let declaration-of-professional-ethics(
   topic: [],
   author: none,
   supervisor: none,
@@ -935,7 +936,7 @@
   type-of-program: default-type-of-program,
   plagiarism-detection-system: default-plagiarism-detection-system,
 ) = {
-  show: fqw-default-title-settings
+  show: default-title-settings
   set page(
     paper: "a4",
     margin: (
@@ -989,7 +990,7 @@
     соблюдены правила профессиональной этики, не допускающие наличия плагиата,
     фальсификации данных и ложного цитирования при написании выпускных квалификационных работ.
 
-    #show: fqw-default-first-line-indent
+    #show: default-first-line-indent
     Все прямые заимствования из печатных и электронных источников,
     а также ранее защищенных письменных работ, кандидатских и докторских диссертаций
     имеют соответствующие ссылки.
@@ -1006,7 +1007,7 @@
   ]
 }
 
-#let fqw-opinion-of-scientific-supervisor(
+#let opinion-of-scientific-supervisor(
   topic: [],
   about-work: [],
   successes: [],
@@ -1021,7 +1022,7 @@
   type-of-program: default-type-of-program,
   plagiarism-detection-system: default-plagiarism-detection-system,
 ) = {
-  show: fqw-default-title-settings
+  show: default-title-settings
   set par(justify: true)
   grid(columns: 1, row-gutter: 1em)[
     #pad(left: 45%)[

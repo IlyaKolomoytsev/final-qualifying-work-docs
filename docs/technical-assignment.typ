@@ -5,10 +5,10 @@
 #technical-assignment-title
 #approval-sheet-title
 
-#show: fqw-document
+#show: document-setup
 #set page(header: none, footer: none)
 
-#fqw-header-abstract()
+#header-abstract()
 
 Тема работы~--~«Разработка компьютерной модели
 программно-аппаратного гидроакустического приёмопередатчика для
@@ -33,10 +33,10 @@ Ns-3,
 
 #pagebreak()
 
-#show: fqw-document.with(document-code: codes.technical-assignment)
-#fqw-outline()
+#show: document-setup.with(document-code: codes.technical-assignment)
+#contents()
 
-#fqw-title()[
+#title()[
   #counter(heading).update(1)
 
   #heading(numbering: none)[Введение]
@@ -49,7 +49,7 @@ Ns-3,
 Наименование программы: «Программный модуль модели гидроакустического
 приёмопередатчика для Ns-3».
 
-#fqw-title()[
+#title()[
   == Область применения
   <sec:application_area>
 ]
@@ -76,7 +76,7 @@ Ns-3,
 Модуль ориентирован на применение инженерами и исследователями организации,
 занимающейся гидроакустикой, на рабочих станциях специалистов.
 
-#fqw-title()[
+#title()[
   = Основание для разработки
   <sec:development_basis>
 ]
@@ -89,7 +89,7 @@ Ns-3,
 виртуальных испытаний» и согласовано с ФГУП ВНИИА им. Духова НПЦ
 «Гидросвязь».
 
-#fqw-title()[
+#title()[
   = Назначение разработки
   <sec:development_purpose>
 ]
@@ -103,7 +103,7 @@ Ns-3,
 Программный модуль предназначен для эксплуатации инженерами и
 программистами в ФГУП ВНИИА им. Духова НПЦ «Гидросвязь».
 
-#fqw-title()[
+#title()[
   = Требования к программе
   <sec:program_requirements>
 
@@ -131,7 +131,7 @@ Ns-3,
 но и предлагать компоненты и архитектурные подходы,
 необходимыедля реализации других моделей.
 
-#fqw-title()[
+#title()[
   === Требования к архитектуре модели программно-аппаратного приёмопередатчика
   <sec:transceiver_architecture_requirements>
 
@@ -153,7 +153,7 @@ Ns-3,
 реализации конкретных моделей приёмопередатчиков без необходимости
 изменения интерфейсов базовых классов.
 
-#fqw-title()[
+#title()[
   ==== Требования к реализации физического уровня
   <sec:physical_layer_functions>
 ]
@@ -185,7 +185,7 @@ Ns-3,
 - обработку принятого сигнала и извлечение полезной информации
   из принятого сигнала.
 
-#fqw-title()[
+#title()[
   === Требования к архитектуре модели гидроакустического канала связи
   <sec:channel_architecture_requirements>
 ]
@@ -203,7 +203,7 @@ Ns-3,
 Модели каналов связи для расчёта свойств распространения сигналов должны
 использовать эти интерфейсы.
 
-#fqw-title()[
+#title()[
   === Требования к реализации модели приёмопередатчика
   <sec:transceiver_implementation_requirements>
 
@@ -222,7 +222,7 @@ Ns-3,
 передаваемого и принимаемого сигнала.
 Сигналы другого типа приёмопередатчик принимать не должен.
 
-#fqw-title()[
+#title()[
   ==== Состояния физического уровня
   <sec:physical_layer_states>
 ]
@@ -247,9 +247,9 @@ Ns-3,
 half-duplex: одновременные передача и приём не допускаются.
 
 Подробное описание поведения конечного автомата физического уровня
-приведено на диаграмме состояний, представленной на рисунке~#fqw-figure-ref(<fig:phy-state-machine>).
+приведено на диаграмме состояний, представленной на рисунке~#figure-ref(<fig:phy-state-machine>).
 
-#fqw-title()[
+#title()[
   ==== Функции канального уровня
   <sec:data_link_layer_functions>
 ]
@@ -273,14 +273,14 @@ MAC-адрес состоит из 8 бит.
 
 - MAC-адрес получателя.
 
-#fqw-title()[
+#title()[
   ==== Используемая модель интерференции
   <sec:interference_model_implementation>
 ]
 
 Модель интерференции должна вычислять отношение сигнал к шуму по
 следующим формулам
-(см.~формулы~#fqw-eq-ref(<eq:signal_power>)--#fqw-eq-ref(<eq:sinr>)):
+(см.~формулы~#eq-ref(<eq:signal_power>)--#eq-ref(<eq:sinr>)):
 
 #eq-signal-power()
 
@@ -288,7 +288,7 @@ MAC-адрес состоит из 8 бит.
 
 #eq-sinr()
 
-#fqw-title()[
+#title()[
   ==== Решение об успешном приёме и декодировании сигнала
   <sec:successful_reception_decision>
 ]
@@ -298,11 +298,11 @@ MAC-адрес состоит из 8 бит.
 который может декодировать этот приёмопередатчик,
 и значение ОСШ для этого сигнала выше порогового значения,
 заданного пользователем
-(см.~формулу~#fqw-eq-ref(<eq:successful_reception_threshold>)):
+(см.~формулу~#eq-ref(<eq:successful_reception_threshold>)):
 
 #eq-successful-reception-threshold()
 
-#fqw-title()[
+#title()[
   ==== Трассировка
   <sec:tracing>
 ]
@@ -311,7 +311,7 @@ MAC-адрес состоит из 8 бит.
 трассировки в формате pcap.
 Файл должен содержать информацию о принятых и отправленных пакетах.
 
-#fqw-title()[
+#title()[
   === Требования к модели гидроакустического канала связи
   <sec:channel_model_requirements>
 
@@ -327,7 +327,7 @@ MAC-адрес состоит из 8 бит.
 - расчёт затухания (потерь) сигнала при прохождении
   из точки излучения в точку приёма.
 
-#fqw-title()[
+#title()[
   ==== Расчёт времени распространения
   <sec:propagation_delay_calculation>
 ]
@@ -346,16 +346,16 @@ MAC-адрес состоит из 8 бит.
 - Сигнал однолучевой;
 
 - Расстояние между узлами определяется как евклидово расстояние между их
-  координатами (см. формулу #fqw-eq-ref(<eq:euclidean_distance>)).
+  координатами (см. формулу #eq-ref(<eq:euclidean_distance>)).
 
 #eq-euclidean-distance()
 
 Время распространения определяется по формуле
-#fqw-eq-ref(<eq:propagation_delay>):
+#eq-ref(<eq:propagation_delay>):
 
 #eq-propagation-delay()
 
-#fqw-title()[
+#title()[
   ==== Расчёт затухания \(потерь) сигнала
   <sec:signal_attenuation_calculation>
 ]
@@ -370,12 +370,12 @@ MAC-адрес состоит из 8 бит.
 - мощность сигнала на выходе излучателя.
 
 Модель потерь состоит из нескольких составляющих
-(см. формулу #fqw-eq-ref(<eq:propagation_loss>)):
+(см. формулу #eq-ref(<eq:propagation_loss>)):
 
 #eq-propagation-loss()
 
 Потери на геометрическое расхождение вычисляются по формуле
-#fqw-eq-ref(<eq:geometric_loss>):
+#eq-ref(<eq:geometric_loss>):
 
 #eq-geometric-loss()
 
@@ -383,13 +383,13 @@ MAC-адрес состоит из 8 бит.
 n~∈~\[1;2\].
 
 Потери на абсорбцию вычисляются по формуле
-#fqw-eq-ref(<eq:absorption_loss>):
+#eq-ref(<eq:absorption_loss>):
 
 #eq-absorption-loss()
 
 Для вычисления коэффициента поглощения используются формулы
-Торпа (см.~формулу~#fqw-eq-ref(<eq:thorp_absorption>)) и
-Франсуа-Гаррисона (см.~формулу~#fqw-eq-ref(<eq:francois_garrison_absorption>)):
+Торпа (см.~формулу~#eq-ref(<eq:thorp_absorption>)) и
+Франсуа-Гаррисона (см.~формулу~#eq-ref(<eq:francois_garrison_absorption>)):
 
 #eq-thorp-absorption()
 
@@ -397,7 +397,7 @@ n~∈~\[1;2\].
 
 Выбор формулы осуществляется пользователем.
 
-#fqw-title()[
+#title()[
   == Требования к надёжности
   <sec:reliability_requirements>
 
@@ -409,7 +409,7 @@ n~∈~\[1;2\].
 выявляться с выдачей диагностических сообщений
 такими средствами ns-3 как механизмы assert, abort и fatal diagnostics.
 
-#fqw-title()[
+#title()[
   === Время восстановления после отказа
   <sec:recovery_time>
 ]
@@ -419,7 +419,7 @@ n~∈~\[1;2\].
 не выполняет автоматическое восстановление состояния
 после критических ошибок конфигурации.
 
-#fqw-title()[
+#title()[
   === Отказы из-за некорректных действий пользователя
   <sec:user_error_failures>
 ]
@@ -432,7 +432,7 @@ n~∈~\[1;2\].
 выдать диагностическое сообщение и
 корректно завершить работу.
 
-#fqw-title()[
+#title()[
   == Требования к условиям эксплуатации
   <sec:operation_conditions_requirements>
 
@@ -442,7 +442,7 @@ n~∈~\[1;2\].
 
 Требования к климатическим условиям эксплуатации не предъявляются.
 
-#fqw-title()[
+#title()[
   === Требования к квалификации и численности персонала
   <sec:personnel_requirements>
 ]
@@ -455,7 +455,7 @@ n~∈~\[1;2\].
 
 - Базовые навыки работы с библиотекой Ns-3.
 
-#fqw-title()[
+#title()[
   == Требования к составу и параметрам технических средств
   <sec:technical_means_requirements>
 ]
@@ -472,7 +472,7 @@ n~∈~\[1;2\].
 - Свободное место на диске - не менее 5 ГБ \(исходный код программы,
   сборка, результаты).
 
-#fqw-title()[
+#title()[
   == Требования к информационной и программной совместимости
   <sec:compatibility_requirements>
 
@@ -487,7 +487,7 @@ n~∈~\[1;2\].
 - Исходный код модуля должен быть оформлен в стиле, принятом в
   Ns-3-модулях \(структура каталогов, нейминг, документирование).
 
-#fqw-title()[
+#title()[
   === Требования к исходным кодам и языкам программирования
   <sec:source_code_requirements>
 ]
@@ -497,7 +497,7 @@ n~∈~\[1;2\].
 
 Компилятор C++ \(gcc/clang) с поддержкой стандарта C++20.
 
-#fqw-title()[
+#title()[
   === Требования к программным средствам, используемым программой
   <sec:software_tools_requirements>
 ]
@@ -508,7 +508,7 @@ core, network, mobility, spectrum, propagation.
 Для сборки используется CMake/ns3 build system,
 компилятор gcc или clang с поддержкой C++20.
 
-#fqw-title()[
+#title()[
   === Требования к защите информации
   <sec:information_security_requirements>
 ]
@@ -517,7 +517,7 @@ core, network, mobility, spectrum, propagation.
 (модуль не реализует механизмы аутентификации/авторизации и
 не обрабатывает персональные данные).
 
-#fqw-title()[
+#title()[
   == Требования к маркировке и упаковке
   <sec:labeling_packaging_requirements>
 ]
@@ -526,7 +526,7 @@ core, network, mobility, spectrum, propagation.
 Поставка программного модуля осуществляется в виде форка библиотеки Ns-3
 с разработанным программным модулем.
 
-#fqw-title()[
+#title()[
   == Требования к транспортированию и хранению
   <sec:transportation_storage_requirements>
 ]
@@ -534,7 +534,7 @@ core, network, mobility, spectrum, propagation.
 Хранение исходного кода программы должно быть выполнено с помощью
 системы контроля версий Git.
 
-#fqw-title()[
+#title()[
   == Специальные требования
   <sec:special_requirements>
 ]
@@ -544,7 +544,7 @@ core, network, mobility, spectrum, propagation.
 для повышения совместимости с такими модулями, как
 network, propagation, mobility, spectrum.
 
-#fqw-title()[
+#title()[
   = Требования к программной документации
   <sec:documentation_requirements>
 ]
@@ -563,7 +563,7 @@ network, propagation, mobility, spectrum.
   учебно-методическим пособием «Подготовка, оформление выпускной
   квалификационной работы и преддипломной практики».
 
-#fqw-title()[
+#title()[
   = Технико-экономические показатели
   <sec:technical_economic_indicators>
 
@@ -608,7 +608,7 @@ network, propagation, mobility, spectrum.
 уменьшение сроков создания опытных образцов и
 повышение эффективности проведения испытаний.
 
-#fqw-title()[
+#title()[
   = Стадии и этапы разработки
   <sec:development_stages>
 
@@ -617,9 +617,9 @@ network, propagation, mobility, spectrum.
 ]
 
 Разработка проходит в шесть этапов в соответствии с таблицей
-#fqw-table-ref(<tab:development_stages>).
+#table-ref(<tab:development_stages>).
 
-#fqw-table(
+#gost-table(
   [Стадии разработки],
   columns: (2fr, 1fr, 2fr),
   label: <tab:development_stages>,
@@ -651,7 +651,7 @@ network, propagation, mobility, spectrum.
   ),
 )
 
-#fqw-title()[
+#title()[
   == Содержание работ по этапам
   <sec:stage_content>
 ]
@@ -678,7 +678,7 @@ network, propagation, mobility, spectrum.
 На стадии документирования должна быть выполнена
 разработка пояснительной записки.
 
-#fqw-title()[
+#title()[
   = Порядок контроля и приёмки
   <sec:control_acceptance>
 
@@ -696,22 +696,22 @@ network, propagation, mobility, spectrum.
 Результаты тестирования предоставляются на защите дипломного проекта
 членам ГАК.
 
-#counter("fqw-appendix").update(2)
-#fqw-default-numbering.update(3)
+#counter("appendix").update(2)
+#default-numbering.update(3)
 #show heading: set heading(outlined: false)
 
-#fqw-subappendix([Диаграмма вариантов использования], label: <sec:appendix_b_1_use_case_diagram>)
+#subappendix([Диаграмма вариантов использования], label: <sec:appendix_b_1_use_case_diagram>)
 
-На рисунке~#fqw-figure-ref(<fig:use-case-diagram>)
+На рисунке~#figure-ref(<fig:use-case-diagram>)
 представлена диаграмма вариантов использования.
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/technical-assignment/use-case-diagram.png"),
   [Диаграмма вариантов использования «Use Case».],
   label: <fig:use-case-diagram>,
 )
 
-#fqw-subappendix([Сценарии вариантов использования], label: <sec:appendix_b_2_use_case_scenarios>)
+#subappendix([Сценарии вариантов использования], label: <sec:appendix_b_2_use_case_scenarios>)
 
 *1. Запуск симуляции с двумя узлами*
 
@@ -747,32 +747,32 @@ network, propagation, mobility, spectrum.
 - Программа формирует отчёт симуляции, содержащий параметры сценария (включая пользовательские значения межузловых расстояний), время отправки первого и второго сообщений, результат приёма первого сообщения (успех), время приёма первого сообщения, среднее значение ОСШ для первого сообщения (если доступно), результат приёма второго сообщения (неудача), среднее значение ОСШ для второго сообщения (если доступно).
 - При одновременной передаче сообщений от двух узлов-отправителей, находящихся на разном расстоянии от узла-получателя, сообщение от ближнего узла принимается успешно, а сообщение от дальнего узла не принимается успешно.
 
-#fqw-subappendix([Макеты экранных форм], label: <sec:appendix_b_3_screen_mockups>)
+#subappendix([Макеты экранных форм], label: <sec:appendix_b_3_screen_mockups>)
 
 Макеты экранных форм работы модуля представлены
-на рисунках #fqw-figure-ref(<fig:wireshark-trace>)~--~#fqw-figure-ref(<fig:three-nodes-output>).
+на рисунках #figure-ref(<fig:wireshark-trace>)~--~#figure-ref(<fig:three-nodes-output>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/technical-assignment/wireshark-trace.png", width: 140mm),
   [Отображение результатов трассировки в программе Wireshark],
   label: <fig:wireshark-trace>,
 )
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/technical-assignment/two-nodes-output.png", width: 140mm),
   [Отображение результатов работы сценария с двумя узлами],
   label: <fig:two-nodes-output>,
 )
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/technical-assignment/three-nodes-output.png", width: 140mm),
   [Отображение результатов работы сценария с тремя узлами],
   label: <fig:three-nodes-output>,
 )
 
-#fqw-subappendix([Структура и формат данных], label: <sec:appendix_b_4_data_structure>)
+#subappendix([Структура и формат данных], label: <sec:appendix_b_4_data_structure>)
 
-#fqw-title()[
+#title()[
   === Взаимодействие двух узлов
   <sec:appendix_b_4_1>
 
@@ -780,9 +780,9 @@ network, propagation, mobility, spectrum.
 ]
 
 Входные данные представляют собой параметры командной строки и
-представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_1>):
+представлены в таблице #table-ref(<tabl:appendix_b_4_1>):
 
-#fqw-table(
+#gost-table(
   [Входные данные сценария взаимодействия двух узлов],
   columns: (1.3fr, 1.5fr, 1fr, 1fr, 1fr),
   align: left + horizon,
@@ -824,7 +824,7 @@ network, propagation, mobility, spectrum.
   ),
 )
 
-#fqw-title()[
+#title()[
   ==== Выходные данные
 ]
 
@@ -854,14 +854,13 @@ Receiver address: <значение>
 Payload: <значение>
 Mean SNR: <значение>
 `
-#fqw-indent-before-text
 
 При неуспешном приёме дополнительно выводится:
 `
 Message was not received successfully.
 `
 
-#fqw-title()[
+#title()[
   === Взаимодействие трёх узлов
   <sec:appendix_b_4_2>
 
@@ -869,9 +868,9 @@ Message was not received successfully.
 ]
 
 Входные данные представляют собой параметры командной строки и
-представлены в таблице #fqw-table-ref(<tabl:appendix_b_4_2>)
+представлены в таблице #table-ref(<tabl:appendix_b_4_2>)
 
-#fqw-table(
+#gost-table(
   [Входные данные сценария взаимодействия трёх узлов],
   columns: (1.3fr, 2fr, 1.2fr, 0.9fr, 1.7fr),
   align: left + horizon,
@@ -918,7 +917,7 @@ Message was not received successfully.
   ),
 )
 
-#fqw-title()[
+#title()[
   ==== Выходные данные
 ]
 
@@ -946,7 +945,6 @@ Send time: <значение> ms
 Receive result: success|failure
 Mean SNR: <значение>|not available
 `
-#fqw-indent-before-text
 
 При успешном приёме для каждого сообщения дополнительно выводятся:
 `
@@ -955,19 +953,17 @@ Sender address: <значение>
 Receiver address: <значение>
 Payload: <значение>
 `
-#fqw-indent-before-text
 
 При неуспешном приёме дополнительно выводится:
 `
 Message was not received successfully.
 `
-#fqw-indent-before-text
 
-#fqw-subappendix([Состояния физического уровня модели приёмопередатчика], label: <sec:appendix_b_5_phy_state_machine>)
+#subappendix([Состояния физического уровня модели приёмопередатчика], label: <sec:appendix_b_5_phy_state_machine>)
 
-На рисунке~#fqw-figure-ref(<fig:phy-state-machine>) представлена диаграмма машины состояний.
+На рисунке~#figure-ref(<fig:phy-state-machine>) представлена диаграмма машины состояний.
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/technical-assignment/phy-state-machine.png", width: 140mm),
   [Диаграмма состояний физического уровня модели приёмопередатчика],
   label: <fig:phy-state-machine>,

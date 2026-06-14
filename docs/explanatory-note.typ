@@ -7,10 +7,10 @@
 #task-title
 #explanatory-note-title
 
-#show: fqw-document.with()
+#show: document-setup.with()
 #set page(header: none, footer: none)
 
-#fqw-header-abstract()
+#header-abstract()
 <sec:annotation>
 
 Документ представляет собой пояснительную записку к выпускной
@@ -37,10 +37,10 @@
 
 Документ включает в себя
 страниц~--~#context counter(page).final().first(),
-рисунков~--~#context counter("fqw-figure").final().first(),
-таблиц~--~#context counter("fqw-table").final().first(),
-формул~--~#context counter("fqw-equation").final().first(),
-приложений~--~#context counter("fqw-appendix").final().first().
+рисунков~--~#context counter("gost-figure").final().first(),
+таблиц~--~#context counter("gost-table").final().first(),
+формул~--~#context counter("equation").final().first(),
+приложений~--~#context counter("appendix").final().first().
 
 Ключевые слова:
 гидроакустический приёмопередатчик,
@@ -52,10 +52,10 @@
 Ns3.
 #pagebreak()
 
-#show: fqw-document.with(document-code: codes.explanatory-note)
-#fqw-outline()
+#show: document-setup.with(document-code: codes.explanatory-note)
+#contents()
 
-#fqw-introduction(label: <sec:introduction>)
+#introduction(label: <sec:introduction>)
 
 // Вступление
 Системы связи играют ключевую роль в развитии современного общества,
@@ -176,7 +176,7 @@ Ns3.
 В результате снижается
 общая стоимость и время разработки и внедрения гидроакустических систем.
 
-#fqw-title(new-chapter: true)[
+#title(new-chapter: true)[
   = Анализ современного состояния вопроса
   <sec:analysis_of_current_state_of_issue>
 
@@ -223,7 +223,7 @@ V-образной модели.
 что в конечном итоге приводит к значительному сокращению сроков и затрат
 на создание систем гидроакустической связи~@clineBenefitsSimulationDrivenDesign2017.
 
-#fqw-title()[
+#title()[
   == Теоретические основы гидроакустических приёмопередатчиков
   <subsec:theoretical_foundations_of_hydroacoustic_transceivers>
 ]
@@ -232,9 +232,9 @@ V-образной модели.
 программно-аппаратного гидроакустического приёмопередатчика
 будет использована
 классическая сетевая модель OSI~@InformationTechnologyOpen1994,
-представленная на рисунке #fqw-figure-ref(<fig:osi_model>).
+представленная на рисунке #figure-ref(<fig:osi_model>).
 
-#fqw-figure(
+#gost-figure(
   table(
     columns: 2,
     align: center,
@@ -331,7 +331,7 @@ V-образной модели.
 требуя комплексного подхода, объединяющего знания в области
 гидроакустики, телекоммуникаций и обработки сигналов.
 
-#fqw-title()[
+#title()[
   == Обзор текущих решений для моделирования гидроакустических приёмопередатчиков
   <subsec:review_of_current_solutions_for_modeling_hydroacoustic_transceivers>
 ]
@@ -385,7 +385,7 @@ OrCAD позволяет на этапе проектирования выяви
 требуются модели гидроакустического канала и сетевые симуляторы,
 рассматриваемые в следующих пунктах.
 
-#fqw-title()[
+#title()[
   == Обзор текущих решений для моделирования гидроакустических каналов связи
   <subsec:review_of_current_solutions_for_modeling_hydroacoustic_communication_channels>
 ]
@@ -504,7 +504,7 @@ OrCAD позволяет на этапе проектирования выяви
 диапазоном частот, протяжённостью трассы и сложностью среды,
 необходимой точностью и доступными вычислительными ресурсами.
 
-#fqw-title()[
+#title()[
   == Обзор текущих решений для моделирования мультиагентных систем
   <subsec:review_of_current_solutions_for_modeling_multi-agent_systems>
 ]
@@ -616,7 +616,7 @@ Ns-3 распространяется под свободной лицензие
 Поэтому для реализации компьютерной модели программно-аппаратного
 приёмопередатчика следует использовать именно Ns-3.
 
-#fqw-title(new-chapter: true)[
+#title(new-chapter: true)[
   = Предлагаемое решение
   <sec:suggested_solution>
 
@@ -635,9 +635,9 @@ Ns-3 распространяется под свободной лицензие
 Для этого в настоящей работе предложена модифицированная V-образная модель,
 в которую интегрированы этапы компьютерного моделирования
 как обязательный элемент на всех уровнях проектирования.
-Детализированная структура процесса представлен в соответствии с рисунком #fqw-figure-ref(<fig:modified_V-shaped_development_model>).
+Детализированная структура процесса представлен в соответствии с рисунком #figure-ref(<fig:modified_V-shaped_development_model>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/modified_V-shaped_development_model-gray.png", width: 100%),
   [Модифицированная V-образная модель разработки],
   label: <fig:modified_V-shaped_development_model>,
@@ -759,7 +759,7 @@ Ns-3 распространяется под свободной лицензие
 Моделирование становится ключевым элементом устойчивой и эффективной разработки
 сложных программно-аппаратных систем.
 
-#fqw-title()[
+#title()[
   == Постановка задачи моделирования на физическом уровне
   <subsec:statement_of_modeling_problem_at_physical_level>
 ]
@@ -841,7 +841,7 @@ Ns-3 распространяется под свободной лицензие
 формальная модель гидроакустического приёмопередатчика,
 непосредственно используемые при реализации компьютерной модели.
 
-#fqw-title()[
+#title()[
   == Формальная модель гидроакустического канала связи
   <subsec:Formal_model_of_hydroacoustic_communication_channel>
 ]
@@ -863,13 +863,13 @@ Ns-3 распространяется под свободной лицензие
 
 Расстояние между передатчиком и приёмником определяется как
 евклидово расстояние между их координатами
-(см. формулу #fqw-eq-ref(<eq:euclidean_distance>)):
+(см. формулу #eq-ref(<eq:euclidean_distance>)):
 
 #eq-euclidean-distance()
 
 Поскольку скорость звука в среде в настоящей работе принимается постоянной,
 задержка распространения сигнала определяется выражением~@urikOsnovyGidroakustiki1978
-(см. формулу #fqw-eq-ref(<eq:propagation_delay>)):
+(см. формулу #eq-ref(<eq:propagation_delay>)):
 // Под эту формулу в целом берётся любой источник, базовая математика
 
 #eq-propagation-delay()
@@ -877,7 +877,7 @@ Ns-3 распространяется под свободной лицензие
 Для описания ослабления сигнала в канале используются суммарные потери при распространении,
 включающие потери на геометрическое расхождение и потери на абсорбцию.
 В общем виде это записывается следующим образом~@stojanovicUnderwaterAcousticCommunication2009
-(см. формулу #fqw-eq-ref(<eq:propagation_loss>)):
+(см. формулу #eq-ref(<eq:propagation_loss>)):
 
 #eq-propagation-loss()
 
@@ -885,7 +885,7 @@ Ns-3 распространяется под свободной лицензие
 распределяется по всё большей площади волнового фронта,
 что приводит к уменьшению плотности энергии сигнала с расстоянием.
 В инженерной форме потери на геометрическое расхождение принято задавать выражением~@urikOsnovyGidroakustiki1978
-(см. формулу #fqw-eq-ref(<eq:loss_of_geometric_divergence>)):
+(см. формулу #eq-ref(<eq:loss_of_geometric_divergence>)):
 
 #eq-geometric-loss(label: <eq:loss_of_geometric_divergence>)
 
@@ -901,30 +901,30 @@ Ns-3 распространяется под свободной лицензие
 при распространении акустического сигнала в водной среде возникают потери на абсорбцию,
 обусловленные необратимым преобразованием части акустической энергии в тепловую.
 В реализуемой модели эта составляющая задаётся как
-(см.~формулу~#fqw-eq-ref(<eq:absorption_loss>)):
+(см.~формулу~#eq-ref(<eq:absorption_loss>)):
 
 #eq-absorption-loss()
 
 Для вычисления коэффициента абсорбции в работе используется
-формула Торпа~@thorpAnalyticDescriptionLowFrequency1967 (см. формулу #fqw-eq-ref(<eq:thorp_absorption>)) и
-формула Франсуа-Гаррисона~@francoisSoundAbsorptionBased1982 (см. формулу #fqw-eq-ref(<eq:francois_garrison_absorption>)):
+формула Торпа~@thorpAnalyticDescriptionLowFrequency1967 (см. формулу #eq-ref(<eq:thorp_absorption>)) и
+формула Франсуа-Гаррисона~@francoisSoundAbsorptionBased1982 (см. формулу #eq-ref(<eq:francois_garrison_absorption>)):
 
 #eq-thorp-absorption()
 
 #eq-francois-garrison-absorption()
 
-Формулы #fqw-eq-ref(<eq:thorp_absorption>) и #fqw-eq-ref(<eq:francois_garrison_absorption>)
+Формулы #eq-ref(<eq:thorp_absorption>) и #eq-ref(<eq:francois_garrison_absorption>)
 задают инженерную аппроксимацию частотной зависимости абсорбции и
 позволяют учитывать увеличение потерь при росте частоты сигнала.
 
 В модели сигнал описывается через спектральную плотность мощности
 на выходе передатчика $S_"tx"(f)$, измеряемую в Па²/Гц.
 Тогда спектральная плотность мощности сигнала на входе приёмника определяется
-выражением (см. формулу #fqw-eq-ref(<eq:received_power_spectral_density>)):
+выражением (см. формулу #eq-ref(<eq:received_power_spectral_density>)):
 
 #eq-received-power-spectral-density()
 
-Выражение #fqw-eq-ref(<eq:received_power_spectral_density>)
+Выражение #eq-ref(<eq:received_power_spectral_density>)
 задаёт основное преобразование, выполняемое моделью канала связи.
 Таким образом, по заданным координатам узлов и параметрам сигнала
 модель канала позволяет определить две ключевые величины, используемые далее
@@ -932,7 +932,7 @@ Ns-3 распространяется под свободной лицензие
 задержку распространения τ и
 спектральную плотность мощности принятого сигнала S#sub[rx];(f).
 
-#fqw-title()[
+#title()[
   == Формальная модель гидроакустического приёмопередатчика
   <subsec:formal_model_of_hydroacoustic_transceiver>
 ]
@@ -965,10 +965,10 @@ Ns-3 распространяется под свободной лицензие
 дополнительного вклада в расчёт уровня сигнала на приёмной стороне.
 
 Полезный сигнал на входе приёмника задаётся через спектральную плотность мощности,
-определённую формулой #fqw-eq-ref(<eq:received_power_spectral_density>).
+определённую формулой #eq-ref(<eq:received_power_spectral_density>).
 Полезная мощность сигнала в рабочей полосе частот [$f_1$, $f_2$]
 вычисляется интегрированием спектральной плотности мощности по этой полосе
-(см. формулу #fqw-eq-ref(<eq:useful_signal_power>)):
+(см. формулу #eq-ref(<eq:useful_signal_power>)):
 
 #eq-useful-signal-power()
 
@@ -976,7 +976,7 @@ Ns-3 распространяется под свободной лицензие
 одновременных передач.
 В рамках принятой модели они учитываются также в энергетическом представлении
 через спектральные плотности мощности
-(см. формулы #fqw-eq-ref(<eq:noise_power>) и #fqw-eq-ref(<eq:interference_power>)):
+(см. формулы #eq-ref(<eq:noise_power>) и #eq-ref(<eq:interference_power>)):
 
 #eq-noise-and-interference-power()
 
@@ -984,14 +984,14 @@ Ns-3 распространяется под свободной лицензие
 отношение мощности полезного сигнала к суммарной мощности шума и помех.
 Для этого используется величина SINR,
 определяемая выражением~@stojanovicUnderwaterAcousticCommunication2009
-(см. формулу #fqw-eq-ref(<eq:sinr>)):
+(см. формулу #eq-ref(<eq:sinr>)):
 
 #eq-sinr()
 
 Решение о возможности успешного приёма пакета принимается путём сравнения
 расчётного значения SINR с заданным порогом приёма $gamma_"th"$.
 Если выполняется условие
-(см. формулу #fqw-eq-ref(<eq:successful_reception_condition>)):
+(см. формулу #eq-ref(<eq:successful_reception_condition>)):
 
 #eq-successful-reception-condition()
 
@@ -1051,7 +1051,7 @@ V-образную модель разработки программно-апп
 более сложные механизмы обработки сигналов и
 правил принятия решения о приёме.
 
-#fqw-title(new-chapter: true)[
+#title(new-chapter: true)[
   = Проектирование и разработка модуля гидроакустической связи
   <sec:module_design>
 
@@ -1119,7 +1119,7 @@ V-образную модель разработки программно-апп
 
 + модель приёмопередатчика должна принимать решение
   о качестве принимаемого сигнала (принят / не принят)
-  на основе порогового значения SINR (см. формулу #fqw-eq-ref(<eq:sinr>));
+  на основе порогового значения SINR (см. формулу #eq-ref(<eq:sinr>));
 
 + MAC-адрес должен состоять из 8 бит;
 
@@ -1142,28 +1142,28 @@ V-образную модель разработки программно-апп
 + модель должна определять
   задержку распространения сигнала
   на основе расстояния между узлами и скорости звука в воде
-  (см. формулу #fqw-eq-ref(<eq:propagation_delay>));
+  (см. формулу #eq-ref(<eq:propagation_delay>));
 
 + модель позволяет настраивать постоянное значение скорости звука в среде;
 
 + модель должна вычислять суммарные потери при распространении согласно формуле
-  (см. формулу #fqw-eq-ref(<eq:propagation_loss>)),
+  (см. формулу #eq-ref(<eq:propagation_loss>)),
   с учётом геометрического расхождения
-  (см. формулу #fqw-eq-ref(<eq:loss_of_geometric_divergence>))
+  (см. формулу #eq-ref(<eq:loss_of_geometric_divergence>))
   и потерь на абсорбцию в среде по формуле Торпа или Франсуа-Гаррисона
   (см. формулы
-  #fqw-eq-ref(<eq:absorption_loss>),
-  #fqw-eq-ref(<eq:thorp_absorption>),
-  #fqw-eq-ref(<eq:francois_garrison_absorption>));
+  #eq-ref(<eq:absorption_loss>),
+  #eq-ref(<eq:thorp_absorption>),
+  #eq-ref(<eq:francois_garrison_absorption>));
 
 + модель позволяет настраивать коэффициент n
   из формулы расчёта потерь на геометрическое расхождение
-  (см. формулу #fqw-eq-ref(<eq:loss_of_geometric_divergence>)).
+  (см. формулу #eq-ref(<eq:loss_of_geometric_divergence>)).
 
 + модель гидроакустического канала связи должна
   осуществлять распространение акустических сигналов с учётом
   времени распространения и потерь при распространении
-  (формулы #fqw-eq-ref(<eq:euclidean_distance>) -- #fqw-eq-ref(<eq:francois_garrison_absorption>));
+  (формулы #eq-ref(<eq:euclidean_distance>) -- #eq-ref(<eq:francois_garrison_absorption>));
 
 + модель выполняет расчёт спектральной плотности мощности сигнала
   на входе приёмника (Па²/Гц).
@@ -1187,16 +1187,16 @@ V-образную модель разработки программно-апп
 + разработка компьютерных моделей, должна быть выполнена
   в формате гидроакустического модуля в Ns-3.
 
-#fqw-title()[
+#title()[
   == Варианты использования компьютерных моделей
   <subsec:use_cases_of_computer_models>
 ]
 
 Диаграмма вариантов использования гидроакустического модуля для
 моделирования программно-аппаратных гидроакустических приёмопередатчиков
-представлен на рисунке #fqw-figure-ref(<fig:use_case>).
+представлен на рисунке #figure-ref(<fig:use_case>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Use case.png", width: 60%),
   [Диаграмма вариантов использования],
 )<fig:use_case>
@@ -1206,19 +1206,19 @@ V-образную модель разработки программно-апп
 Варианты использования включают
 настройку параметров, запуск симуляции, получение и анализ результатов.
 
-#fqw-title()[
+#title()[
   == Структура компонентов компьютерных моделей
   <subsec:structure_of_model_components>
 ]
 
 Модель гидроакустического приёмопередатчика должна быть
 спроектирована в соответствии с сетевой моделью OSI.
-Как уже было сказано в пункте #fqw-section-ref(<subsec:theoretical_foundations_of_hydroacoustic_transceivers>),
+Как уже было сказано в пункте #section-ref(<subsec:theoretical_foundations_of_hydroacoustic_transceivers>),
 приёмопередатчик реализует канальный и физический уровень.
 В общем случае, модель гидроакустического приёмопередатчика описывается
-с помощью следующей диаграммы классов (в соответствии с рисунком #fqw-figure-ref(<fig:overall_transceiver_movel>)).
+с помощью следующей диаграммы классов (в соответствии с рисунком #figure-ref(<fig:overall_transceiver_movel>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Overall transeiver model.png", height: 90%),
   [Диаграмма классов общей модели гидроакустического приёмопередатчика],
 )<fig:overall_transceiver_movel>
@@ -1260,9 +1260,9 @@ V-образную модель разработки программно-апп
 
 Важной частью любой системы связи являются данные, передаваемые устройствами по сети.
 В разрабатываемой системе моделирования их место в системе отображено
-на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:transceiver_movel>)).
+на следующей диаграмме классов (в соответствии с рисунком #figure-ref(<fig:transceiver_movel>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Transceiver model.png"),
   [Диаграмма классов пакетов в модели гидроакустического приёмопередатчика],
 )<fig:transceiver_movel>
@@ -1294,9 +1294,9 @@ HaTransmissionParameters.
 Основные функции гидроакустического приёмопередатчика на физическом уровне --
 это преобразование акустических сигналов.
 Для выполнения этих операций в компьютерную модель приёмопередатчика вводятся
-следующие классы, представленные на диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:ppdu_processors>)).
+следующие классы, представленные на диаграмме классов (в соответствии с рисунком #figure-ref(<fig:ppdu_processors>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Ppdu processors.png"),
   [Диаграмма классов преобразователей акустических сигналов],
 )<fig:ppdu_processors>
@@ -1318,9 +1318,9 @@ HaTransmissionParameters.
   осуществляющий приём акустических сигналов, начинающихся с преамбулы.
 
 Процесс приёма сигнала в модели HaPpduPreamblePayloadProcessor представлен
-на следующей диаграмме последовательности (в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_signal_reception>)).
+на следующей диаграмме последовательности (в соответствии с рисунком #figure-ref(<fig:sequence_diagram_of_signal_reception>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/04. Receive HaPpduPreamblePayloadProcessor.png"),
   [диаграмма последовательности приёма сигнала в HaPpduPreamblePayloadProcessor],
 )<fig:sequence_diagram_of_signal_reception>
@@ -1334,9 +1334,9 @@ HaTransmissionParameters.
 Как уже упоминалось ранее, класс HaPpduProcessor использует модель интерференции.
 Она используется для расчёта характеристик принимаемых сигналов.
 Диаграмма классов, описывающая компоненты модели интерференции
-представлена ниже в соответствии с рисунком #fqw-figure-ref(<fig:interference_model_classes>).
+представлена ниже в соответствии с рисунком #figure-ref(<fig:interference_model_classes>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Interference (one band).png"),
   [Диаграмма классов модели интерференции],
 )<fig:interference_model_classes>
@@ -1370,19 +1370,19 @@ HaInterferenceModel и HaInterferenceStatus
 Для разрабатываемой модели приёмопередатчика используется модель интерференции
 HaInterferenceOneBandModel.
 Работа этой модели, представлена на диаграммах последовательностей
-(в соответствии с рисунками #fqw-figure-ref(<fig:sequence_diagram_of_adding_ppdu_to_interference_model>)--#fqw-figure-ref(<fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>)).
+(в соответствии с рисунками #figure-ref(<fig:sequence_diagram_of_adding_ppdu_to_interference_model>)--#figure-ref(<fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/08.01. HaInterferenceOneBandModel add ppdu.png", width: 92.5%),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
 )<fig:sequence_diagram_of_adding_ppdu_to_interference_model>
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/08.02. HaInterferenceOneBandModel add signal.png", width: 85%),
   [Диаграмма последовательности приёма нового информационного сигнала в модель интерференции HaInterferenceOneBandModel],
 )<fig:sequence_diagram_of_adding_signal_to_interference_model>
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/08.03. HaInterferenceOneBandModel Update.png"),
   [Диаграмма последовательности обновления статусов сигналов в модели интерференции HaInterferenceOneBandModel],
   label: <fig:sequence_diagram_of_signal_status_updates_within_the_interference_model>,
@@ -1391,12 +1391,12 @@ HaInterferenceOneBandModel.
 Расчёт характеристик в модели интерференции HaInterferenceOneBandModel
 осуществляется на основании мощности сигнала в одной полосе частот.
 Для расчёта SINR используются формулы
-#fqw-eq-ref(<eq:received_power_spectral_density>) -- #fqw-eq-ref(<eq:interference_power>).
+#eq-ref(<eq:received_power_spectral_density>) -- #eq-ref(<eq:interference_power>).
 
 Связь поведения физического уровня с гидроакустическими преобразователями
-представлена на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:phy_behavior>)).
+представлена на следующей диаграмме классов (в соответствии с рисунком #figure-ref(<fig:phy_behavior>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Phy Behavior.png"),
   [Диаграмма классов поведений физического уровня с акустическими преобразователями],
   label: <fig:phy_behavior>,
@@ -1414,10 +1414,10 @@ HaInterferenceOneBandModel.
   предоставляющий один активный акустический преобразователь.
 
 Работа приёмопередатчика в полудуплексном режиме описывается с помощью
-диаграммы машины состояний (см. рисунок #fqw-figure-ref(<fig:state_machine_diagram_of_the_transceiver_model>))
-и диаграммы классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_the_transceiver_models_state_machine>))
+диаграммы машины состояний (см. рисунок #figure-ref(<fig:state_machine_diagram_of_the_transceiver_model>))
+и диаграммы классов (в соответствии с рисунком #figure-ref(<fig:class_diagram_of_the_transceiver_models_state_machine>))
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Phy states.png"),
   [Диаграмма машины состояний модели приёмопередатчика в полудуплексном режиме],
   label: <fig:state_machine_diagram_of_the_transceiver_model>,
@@ -1430,7 +1430,7 @@ HaInterferenceOneBandModel.
 - *Tx* -- устройство находится в режиме отправки акустического сигнала;
 - *Rx* -- устройство находится в режиме приёма акустического сигнала.
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/Transceiver state machine.png", width: 50%),
   [Диаграмма классов машины состояний модели приёмопередатчика],
   label: <fig:class_diagram_of_the_transceiver_models_state_machine>,
@@ -1443,9 +1443,9 @@ HaInterferenceOneBandModel.
 - *TransceiverStateMachine* -- базовый класс машины состояний приёмопередатчика.
 
 Конечное поведение модели приёмопередатчика описывается классами,
-представленными на следующей диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_hydroacoustic_transceiver_model>)).
+представленными на следующей диаграмме классов (в соответствии с рисунком #figure-ref(<fig:class_diagram_of_hydroacoustic_transceiver_model>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/simple/Simple transmitter.png"),
   [Диаграмма классов машины состояний модели приёмопередатчика],
   label: <fig:class_diagram_of_hydroacoustic_transceiver_model>,
@@ -1473,16 +1473,16 @@ HaInterferenceOneBandModel.
 
 Процесс отправки пакета на канальном уровне в модели гидроакустического
 приёмопередатчика представлен на следующих диаграммах последовательности
-в соответствии с рисунками #fqw-figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>)
-и #fqw-figure-ref(<fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>).
+в соответствии с рисунками #figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>)
+и #figure-ref(<fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/simple/01. Send packet.png"),
   [Диаграмма последовательности отправки нового пакета на канальном уровне],
   label: <fig:sequence_diagram_of_new_packet_transmission_at_data_link_layer>,
 )
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/simple/02. Move mpdu to queue.png", height: 90%),
   [Диаграмма последовательности взаимодействия очереди с поведением физического уровня],
   label: <fig:sequence_diagram_of_queue_interfacing_with_physical_layer_behavior>,
@@ -1490,9 +1490,9 @@ HaInterferenceOneBandModel.
 
 Процесс отправки пакета на физическом уровне модели гидроакустического
 приёмопередатчика представлен на следующей диаграмме последовательности
-(в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>)).
+(в соответствии с рисунком #figure-ref(<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/simple/03. Send mpdu via SimpleHaPhyBehavior.png", width: 95%),
   [Диаграмма последовательности отправки нового пакета на физическом уровне],
 )<fig:sequence_diagram_of_new_packet_transmission_at_physical_layer>
@@ -1503,9 +1503,9 @@ HaInterferenceOneBandModel.
 позволяет упростить создание альтернативных моделей приёмопередатчиков.
 
 Модель гидроакустического канала связи представлена на следующей
-диаграмме классов (в соответствии с рисунком #fqw-figure-ref(<fig:class_diagram_of_single-band_hydroacoustic_communication_channel_model>)).
+диаграмме классов (в соответствии с рисунком #figure-ref(<fig:class_diagram_of_single-band_hydroacoustic_communication_channel_model>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/One ray channel.png"),
   [Диаграмма классов однолучевой модели гидроакустического канала связи],
 )<fig:class_diagram_of_single-band_hydroacoustic_communication_channel_model>
@@ -1535,9 +1535,9 @@ HaInterferenceOneBandModel.
 
 Процесс работы однолучевой модели гидроакустического канала связи
 представлен на следующей диаграмме последовательности
-(в соответствии с рисунком #fqw-figure-ref(<fig:sequence_diagram_of_signal_transmission_from_the_transceiver_to_single_beam_channel_model>)).
+(в соответствии с рисунком #figure-ref(<fig:sequence_diagram_of_signal_transmission_from_the_transceiver_to_single_beam_channel_model>)).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/diagrams/seqence one ray.png"),
   [Диаграмма последовательности передачи сигнала от приёмопередатчика в однолучевую модель канала связи],
 )<fig:sequence_diagram_of_signal_transmission_from_the_transceiver_to_single_beam_channel_model>
@@ -1579,7 +1579,7 @@ HaInterferenceOneBandModel.
 образует основу для программной реализации модуля и
 его последующей апробации.
 
-#fqw-title(new-chapter: true)[
+#title(new-chapter: true)[
   = Результаты разработки и апробация
   <sec:development_results_and_validation>
 ]
@@ -1594,7 +1594,7 @@ HaInterferenceOneBandModel.
 изложены результаты валидации по техническим характеристикам
 промышленных модемов.
 
-#fqw-title()[
+#title()[
   == Результаты реализации модуля
   <subsec:implementation_results>
 ]
@@ -1604,7 +1604,7 @@ HaInterferenceOneBandModel.
 для сетевого симулятора Ns-3 на языке C++.
 Реализация построена на иерархии абстрактных и базовых классов
 и охватывает все компоненты, описанные в пункте
-#fqw-section-ref(<subsec:structure_of_model_components>):
+#section-ref(<subsec:structure_of_model_components>):
 модель гидроакустического канала, модели поглощения звука,
 модель приёмопередатчика и модель интерференции.
 Компоненты слабо связаны между собой и
@@ -1615,14 +1615,14 @@ HaInterferenceOneBandModel.
 
 *Модель гидроакустического канала.*
 Потери в канале складываются из потерь на геометрическое расхождение
-(см. формулу #fqw-eq-ref(<eq:loss_of_geometric_divergence>))
+(см. формулу #eq-ref(<eq:loss_of_geometric_divergence>))
 и потерь на поглощение звука
-(см. формулу #fqw-eq-ref(<eq:absorption_loss>))
+(см. формулу #eq-ref(<eq:absorption_loss>))
 в соответствии с формальной моделью из пункта
-#fqw-section-ref(<subsec:Formal_model_of_hydroacoustic_communication_channel>).
+#section-ref(<subsec:Formal_model_of_hydroacoustic_communication_channel>).
 Задержка распространения вычисляется
 как отношение расстояния между узлами к скорости звука
-(см. формулу #fqw-eq-ref(<eq:propagation_delay>)).
+(см. формулу #eq-ref(<eq:propagation_delay>)).
 Механизмы потерь реализованы через штатную цепочку объектов
 `PropagationLossModel`, что позволяет подключать
 произвольное число моделей потерь и
@@ -1632,11 +1632,11 @@ HaInterferenceOneBandModel.
 Реализованы два варианта модели поглощения звука,
 оформленные как расширение стандартного модуля распространения Ns-3 (propagation).
 Формула Франсуа-Гаррисона~@francoisSoundAbsorptionBased1982
-(см. формулу #fqw-eq-ref(<eq:francois_garrison_absorption>))
+(см. формулу #eq-ref(<eq:francois_garrison_absorption>))
 учитывает химический состав морской воды, давление, температуру и кислотность среды
 и обеспечивает высокую точность в диапазоне частот от 200~Гц до 500~кГц.
 Формула Торпа~@thorpAnalyticDescriptionLowFrequency1967
-(см. формулу #fqw-eq-ref(<eq:thorp_absorption>))
+(см. формулу #eq-ref(<eq:thorp_absorption>))
 представляет собой упрощённую аппроксимацию, применимую для частот до 100~кГц.
 Обе модели наследуют базовый класс потерь распространения Ns-3,
 что делает их взаимозаменяемыми с другими моделями этого типа.
@@ -1644,8 +1644,8 @@ HaInterferenceOneBandModel.
 *Модель приёмопередатчика.*
 Критерий успешного приёма реализован на основе отношения сигнал-шум-помеха (SINR)
 в соответствии с условием
-(см. формулу #fqw-eq-ref(<eq:successful_reception_condition>))
-из пункта #fqw-section-ref(<subsec:formal_model_of_hydroacoustic_transceiver>).
+(см. формулу #eq-ref(<eq:successful_reception_condition>))
+из пункта #section-ref(<subsec:formal_model_of_hydroacoustic_transceiver>).
 Обработка PPDU разделена на два этапа: обнаружение преамбулы и декодирование полезной нагрузки~--
 для каждого из них задаётся независимый порог SINR.
 Приёмопередатчик работает в полудуплексном режиме:
@@ -1657,14 +1657,14 @@ HaInterferenceOneBandModel.
 которая задаётся как параметр модели интерференции.
 Сигналы от одновременно передающих узлов рассматриваются как помехи
 и учитываются этой же моделью.
-Значение SINR (см. формулу #fqw-eq-ref(<eq:sinr>))
+Значение SINR (см. формулу #eq-ref(<eq:sinr>))
 не фиксируется однократно, а пересчитывается в течение всего приёма сигнала --
 при каждом изменении обстановки в канале (начале или окончании передач и помех).
 По полученным значениям за время приёма отслеживаются
 минимальное, максимальное и усреднённое по времени SINR,
 используемые при оценке качества приёма.
 
-#fqw-title()[
+#title()[
   == Тестовый пример
   <subsec:test_example>
 ]
@@ -1680,7 +1680,7 @@ HaInterferenceOneBandModel.
 передают пакеты получателю (Узел 2), находящемуся в начале координат.
 Параметры приёмопередатчиков соответствуют техническим характеристикам
 промышленного гидроакустического модема Modem~6~OEM~Nano (subsea) Type~8262~@Modem6OEM
-(см. таблицу #fqw-table-ref(<tab:hydroacoustic-modems>)):
+(см. таблицу #table-ref(<tab:hydroacoustic-modems>)):
 
 - несущая частота: $f_c = 27$ кГц (полоса 20--34~кГц), полоса $B = 14$ кГц;
 
@@ -1695,9 +1695,9 @@ HaInterferenceOneBandModel.
 - пороговое значение SINR: $gamma_"th" = 10$.
 
 Ключевая часть скрипта инициализации сценария приведена в листинге,
-представленном в соответствии с рисунком #fqw-figure-ref(<lst:three_nodes>).
+представленном в соответствии с рисунком #figure-ref(<lst:three_nodes>).
 
-#fqw-figure(
+#gost-figure(
   block(
     width: 100%,
     fill: luma(97%),
@@ -1733,7 +1733,7 @@ HaInterferenceOneBandModel.
 
 Рассмотрим два случая запуска: коллизия при равных расстояниях и успешный приём при разных расстояниях.
 
-#fqw-title()[
+#title()[
   === Сценарий 1: равные расстояния (коллизия)
   <subsec:test_scenario_1>
 ]
@@ -1744,11 +1744,11 @@ HaInterferenceOneBandModel.
 SINR каждого из них определяется как отношение
 мощности полезного сигнала к сумме мощности помехи
 (второй сигнал) и шума,
-что согласно формуле #fqw-eq-ref(<eq:sinr>) даёт значение
+что согласно формуле #eq-ref(<eq:sinr>) даёт значение
 существенно ниже порогового $gamma_"th" = 10$:
 оба пакета не принимаются.
 
-#fqw-figure(
+#gost-figure(
   block(
     width: 100%,
     fill: luma(97%),
@@ -1779,16 +1779,15 @@ SINR каждого из них определяется как отношени
 эффект коллизии в гидроакустической сети при отсутствии
 протокола разрешения доступа к среде.
 
-#fqw-title()[
+#title()[
   === Сценарий 2: разные расстояния (успешный приём)
   <subsec:test_scenario_2>
-  #fqw-indent-before-text
 ]
 
 Отправитель 1 расположен ближе ($D_1 = 500$ м),
 отправитель 2 -- дальше ($D_2 = 2000$ м).
 Принятая мощность убывает с расстоянием за счёт геометрического расхождения
-(см. формулу #fqw-eq-ref(<eq:loss_of_geometric_divergence>))
+(см. формулу #eq-ref(<eq:loss_of_geometric_divergence>))
 и поглощения. Оценим вклад геометрического расхождения
 при $n = 2$ отношение принятых мощностей составляет:
 
@@ -1801,7 +1800,7 @@ $ P_1 slash P_2 approx (D_2 slash D_1)^2 = (2000 slash 500)^2 = 16. $
 на порядок мощнее, что обеспечивает SINR выше порогового
 $gamma_"th" = 10$ и успешный приём первого сообщения.
 
-#fqw-figure(
+#gost-figure(
   block(
     width: 100%,
     fill: luma(97%),
@@ -1846,7 +1845,7 @@ SINR = 243.80 ($approx 23.9$ дБ), что многократно превыша
 реальных гидроакустических систем
 в отсутствие протокола разрешения коллизий.
 
-#fqw-title()[
+#title()[
   == Валидация разработанных моделей
   <sec:validation>
 
@@ -1890,7 +1889,7 @@ $ N = N_0 dot B, $
 
 где $N_0$ -- спектральная плотность шума, $B$ -- ширина полосы модема.
 Такой подход соответствует формуле расчёта SINR
-(см. формулу #fqw-eq-ref(<eq:sinr>)).
+(см. формулу #eq-ref(<eq:sinr>)).
 
 Следует подчеркнуть, что принятый постоянный уровень шума
 является первым приближением:
@@ -1906,19 +1905,19 @@ $ N = N_0 dot B, $
 Для каждого из 22 модемов выполнялась ровно одна итерация бинарного поиска
 (симуляция детерминированная).
 
-#fqw-title()[
+#title()[
   === Данные для валидации
   <subsec:validation_data>
 ]
 
 Характеристики модемов, использованных для валидации,
-приведены в таблице #fqw-table-ref(<tab:hydroacoustic-modems>).
+приведены в таблице #table-ref(<tab:hydroacoustic-modems>).
 В выборку вошли устройства четырёх производителей,
 охватывающие диапазон рабочих частот от 7 до 180~кГц,
 излучаемое давление от 169 до 196~дБ re 1~мкПа \@ 1~м
 и паспортную дальность от 0.3 до 10~км.
 
-#fqw-table(
+#gost-table(
   [Характеристики гидроакустических модемов],
   columns: (2fr, 0.7fr, 1.05fr, 1.2fr),
   label: <tab:hydroacoustic-modems>,
@@ -2021,7 +2020,7 @@ $ N = N_0 dot B, $
   ),
 )
 
-#fqw-title()[
+#title()[
   === Результаты и интерпретация
   <subsec:validation_results>
 ]
@@ -2046,7 +2045,7 @@ $ N = N_0 dot B, $
 - *R²* = 0.9 (90%);
 - *MAPE* = 24%.
 
-На рисунке #fqw-figure-ref(<fig:validation_scatter>) представлено
+На рисунке #figure-ref(<fig:validation_scatter>) представлено
 соотношение паспортных и предсказанных значений дальности
 для всех 22 модемов.
 Точки разбиты на три частотных группы:
@@ -2055,13 +2054,13 @@ $ N = N_0 dot B, $
 высокочастотные (ВЧ, $f_c > 50$ кГц).
 Пунктирная диагональ соответствует идеальной модели ($hat(d) = d$).
 
-#fqw-figure(
+#gost-figure(
   image("../assets/images/validation_scatter.png", width: 80%),
   [Соотношение паспортной и предсказанной дальности для 22 модемов (постоянный уровень шума)],
   label: <fig:validation_scatter>,
 )
 
-Из рисунка #fqw-figure-ref(<fig:validation_scatter>) видно,
+Из рисунка #figure-ref(<fig:validation_scatter>) видно,
 что предсказанные значения в целом группируются вдоль
 линии идеального соответствия,
 что отражается в высоком коэффициенте детерминации.
@@ -2091,7 +2090,7 @@ $ N = N_0 dot B, $
 и свидетельствует о применимости модели
 для виртуальных испытаний приёмопередатчиков на ранних этапах проектирования.
 
-#fqw-title()[
+#title()[
   == Апробация
   <subsec:approbation>
 ]
@@ -2103,7 +2102,7 @@ $ N = N_0 dot B, $
 выпускных квалификационных работ (ВИК-2025/26),
 проходившем с 1~октября 2025 по июнь 2026~года,
 и по итогам отбора прошла в полуфинал (см. приложение
-#fqw-section-ref(<appendix:all_russian_engineering_competition>)),
+#section-ref(<appendix:all_russian_engineering_competition>)),
 пройдя экспертную оценку конкурсной комиссии.
 
 *Использование результатов на предприятии.*
@@ -2111,9 +2110,9 @@ $ N = N_0 dot B, $
 для решении внутренних задач исследования и моделирования
 гидроакустических систем связи.
 Разрешение на публикацию материалов по теме данной работы приведено в приложении
-#fqw-section-ref(<appendix:permission_to_publish>).
+#section-ref(<appendix:permission_to_publish>).
 
-#fqw-title()[
+#title()[
   == Постпроектный анализ
   <subsec:post_project_analysis>
 ]
@@ -2190,7 +2189,7 @@ XII~Всероссийского инженерного конкурса ВКР 
 задачи разработки компьютерной модели и её валидации можно считать
 выполненными.
 
-#fqw-title(new-chapter: true)[
+#title(new-chapter: true)[
   #heading(numbering: none)[Заключение]
   <sec:global_conclusions>
 ]
@@ -2235,8 +2234,7 @@ XII~Всероссийского инженерного конкурса ВКР 
 продолжая внедрение MBSE методологии.
 
 #pagebreak()
-#heading(numbering: none)[Список использованных источников]
-#fqw-indent-before-text
+#title(heading(numbering: none)[Список использованных источников])
 #en-bibliography("../assets/FQW.bib")
 
 + Урик, Р. Д. Основы гидроакустики / Р. Д. Урик. – Ленинград : Судостроение, 1978. – 448 с.
@@ -2429,15 +2427,15 @@ XII~Всероссийского инженерного конкурса ВКР 
   URL: https:\/\/www.teledynemarine.com/en-us/products/SiteAssets/Benthos/Modems%20Product%20Selection%20Guide_2025.pdf
   (дата обращения: 29.04.2026).
 
-#fqw-appendix-state.update(true)
-#fqw-appendix-title([Справка о результатах проверки выпускной квалификационной работы на наличие заимствований])
-#fqw-appendix-title([Техническое задание])
-#fqw-appendix-title([Руководство системного программиста])
-#fqw-appendix-title([
+#appendix-state.update(true)
+#appendix-title([Справка о результатах проверки выпускной квалификационной работы на наличие заимствований])
+#appendix-title([Техническое задание])
+#appendix-title([Руководство системного программиста])
+#appendix-title([
   Свидетельство о прохождении в полуфинал в
   XII~Всероссийском инженерном конкурсе
   выпускных квалификационных работ (ВИК-2025/26)
 ])
 <appendix:all_russian_engineering_competition>
-#fqw-appendix-title([Разрешение на публикацию от ФГУП «ВНИИА им. Н.~Л.~Духова»])
+#appendix-title([Разрешение на публикацию от ФГУП «ВНИИА им. Н.~Л.~Духова»])
 <appendix:permission_to_publish>

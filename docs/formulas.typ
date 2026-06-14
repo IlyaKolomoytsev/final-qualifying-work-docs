@@ -1,9 +1,9 @@
-#import "../template/fqw.typ": fqw-where, fqw-equation-list
+#import "../template/fqw.typ": where-defs, equation-list
 
 // Евклидово расстояние между узлами (используется в ПЗ и ТЗ)
 #let eq-euclidean-distance(label: <eq:euclidean_distance>) = {
   [$ d = norm(r_"rx" - r_"tx") $ #label]
-  fqw-where((
+  where-defs((
     ($d$, [расстояние между передатчиком и приёмником, м]),
     ($r_"tx"$, [радиус-вектор передатчика]),
     ($r_"rx"$, [радиус-вектор приёмника]),
@@ -13,7 +13,7 @@
 // Задержка распространения (используется в ПЗ и ТЗ)
 #let eq-propagation-delay(label: <eq:propagation_delay>) = {
   [$ tau = d / c $ #label]
-  fqw-where((
+  where-defs((
     ($tau$, [задержка распространения сигнала, с]),
     ($d$, [расстояние между передатчиком и приёмником, м]),
     ($c$, [скорость звука в воде, м/с]),
@@ -23,7 +23,7 @@
 // Суммарные потери при распространении (используется в ПЗ и ТЗ)
 #let eq-propagation-loss(label: <eq:propagation_loss>) = {
   [$ T L(f, d) = T L_"geom" (d) + T L_"abs" (f, d) $ #label]
-  fqw-where((
+  where-defs((
     ([$T L$ (Transmission loss)], [суммарные потери при распространении на частоте $f$ при расстоянии $d$, дБ]),
     ($T L_"geom"$, [потери на геометрическое расхождение, дБ]),
     ($T L_"abs"$, [потери на абсорбцию, дБ]),
@@ -35,7 +35,7 @@
 // Потери на геометрическое расхождение с нормировкой d/d₀
 #let eq-geometric-loss(label: <eq:geometric_loss>) = {
   [$ T L_"geom" (d) = 10 n log_10 (d / d_0) $ #label]
-  fqw-where((
+  where-defs((
     ($T L_"geom"$, [потери на геометрическое расхождение, дБ]),
     ($n$, [коэффициент расхождения]),
     ($d$, [расстояние, пройденное сигналом, м]),
@@ -46,7 +46,7 @@
 // Потери на абсорбцию
 #let eq-absorption-loss(label: <eq:absorption_loss>) = {
   [$ T L_"abs" (f, d) = alpha(f) dot d dot 10^(-3) $ #label]
-  fqw-where((
+  where-defs((
     ($T L_"abs"$, [потери на абсорбцию, дБ]),
     ($alpha$, [коэффициент поглощения, дБ/км]),
     ($d$, [расстояние, пройденное сигналом, м]),
@@ -56,7 +56,7 @@
 // Коэффициент абсорбции по формуле Торпа
 #let eq-thorp-absorption(label: <eq:thorp_absorption>) = {
   [$ alpha(f) approx (0.11 f^2) / (1 + f^2) + (44 f^2) / (4100 + f^2) + 2.75 dot 10^(-4) f^2 + 0.003 $ #label]
-  fqw-where((
+  where-defs((
     ($alpha$, [коэффициент поглощения, дБ/км]),
     ($f$, [частота звука, кГц]),
   ))
@@ -64,7 +64,7 @@
 
 // Коэффициент абсорбции по формуле Франсуа-Гаррисона
 #let eq-francois-garrison-absorption(label: <eq:francois_garrison_absorption>) = {
-  fqw-equation-list((
+  equation-list((
     (
       [$
         alpha(f) approx
@@ -88,7 +88,7 @@
     [$ P_3 = 1 - 3.83 dot 10^(-5) D + 4.9 dot 10^(-10) D^2 $],
     [$ c = 1412 + 3.21 T + 1.19 S + 0.0167 D $],
   ))
-  fqw-where((
+  where-defs((
     ($alpha$, [коэффициент поглощения, дБ/км]),
     ($f$, [частота звука, кГц]),
     ($A_1$, [амплитудный коэффициент вклада борной кислоты]),
@@ -108,7 +108,7 @@
 // Спектральная плотность мощности на входе приёмника (ПЗ)
 #let eq-received-power-spectral-density(label: <eq:received_power_spectral_density>) = {
   [$ S_"rx" (f) = S_"tx" (f) dot 10^(-(T L(f, d)) / 10) $ #label]
-  fqw-where((
+  where-defs((
     ($S_"rx" (f)$, [спектральная плотность мощности сигнала на входе приёмника, Па²/Гц]),
     ($S_"tx" (f)$, [спектральная плотность мощности сигнала на выходе передатчика, Па²/Гц]),
     ([$T L$ (Transmission loss)], [суммарные потери при распространении, дБ]),
@@ -120,7 +120,7 @@
 // Мощность полезного сигнала с дифференциалом dif f (ПЗ)
 #let eq-useful-signal-power(label: <eq:useful_signal_power>) = {
   [$ P_s = integral_(f_1)^(f_2) S_"rx" (f) dif f $ #label]
-  fqw-where((
+  where-defs((
     ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
     ($f_1$, [нижняя граница рабочей полосы, Гц]),
     ($f_2$, [верхняя граница рабочей полосы, Гц]),
@@ -131,7 +131,7 @@
 // Мощность полезного сигнала с дифференциалом d f (ТЗ)
 #let eq-signal-power(label: <eq:signal_power>) = {
   [$ P_s = integral_(f_1)^(f_2) S_"rx" (f) d f $ #label]
-  fqw-where((
+  where-defs((
     ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
     ($f_1$, [нижняя граница рабочей полосы, Гц]),
     ($f_2$, [верхняя граница рабочей полосы, Гц]),
@@ -146,7 +146,7 @@
 ) = {
   [$ P_n = integral_(f_1)^(f_2) S_n (f) dif f $ #noise-label]
   [$ P_i = integral_(f_1)^(f_2) S_i (f) dif f $ #interference-label]
-  fqw-where((
+  where-defs((
     ($P_n$, [мощность шума в рабочей полосе, Па²]),
     ($S_n$, [спектральная плотность мощности шума, Па²/Гц]),
     ($P_i$, [мощность помехи (другого сигнала) в рабочей полосе, Па²]),
@@ -154,16 +154,16 @@
   ))
 }
 
-// Мощность шума и помехи — fqw-equation-list с d f (ТЗ)
+// Мощность шума и помехи — equation-list с d f (ТЗ)
 #let eq-ta-noise-and-interference-power(
   noise-label: <eq:noise_power>,
   interference-label: <eq:interference_power>,
 ) = {
-  fqw-equation-list((
+  equation-list((
     ([$ P_n = integral_(f_1)^(f_2) S_n (f) d f $], noise-label),
     ([$ P_i = integral_(f_1)^(f_2) S_i (f) d f $], interference-label),
   ))
-  fqw-where((
+  where-defs((
     ($P_n$, [мощность шума в рабочей полосе, Па²]),
     ($S_n$, [спектральная плотность мощности шума, Па²/Гц]),
     ($P_i$, [мощность помехи (другого сигнала) в рабочей полосе, Па²]),
@@ -174,7 +174,7 @@
 // SINR (используется в ПЗ и ТЗ)
 #let eq-sinr(label: <eq:sinr>) = {
   [$ S I N R = P_s / (sum_(k = 1)^(N_i) P_(i,k) + P_n) $ #label]
-  fqw-where((
+  where-defs((
     ($S I N R$, [отношение мощности полезного сигнала к суммарной мощности шума и помех]),
     ($P_s$, [мощность полезного сигнала в рабочей полосе, Па²]),
     ($P_n$, [мощность шума в рабочей полосе, Па²]),
@@ -186,7 +186,7 @@
 // Условие успешного приёма с меткой eq:successful_reception_condition (ПЗ)
 #let eq-successful-reception-condition(label: <eq:successful_reception_condition>) = {
   [$ S I N R >= gamma_"th" $ #label]
-  fqw-where((
+  where-defs((
     ($S I N R$, [отношение мощности полезного сигнала к суммарной мощности шума и помех]),
     ($gamma_"th"$, [порог приёма]),
   ))
@@ -195,7 +195,7 @@
 // Порог успешного приёма с меткой eq:successful_reception_threshold (ТЗ)
 #let eq-successful-reception-threshold(label: <eq:successful_reception_threshold>) = {
   [$ S I N R >= gamma_"th" $ #label]
-  fqw-where((
+  where-defs((
     ($S I N R$, [отношение мощности полезного сигнала к суммарной мощности шума и помех]),
     ($gamma_"th"$, [порог успешного приёма]),
   ))
