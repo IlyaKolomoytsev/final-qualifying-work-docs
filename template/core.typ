@@ -267,6 +267,7 @@
 ///   По умолчанию — `default-codes.fqw` с предупреждением об использовании заглушки.
 /// -> content
 #let document-setup(body, document-code: warning[#default-codes.fqw]) = [
+  #let in-header = state("in-header", false)
   #show: default
 
   // header and footer settings
@@ -276,26 +277,45 @@
   )
 
   // headers settings
-  #show heading: it => block(
-    spacing: baseline,
-  )[
-    #if it.level == 1 {
-      // update counters
+  #show heading: it => {
+    // update counters
+    if it.level == 1 {
       counter(figure.where(kind: image)).update(0)
       counter(figure.where(kind: table)).update(0)
       counter(math.equation).update(0)
     }
-    #show: default-text
-    #par[
-      #if it.numbering != none {
-        context if appendix-state.get() {
-          counter("appendix").step(level: it.level)
+
+    // write header
+    set text(..gost-text)
+    set par(..gost-paragraph)
+    set par(first-line-indent: (amount: first-line-indent, all: true))
+
+    let above = if in-header.get() { baseline } else { baseline * 2 }
+
+    block(
+      above: above,
+      below: baseline,
+      sticky: true,
+    )[
+      #par[
+        #if it.numbering != none {
+          context if appendix-state.get() {
+            counter("appendix").step(level: it.level)
+          }
+          section-counts().map(str).join(".")
         }
-        section-counts().map(str).join(".")
-      }
-      #it.body
+        #it.body
+      ]
     ]
-  ]
+
+    in-header.update(true)
+  }
+
+  #show par: it => {
+    if in-header.get() { v(baseline * 2, weak: true) }
+    it
+    in-header.update(false)
+  }
 
   // equation settings
   #show math.equation: it => {
