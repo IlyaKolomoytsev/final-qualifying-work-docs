@@ -6,18 +6,14 @@
 
 /// Renders an unnumbered, unoutlined "Аннотация" heading.
 #let header-abstract() = [
-  #fqw.title(
-    heading(level: 1, numbering: none, outlined: false)[Аннотация],
-  )
+  #heading(level: 1, numbering: none, outlined: false)[Аннотация]
 ]
 
 == `#contents`
 
 /// Renders "Содержание" heading followed by the table of contents, then a page break.
 #let contents() = [
-  #fqw.title(
-    heading(numbering: none, outlined: false)[Содержание],
-  )
+  #heading(numbering: none, outlined: false)[Содержание]
   #set outline.entry(fill: none) // Вроде так нужно
   #outline(title: none, depth: 3, indent: 0pt)
   #pagebreak()
@@ -30,9 +26,7 @@
 /// Parameters:
 /// - label: An optional label attached after the heading. Defaults to `none`.
 #let introduction(label: none) = [
-  #fqw.title(
-    heading(numbering: none)[Введение],
-  )
+  #heading(numbering: none)[Введение]
   #if label != none {
     label
   }
@@ -93,7 +87,5 @@
     ]
   }
 
-  #fqw.title(
-    align(center)[#title],
-  )
+  #align(center)[#heading(numbering: none, outlined: false)[#title]]
 ]

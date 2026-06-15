@@ -82,21 +82,6 @@
 
 = FQW functions
 
-/// Оборачивает содержимое в блок с двойным базовым отступом (ГОСТ-интервал вокруг заголовков).
-///
-/// ```typst
-/// #title[= Введение]
-/// #title(new-page: true)[= 1 Теоретические основы]
-/// ```
-///
-/// - body (content): Содержимое блока.
-/// - new-page (bool): Вставить разрыв страницы перед блоком.
-/// -> content
-#let title(body, new-page: false) = {
-  if new-page { pagebreak() }
-  block(spacing: baseline * 2, width: 100%, sticky: true)[#body]
-}
-
 == default show functions
 
 /// Применяет параметры страницы ГОСТ ко всему содержимому.

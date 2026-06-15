@@ -1,10 +1,6 @@
-#import "core.typ": title
-
 #let en-header-conclusions(label: none) = [
-  #title()[
-    #heading(level: 2, numbering: none)[Выводы]
-    #label
-  ]
+  #heading(level: 2, numbering: none)[Выводы]
+  #label
 ]
 
 #let en-bibliography(source) = [
