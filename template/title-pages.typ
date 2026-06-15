@@ -378,7 +378,7 @@
   ministry: defaults.ministry,
   university: defaults.university,
   faculty: defaults.faculty,
-  department: defaults.department,
+  department: defaults.department.name,
   work-kind: [выпускной квалификационной работе бакалавра],
   direction: [
     09.03.04 -- Программная инженерия, \
@@ -542,7 +542,7 @@
   // Page title parameters
   ministry: defaults.ministry,
   university: defaults.university,
-  department: defaults.department,
+  department: defaults.department.name,
   university-directive: (date: none, number: []),
   department-code: [10.19],
   work-kind: [выпускную квалификационную работу бакалавра],
@@ -721,7 +721,7 @@
   document-code: warning([Код зависит от документа]),
   ministry: defaults.ministry,
   university: defaults.university,
-  department: defaults.department,
+  department: defaults.department.name,
   city: defaults.city,
   year: [#datetime.today().year()],
 ) = [
